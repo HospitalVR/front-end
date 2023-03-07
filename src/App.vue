@@ -1,15 +1,22 @@
 <template>
   <div id="app">
-    <h1>APP</h1>
+    <Entry />
   </div>
 </template>
 
 <script>
-
+import Entry from './page/webvr/Entry.vue';
 export default {
   name: 'App',
+  components: {
+    Entry
+  }
 }
 </script>
 
-<style>
+<style lang="less" scoped>
+body,html {
+  margin: 0;
+  padding: 0;
+}
 </style>
