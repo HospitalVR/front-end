@@ -1,15 +1,16 @@
 <template>
   <div id="app">
-    <Entry />
+    <HospitalVR />
   </div>
 </template>
 
 <script>
 import Entry from './page/webvr/Entry.vue';
+import HospitalVR from './page/webvr/HospitalVR.vue';
 export default {
   name: 'App',
   components: {
-    Entry
+    Entry,HospitalVR
   }
 }
 </script>
