@@ -12,7 +12,6 @@ export const sceneList = [
                 content:{
                     title: "进入医院",
                     tip: "",
-                    image: 0,
                     type: "title",
                     directTo: 1
                 },
@@ -23,8 +22,32 @@ export const sceneList = [
     },
     { // 第二个场景
         image: require("@/assets/Hall.jpg"),
-        // tipList: [
-
-        // ]
+        tipList: [
+            {
+                position: {
+                    x: -95,
+                    y: 0,
+                    z: 15
+                },
+                content:{
+                    title: "回到大门",
+                    tip: "",
+                    type: "title",
+                    directTo: 0
+                },
+            },
+            {
+                position: {
+                    x: 100,
+                    y: 10,
+                    z: -40
+                },
+                content: {
+                    title: "前台",
+                    tip: "这是前台界面",
+                    type: "tip",
+                }
+            }
+        ]
     }
 ]

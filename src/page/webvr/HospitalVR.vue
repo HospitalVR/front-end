@@ -16,6 +16,8 @@
 import * as THREE from "three"
 import gsap from "gsap"
 import { OrbitControls } from 'three/addons/controls/OrbitControls'
+import { FirstPersonControls } from "three/addons/controls/FirstPersonControls"
+import { PointerLockControls } from "three/examples/jsm/controls/PointerLockControls.js"
 import { sceneList } from "@/page/webvr/utils/tips"
 import { nextTick } from 'vue'
 export default {
@@ -29,6 +31,8 @@ export default {
             group: null,
             sceneList: sceneList,
             currentScene: null,
+            clock: null,
+            mode: "orbit",
             tipContent: {
                 tip: "",
                 title: "",
@@ -76,19 +80,31 @@ export default {
         },
         // 初始化渲染器
         initRenderer() {
-            this.renderer = new THREE.WebGLRenderer(); //创建渲染器
+            this.renderer = new THREE.WebGLRenderer({
+                    antialias: true, // 抗锯齿
+                }
+            ); //创建渲染器
             this.renderer.setClearColor(0xffffff); //添加背景颜色
             this.renderer.setSize(window.innerWidth, window.innerHeight); // 设定渲染器尺寸
             this.$refs.threeDom.appendChild(this.renderer.domElement); //通过 this.$refs获取页面的dom将场景初始化上去
         },
         // 初始化轨道控制器
-        initController() {
+        initOrbitController() {
+            this.controller && this.controller.dispose();
             this.controller = new OrbitControls(this.camera, this.$refs.threeDom); // 初始化控制器
             this.controller.target.set(0, 0, 0); // 设置控制器的焦点，使控制器围绕这个焦点进行旋转
             this.controller.minDistance = 10; // 设置移动的最短距离（默认为零）
             this.controller.maxPolarAngle = Math.PI; //绕垂直轨道的距离（范围是0-Math.PI,默认为Math.PI）
             this.controller.maxDistance = 30; // 设置移动的最长距离（默认为无穷）
             this.controller.enablePan = false; //禁用右键功能
+            this.controller.enableDamping = true;
+        },
+
+        // 初始化第一人称控制器
+        initFirstPersonController() {
+            this.controller && this.controller.dispose();
+            this.controller = new PointerLockControls(this.camera, this.renderer.domElement)
+            this.controller.lock()
         },
         /**
          * @description 添加标签
@@ -114,18 +130,21 @@ export default {
         },
         // 刷新页面
         refresh() {
+            const delta = this.clock.getDelta() //获取自上次调用的时间差
+            this.controller.update && this.controller.update(delta)
             this.renderer.render(this.scene,this.camera)
 
             // 屏幕每刷新一帧都需要渲染
             requestAnimationFrame(this.refresh)
         },
         initVR() {
+            this.clock = new THREE.Clock()
             this.initScene();
 
             this.initCamera();
             this.initModel();
             this.initRenderer();
-            this.initController();
+            this.initOrbitController();
             this.initTips();
 
             this.initClick();
@@ -218,6 +237,7 @@ export default {
                         }
 
                         setTimeout(() => {
+                            if(!document.getElementsByClassName("vr_hospital-tip")[0]) return;
                             document.getElementsByClassName("vr_hospital-tip")[0].style.transition = "top .5s ease";
                             document.getElementsByClassName("vr_hospital-tip")[0].style.visibility = "visible";
                             let top = Math.round(-elementHeight * position.y + 
@@ -248,6 +268,7 @@ export default {
                         }
 
                         setTimeout(() => {
+                            if(!document.getElementsByClassName("vr_hospital-tip")[0]) return;
                             document.getElementsByClassName("vr_hospital-tip")[0].style.transition = "top .5s ease";
                             document.getElementsByClassName("vr_hospital-tip")[0].style.visibility = "visible"
                             let top = Math.round(-elementHeight * position.y + 
@@ -292,7 +313,24 @@ export default {
         this.initVR();
 
         this.$refs.threeDom.addEventListener("mousemove", this.onMousemove)
-        
+        document.addEventListener("keypress", (e) => {
+            if(e.key === "f") {
+                if(this.mode === "orbit") {
+                    // 进入第一人称视角
+                    this.mode = "firstperson"
+                    console.log("进入第一人称视角")
+                    this.initFirstPersonController();
+                    
+                } else {
+                    // 进入轨道控制器视角
+                    this.mode = "orbit"
+                    console.log("进入第三人称视角")
+
+                    this.controller.unlock();
+                    this.initOrbitController();
+                }
+            }
+        })
     }
 }
 </script>
