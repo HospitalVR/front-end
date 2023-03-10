@@ -1,17 +1,17 @@
 <template>
   <div id="app">
-    <HospitalVR />
-    <!-- <Entry /> -->
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
-import Entry from './page/webvr/Entry.vue';
 import HospitalVR from './page/webvr/HospitalVR.vue';
+import Home from './page/home/Home.vue';
+import Case from "./page/case/Case.vue"
 export default {
   name: 'App',
   components: {
-    Entry,HospitalVR
+    HospitalVR,Home,Case
   }
 }
 </script>
