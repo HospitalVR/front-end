@@ -5,14 +5,18 @@
         </transition>
         <div class="vr_hospital-three" ref="threeDom"></div>
         <div class="vr_hospital-scene">
-            <div class="vr_hospital-icon">
+            <div class="vr_hospital-icon" @click="handleShowList">
                 <svg t="1678412736341" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2761" width="30" height="30">
                     <path d="M975.1 496l-95.4-96.3c24.3-30.9 38.8-69.9 38.8-112.2 0-100.4-81.6-182-182-182s-182 81.6-182 182 81.6 182 182 182c42.2 0 81.2-14.5 112.1-38.7l95.3 96.2c4.3 4.3 10 6.5 15.6 6.5s11.2-2.1 15.5-6.4c8.6-8.5 8.7-22.5 0.1-31.1z m-238.6-70.5c-76.1 0-138-61.9-138-138s61.9-138 138-138 138 61.9 138 138-61.9 138-138 138zM386 555H188c-45.2 0-82 36.8-82 82v198c0 45.2 36.8 82 82 82h198c45.2 0 82-36.8 82-82V637c0-45.2-36.8-82-82-82z m38 280c0 21-17 38-38 38H188c-21 0-38-17-38-38V637c0-21 17-38 38-38h198c21 0 38 17 38 38v198zM386 153H188c-45.2 0-82 36.8-82 82v198c0 45.2 36.8 82 82 82h198c45.2 0 82-36.8 82-82V235c0-45.2-36.8-82-82-82z m38 280c0 21-17 38-38 38H188c-21 0-38-17-38-38V235c0-21 17-38 38-38h198c21 0 38 17 38 38v198zM790 555H592c-45.2 0-82 36.8-82 82v198c0 45.2 36.8 82 82 82h198c45.2 0 82-36.8 82-82V637c0-45.2-36.8-82-82-82z m38 280c0 21-17 38-38 38H592c-21 0-38-17-38-38V637c0-21 17-38 38-38h198c21 0 38 17 38 38v198z" p-id="2762">
                     </path>
                 </svg>
                 <div>选择场景</div>
             </div>
-            <div class="list"></div>
+            <div class="vr_hospital-list" v-if="showList">
+                <div class="vr_hospital-item" v-for="(item,index) in sceneList" :key="index">
+                    <img :src="item.image" alt="">
+                </div>
+            </div>
         </div>
         <div class="vr_hospital-tip" ref="tipBox" v-if="showTip" :style="tipStyle">
             <div v-if="tipContent.type === 'tip'">
@@ -55,6 +59,7 @@ export default {
             spriteList: [] ,
             showTip: false,
             showInfo: false,
+            showList: false,
             tipStyle: {
                 left: "-100%",
                 top: "-100%"
@@ -333,6 +338,9 @@ export default {
                 title: "",
                 type: "tip"
             }
+        },
+        handleShowList() {
+            this.showList = true;
         }
     },
     created() {
@@ -405,6 +413,8 @@ export default {
         bottom: 20px;
         padding: 0 40px;
         max-width: 80%;
+        display: flex;
+        align-items: center;
         .vr_hospital-icon {
             width: 80px;
             height: 80px;
@@ -418,6 +428,26 @@ export default {
             color: #fff;
             svg {
                 fill: #fff;
+            }
+        }
+        .vr_hospital-list {
+            padding: 10px;
+            background: rgba(0,0,0,0.4);
+            border-radius: 5px;
+            margin-left: 15px;
+            display: flex;
+            align-items: center;
+            .vr_hospital-item {
+                margin-left: 15px;
+                transition: transform .2s ease;
+                img {
+                    width: 150px;
+                    height: auto;
+                    border-radius: 10px;
+                }
+                &:hover {
+                    transform: scale(1.1);
+                }
             }
         }
     }

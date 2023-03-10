@@ -1,6 +1,7 @@
 <template>
   <div id="app">
     <HospitalVR />
+    <!-- <Entry /> -->
   </div>
 </template>
 

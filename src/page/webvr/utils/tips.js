@@ -2,6 +2,7 @@
 export const sceneList = [
     { //第一个场景--大门口
         image: require("@/assets/entry.jpg"),
+        name: "大门口",
         tipList:[
             {
                 position:{
@@ -22,6 +23,7 @@ export const sceneList = [
     },
     { // 第二个场景-- 前台大厅
         image: require("@/assets/Hall.jpg"),
+        name: "前台大厅",
         tipList: [
             {
                 position: {
@@ -66,6 +68,7 @@ export const sceneList = [
     // 第三个场景 --手术室
     {
         image: require("@/assets/Operating.jpg"),
+        name: "手术室",
         tipList:[
             {
                 position: {
@@ -109,6 +112,7 @@ export const sceneList = [
     }, // 第四个场景 -- 处置室
     {
         image: require("@/assets/Disposal.jpg"),
+        name: "处置室",
         tipList:[
             {
                 position: {
@@ -129,7 +133,19 @@ export const sceneList = [
     {
         image: require("@/assets/Laboratory.jpg"),
         tipList:[
-            
+            {
+                position: {
+                    x: 50,
+                    y: 0,
+                    z: -50
+                },
+                content: {
+                    title: "",
+                    tip: "",
+                    type:" title",
+                    
+                }
+            }
         ]
     }
 ]
