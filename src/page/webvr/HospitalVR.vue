@@ -1,6 +1,23 @@
 <template>
-    <div class="vr_hospital-container">
-        <div id="vr_hospital-three" ref="threeDom"></div>
+    <div class="vr_hospital-container" ref="vr">
+        <transition name="vr">
+            <div class="vr_hospital-info" v-if="showInfo">VR模式</div>
+        </transition>
+        <div class="vr_hospital-three" ref="threeDom"></div>
+        <div class="vr_hospital-scene">
+            <div class="vr_hospital-icon" @click="handleShowList">
+                <svg t="1678412736341" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2761" width="30" height="30">
+                    <path d="M975.1 496l-95.4-96.3c24.3-30.9 38.8-69.9 38.8-112.2 0-100.4-81.6-182-182-182s-182 81.6-182 182 81.6 182 182 182c42.2 0 81.2-14.5 112.1-38.7l95.3 96.2c4.3 4.3 10 6.5 15.6 6.5s11.2-2.1 15.5-6.4c8.6-8.5 8.7-22.5 0.1-31.1z m-238.6-70.5c-76.1 0-138-61.9-138-138s61.9-138 138-138 138 61.9 138 138-61.9 138-138 138zM386 555H188c-45.2 0-82 36.8-82 82v198c0 45.2 36.8 82 82 82h198c45.2 0 82-36.8 82-82V637c0-45.2-36.8-82-82-82z m38 280c0 21-17 38-38 38H188c-21 0-38-17-38-38V637c0-21 17-38 38-38h198c21 0 38 17 38 38v198zM386 153H188c-45.2 0-82 36.8-82 82v198c0 45.2 36.8 82 82 82h198c45.2 0 82-36.8 82-82V235c0-45.2-36.8-82-82-82z m38 280c0 21-17 38-38 38H188c-21 0-38-17-38-38V235c0-21 17-38 38-38h198c21 0 38 17 38 38v198zM790 555H592c-45.2 0-82 36.8-82 82v198c0 45.2 36.8 82 82 82h198c45.2 0 82-36.8 82-82V637c0-45.2-36.8-82-82-82z m38 280c0 21-17 38-38 38H592c-21 0-38-17-38-38V637c0-21 17-38 38-38h198c21 0 38 17 38 38v198z" p-id="2762">
+                    </path>
+                </svg>
+                <div>选择场景</div>
+            </div>
+            <div class="vr_hospital-list" v-if="showList">
+                <div class="vr_hospital-item" v-for="(item,index) in sceneList" :key="index">
+                    <img :src="item.image" alt="">
+                </div>
+            </div>
+        </div>
         <div class="vr_hospital-tip" ref="tipBox" v-if="showTip" :style="tipStyle">
             <div v-if="tipContent.type === 'tip'">
                 <div>{{ tipContent.tip }}</div>
@@ -16,10 +33,11 @@
 import * as THREE from "three"
 import gsap from "gsap"
 import { OrbitControls } from 'three/addons/controls/OrbitControls'
-import { FirstPersonControls } from "three/addons/controls/FirstPersonControls"
 import { PointerLockControls } from "three/examples/jsm/controls/PointerLockControls.js"
 import { sceneList } from "@/page/webvr/utils/tips"
 import { nextTick } from 'vue'
+
+
 export default {
     data() {
         return {
@@ -40,6 +58,8 @@ export default {
             }, //当前展示的tip的信息
             spriteList: [] ,
             showTip: false,
+            showInfo: false,
+            showList: false,
             tipStyle: {
                 left: "-100%",
                 top: "-100%"
@@ -97,13 +117,16 @@ export default {
             this.controller.maxPolarAngle = Math.PI; //绕垂直轨道的距离（范围是0-Math.PI,默认为Math.PI）
             this.controller.maxDistance = 30; // 设置移动的最长距离（默认为无穷）
             this.controller.enablePan = false; //禁用右键功能
-            this.controller.enableDamping = true;
+            // this.controller.enableDamping = true;
         },
 
         // 初始化第一人称控制器
         initFirstPersonController() {
             this.controller && this.controller.dispose();
             this.controller = new PointerLockControls(this.camera, this.renderer.domElement)
+            this.controller.addEventListener("lock",() => {
+                console.log("鼠标锁定")            
+            })
             this.controller.lock()
         },
         /**
@@ -148,6 +171,7 @@ export default {
             this.initTips();
 
             this.initClick();
+            this.initResize();
             this.refresh();
         },
 
@@ -186,12 +210,23 @@ export default {
                 mouse.y = -(e.clientY / element.clientHeight) * 2 + 1;
                 raycaster.setFromCamera(mouse, this.camera);
                 let intersects = raycaster.intersectObjects(this.spriteList, true);
-                console.log(intersects)
                 if (intersects.length > 0 && intersects[0].object.content.type === "title") {
                     
                     this.changeScene(intersects[0].object.content.directTo);
                     this.hideTip(e);
                 }
+            })
+        },
+
+        // 监听window的尺寸变化
+        initResize() {
+            window.addEventListener("resize",() => {
+                // 重新设置相机的视角
+                this.camera.aspect = window.innerWidth / window.innerHeight;
+                // 更新相机的投影矩阵
+                this.camera.updateProjectionMatrix();
+                this.renderer.setSize(window.innerWidth,window.innerHeight);
+                this.renderer.setPixelRatio(window.devicePixelRatio)
             })
         },
 
@@ -303,6 +338,9 @@ export default {
                 title: "",
                 type: "tip"
             }
+        },
+        handleShowList() {
+            this.showList = true;
         }
     },
     created() {
@@ -318,31 +356,109 @@ export default {
                 if(this.mode === "orbit") {
                     // 进入第一人称视角
                     this.mode = "firstperson"
-                    console.log("进入第一人称视角")
+                    this.showInfo = true;
+                    if(!document.fullscreenElement && document.fullscreenEnabled) {
+                        this.$refs.vr.requestFullscreen();
+                    }
                     this.initFirstPersonController();
                     
                 } else {
                     // 进入轨道控制器视角
                     this.mode = "orbit"
-                    console.log("进入第三人称视角")
-
+                    this.showInfo = false;
+                    document.exitFullscreen(); //退出全屏
                     this.controller.unlock();
                     this.initOrbitController();
                 }
             }
         })
-    }
+
+        document.addEventListener("fullscreenchange",(e ) => {
+            e.preventDefault();
+        })
+    } 
 }
 </script>
 
 <style lang="less" scoped>
-.vr_hospital-tip {
-    position: absolute;
-    background: rgba(0,0,0,0.5);
-    padding: 5px;
-    color: #fff;
-    font-size: 12px;
-    border-radius: 2px;
-    visibility: hidden;
+.vr_hospital-container {
+    .vr_hospital-tip {
+        position: absolute;
+        background: rgba(0,0,0,0.5);
+        padding: 5px;
+        color: #fff;
+        font-size: 12px;
+        border-radius: 2px;
+        visibility: hidden;
+    }
+    .vr_hospital-three {
+        width: 100vw;
+        height: 100vh;
+    }
+    .vr_hospital-info {
+        position: absolute;
+        top: 20px;
+        padding: 10px 20px;
+        border-radius: 15px;
+        background: rgba(0,0,0,0.4);
+        font-size: 20px;
+        color: #fff;
+        left: 50%;
+        transform: translateX(-50%);
+
+    }
+
+    .vr_hospital-scene {
+        position: absolute;
+        bottom: 20px;
+        padding: 0 40px;
+        max-width: 80%;
+        display: flex;
+        align-items: center;
+        .vr_hospital-icon {
+            width: 80px;
+            height: 80px;
+            background: rgba(0,0,0,0.4);
+            border-radius: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-size: 13px;
+            color: #fff;
+            svg {
+                fill: #fff;
+            }
+        }
+        .vr_hospital-list {
+            padding: 10px;
+            background: rgba(0,0,0,0.4);
+            border-radius: 5px;
+            margin-left: 15px;
+            display: flex;
+            align-items: center;
+            .vr_hospital-item {
+                margin-left: 15px;
+                transition: transform .2s ease;
+                img {
+                    width: 150px;
+                    height: auto;
+                    border-radius: 10px;
+                }
+                &:hover {
+                    transform: scale(1.1);
+                }
+            }
+        }
+    }
+
+    .vr-enter,.vr-leave-to {
+        transform: translateY(-20px);
+        opacity: 0;
+    }
+    .vr-enter-active,.vr-leave-active {
+        transition: all .3s ease;
+    }
 }
+
 </style>
