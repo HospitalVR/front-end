@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "core-js": "^3.8.3",
+    "element-ui": "^2.15.13",
     "gsap": "^3.11.4",
     "three": "^0.150.1",
     "three-stats": "^1.0.1",
