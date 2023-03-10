@@ -39,6 +39,7 @@ import { nextTick } from 'vue'
 
 
 export default {
+    name: "HospitalVR",
     data() {
         return {
             scene: null,
