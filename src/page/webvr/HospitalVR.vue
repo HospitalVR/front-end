@@ -135,8 +135,14 @@ export default {
          * @param {{position:{x:number;y:number;z:number};content:{}}} tip 
          */
         addTip(tip) {
+            let source = null;
+            if(tip.content.type === "tip") {
+                source = require("@/assets/tip.png")
+            } else {
+                source = require("@/assets/title.png")
+            }
             let tipTexture = new THREE.TextureLoader().load(
-                require("@/assets/tip.png")
+                source
             );
             let material = new THREE.SpriteMaterial({ map: tipTexture });
             let sprite = new THREE.Sprite(material);
@@ -178,7 +184,6 @@ export default {
 
         // 更换场景
         changeScene(index) {
-            console.log(this.sceneList,index)
             this.scene.children = this.scene.children.filter(item => {
                 return String(item.type) !== "Sprite"
             })
