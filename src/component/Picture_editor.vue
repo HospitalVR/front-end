@@ -16,6 +16,11 @@
             <template v-if="component_type!=2">
                 <input class="button1" type="file" ref="file">
             </template>
+            <template v-else>
+                <div style="display: none;">
+                    <input class="button1" type="file" ref="file">
+                </div>
+            </template>
         </div>
     </div>
 </template>
