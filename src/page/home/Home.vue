@@ -2,7 +2,7 @@
     <div>
         <h1>这是主页</h1>
         <router-link to="/vr">医院导览模块</router-link>
-        <router-link to="/case">病例管理模块</router-link>
+        <router-link to="/case_list">病例管理模块</router-link>
     </div>
 </template>
 

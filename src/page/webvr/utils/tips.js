@@ -1,17 +1,18 @@
 // 标签和材质列表，该数组中每一项都代表着一个场景和场景中的标签
 export const sceneList = [
-    { //第一个场景--大门口
-        image: require("@/assets/entry.jpg"),
+    //第一个场景--大门口
+    { 
+        image: require("@/assets/Entry.jpg"),
         name: "大门口",
         tipList:[
             {
                 position:{
-                    x:120,
-                    y:0,
-                    z:30
+                    x:100,
+                    y:-10,
+                    z:45
                 },
                 content:{
-                    title: "进入医院",
+                    title: "通向前台",
                     tip: "",
                     type: "title",
                     directTo: 1
@@ -21,7 +22,8 @@ export const sceneList = [
         ]
         
     },
-    { // 第二个场景-- 前台大厅
+    // 第二个场景-- 前台大厅
+    { 
         image: require("@/assets/Hall.jpg"),
         name: "前台大厅",
         tipList: [
@@ -41,8 +43,8 @@ export const sceneList = [
             {
                 position: {
                     x: 100,
-                    y: 10,
-                    z: -40
+                    y: 0,
+                    z: 50
                 },
                 content: {
                     title: "",
@@ -52,17 +54,70 @@ export const sceneList = [
             },
             {
                 position: {
-                    x: 90,
-                    y: 0,
-                    z: -80
+                    x: 110,
+                    y: -40,
+                    z: -40
                 },
                 content: {
-                    title: "手术室",
+                    title: "通向手术室",
                     tip: "",
                     type: "title",
                     directTo: 2
                 }
+            },
+            {
+                position: {
+                    x: -20,
+                    y: -60,
+                    z: 110
+                },
+                content: {
+                    title: "通向诊室",
+                    tip: "",
+                    type: "title",
+                    directTo: 3
+                }
+            },
+            {
+                position:{
+                    x: -30,
+                    y: -60,
+                    z: -100
+                },
+                content: {
+                    type: "title",
+                    title: "通向病理剖析室",
+                    tip: "",
+                    directTo: 4
+                }
+            },
+            {
+                position: {
+                    x: 30,
+                    y: -60,
+                    z: 110
+                },
+                content: {
+                    tip: "",
+                    title: "通向免疫室",
+                    type: "title",
+                    directTo: 5
+                }
+            },
+            {
+                position:{
+                    x: 30,
+                    y: -60,
+                    z: -110
+                },
+                content: {
+                    tip: "",
+                    title: "通向药房",
+                    type: "title",
+                    directTo: 6
+                }
             }
+
         ]
     },
     // 第三个场景 --手术室
@@ -72,9 +127,9 @@ export const sceneList = [
         tipList:[
             {
                 position: {
-                    x: 100,
+                    x: 0,
                     y: -50,
-                    z: 50
+                    z: -100
                 },
                 content: {
                     title: "",
@@ -85,11 +140,31 @@ export const sceneList = [
             {
                 position: {
                     x: -50,
-                    y: 0,
-                    z: -10
+                    y: -50,
+                    z: 10
                 },
                 content: {
-                    title: "前台",
+                    title: "通向前台",
+                    tip: "",
+                    type: "title",
+                    directTo: 1
+                }
+            },
+        ]
+    }, 
+    // 第四个场景 --诊室
+    {
+        image: require("@/assets/ConsultRoom.jpg"),
+        name: "诊室",
+        tipList:[
+            {
+                position: {
+                    x: -30,
+                    y: -60,
+                    z: 50
+                },
+                content: {
+                    title: "通向前台",
                     tip: "",
                     type: "title",
                     directTo: 1
@@ -97,55 +172,233 @@ export const sceneList = [
             },
             {
                 position: {
-                    x: 100,
-                    y: 0,
-                    z: 0
+                    x: 40,
+                    y: -40,
+                    z: 30
                 },
                 content: {
-                    title: "处置室",
-                    tip: "",
-                    type: "title",
-                    directTo: 3
-                }
-            }
-        ]
-    }, // 第四个场景 -- 处置室
-    {
-        image: require("@/assets/Disposal.jpg"),
-        name: "处置室",
-        tipList:[
-            {
-                position: {
-                    x: -50,
-                    y: 0,
-                    z: 80
-                },
-                content: {
-                    title: "化验室",
-                    tip: "",
-                    type: "title",
-                    directTo: 4
+                    tip: "点击查看诊室信息",
+                    title: "",
+                    type: "tip"
                 }
             }
         ]
     },
-    // 第五个场景 -- 化验室
+    // 第五个场景 --病例剖析室
     {
-        image: require("@/assets/Laboratory.jpg"),
+        image: require("@/assets/PathologicalAutopsyRoom.jpg"),
+        name: "病例剖析室",
+        tipList: [
+            {
+                position: {
+                    x: 0,
+                    y: -60,
+                    z: -80
+                },
+                content: {
+                    tip: "点击了解病理剖析室",
+                    title: "",
+                    type: "tip",
+                }
+            },
+            {
+                position: {
+                    x: -60,
+                    y: -60,
+                    z: 50
+                },
+                content: {
+                    tip: "",
+                    title: "回到前台",
+                    type: "title",
+                    directTo: 1
+                }
+            }
+        ]
+    },
+    // 第六个场景 --免疫室
+    {
+        image: require("@/assets/ImmunologyRoom.jpg"),
+        name: "免疫室",
+        tipList:[
+            {
+                position: {
+                    x: -60,
+                    y: -60,
+                    z: 30
+                },
+                content: {
+                    tip: "",
+                    title: "回到前台",
+                    type: "title",
+                    directTo: 1
+                }
+            },
+            {
+                position: {
+                    x: -10,
+                    y: -40,
+                    z: -30
+                },
+                content: {
+                    tip: "点击查看免疫室信息",
+                    title: "",
+                    type: "tip",
+                }
+            }
+        ]
+    },
+    // 第七个场景 --药房
+    {
+        image: require("@/assets/PharmacyRoom.jpg"),
+        name: "药房",
         tipList:[
             {
                 position: {
                     x: 50,
-                    y: 0,
-                    z: -50
+                    y: -20,
+                    z: 40
                 },
                 content: {
+                    tip: "点击查看药房信息",
                     title: "",
+                    type: "tip"
+                }
+            },
+            {
+                position: {
+                    x: 60,
+                    y: -30,
+                    z: 90
+                },
+                content: {
                     tip: "",
-                    type:" title",
-                    
+                    title: "通向手术准备室",
+                    type: "title",
+                    directTo: 7
+                }
+            },
+        
+        ]
+    },
+    // 第八个场景 --手术准备室
+    {
+        image: require("@/assets/SurgicalPreparationRoom.jpg"),
+        name: "手术准备室",
+        tipList:[
+            {
+                position:{
+                    x: -30,
+                    y: -90,
+                    z: 70
+                },
+                content:{
+                    tip:"",
+                    title: "通向手术室",
+                    type: "title",
+                    directTo: 2
+                }
+            },
+            {
+                position:{
+                    x: -100,
+                    z: -30,
+                    y: -60
+                },
+                content:{
+                    tip:"",
+                    title: "通向二楼走廊",
+                    type: "title",
+                    directTo: 8
+                }
+            }
+            // {
+            //     position:{},
+            //     content:{}
+            // }
+        ]
+    },
+    // 第九个场景 --二楼走廊
+    {
+        image: require("@/assets/Corridor.jpg"),
+        name: "二楼走廊",
+        tipList:[
+            {
+                position:{
+                    x: -10,
+                    y: -60,
+                    z: -80
+                },
+                content: {
+                    title: "通向手术准备室",
+                    tip: "",
+                    type: "title",
+                    directTo: 7
+                }
+            },
+            {
+                position: {
+                    x: 100,
+                    y: -60,
+                    z: 10
+                },
+                content: {
+                    title: "通向住院部",
+                    tip: "",
+                    type: "title",
+                    directTo: 9
                 }
             }
         ]
-    }
+    },
+    //第十个场景 --住院部
+    {
+        image: require("@/assets/InpatientDepartment.jpg"),
+        name:" 住院部",
+        tipList:[
+            {
+                position: {
+                    x: -80,
+                    y: -60,
+                    z: 0
+                },
+                content: {
+                    tip: "",
+                    title: "通向档案室",
+                    type: "title",
+                    directTo: 10
+                }
+            }
+        ]
+    },
+    //第十一个场景 --档案室
+    {
+        image: require("@/assets/ArchivesRoom.jpg"),
+        name: "档案室",
+        tipList:[]
+    },
+    //第十二个场景 --化验室
+    {
+        image: require("@/assets/Laboratory.jpg"),
+        name: "化验室",
+        tipList:[]
+    },
+    //第十三个场景 --影像室
+    {
+        image: require("@/assets/ImageRoom.jpg"),
+        name: "影像室",
+        tipList:[]
+    },
+    //第十四个场景 --处置室
+    {
+        image: require("@/assets/DisposalRoom.jpg"),
+        name: "处置室",
+        tipList:[]
+    },
+    //第十五个场景 --专科检查室
+    {
+        image: require("@/assets/SpecialistExaminationRoom.jpg"),
+        name: "专科检查室",
+        tipList:[]
+    }      
 ]
