@@ -5,6 +5,8 @@
             <button v-on:click="edit">编辑</button>
             <button v-on:click="back">返回</button>
         </div>
+        <h2>疾病类别</h2>
+        <p>{{ disease_group }}</p>
         <h2>疾病信息</h2>
         <p>{{disease_description}}</p>
         <Picture_editor :disease_picture="disease_picture" :component_type="2"></Picture_editor>
@@ -24,6 +26,7 @@ export default {
         let disease_name = this.$route.query.disease_name;
         return {
             disease_name: disease_name,
+            disease_group: "没有数据无法显示类别啊",
             disease_description: "我也不知道这是什么病，反正它是个病。我也不知道这是什么病，反正它是个病。"+
                 "我也不知道这是什么病，反正它是个病。我也不知道这是什么病，反正它是个病。" +
                 "我也不知道这是什么病，反正它是个病。我也不知道这是什么病，反正它是个病。" +
@@ -40,6 +43,7 @@ export default {
             this.$router.push({
                 path: '/edit_disease', query: {
                     disease_name: this.disease_name,
+                    disease_group: this.disease_group,
                     disease_description: this.disease_description,
                     disease_picture: this.disease_picture,
                     disease_video: this.disease_video

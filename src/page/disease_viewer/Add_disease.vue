@@ -5,6 +5,8 @@
         </div>
         <h2>疾病名称</h2>
         <input v-model="disease_name" placeholder="在此处输入疾病名称">
+        <h2>疾病类别</h2>
+        <p>{{this.$route.query.disease_group}}</p>
         <h2>疾病信息</h2>
         <textarea id="textarea" v-model="disease_description" placeholder="在此处输入疾病信息"></textarea>
         <Picture_editor :disease_picture="disease_picture" :component_type="1"></Picture_editor>

@@ -28,8 +28,9 @@ export default {
             alert("删除疾病 "+name)
         },
         add_disease: function () {
-            alert("添加" + this.disease_group + "疾病")
-            this.$router.replace('/add_disease')
+            this.$router.push({
+                path: '/add_disease', query: { disease_group: this.disease_group }
+            })
         }
     },
     props: {

@@ -5,6 +5,8 @@
         </div>
         <h2>疾病名称</h2>
         <input v-model="disease_name" placeholder="在此处输入疾病名称">
+        <h2>疾病类别</h2>
+        <input v-model="disease_group" placeholder="在此处输入疾病类别">
         <h2>疾病信息</h2>
         <textarea id="textarea" v-model="disease_description" placeholder="在此处输入疾病信息"></textarea>
         <Picture_editor :disease_picture="disease_picture" :component_type="3"></Picture_editor>
@@ -25,6 +27,7 @@ export default {
     data() {
         return {
             disease_name: this.$route.query.disease_name,
+            disease_group: this.$route.query.disease_group,
             disease_description: this.$route.query.disease_description,
             disease_picture: this.$route.query.disease_picture,
             disease_video: this.$route.query.disease_video
