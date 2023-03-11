@@ -43,7 +43,6 @@ export default {
             console.log(e.target.files)
             let video = e.target.files[0]
             this.video_url= window.webkitURL.createObjectURL(video);
-            //this.video_url = window.URL.createObjectURL(new Blob([video]))
         })
     }
 }
