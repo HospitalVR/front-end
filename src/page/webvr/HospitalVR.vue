@@ -13,8 +13,9 @@
                 <div>选择场景</div>
             </div>
             <div class="vr_hospital-list" v-if="showList">
-                <div class="vr_hospital-item" v-for="(item,index) in sceneList" :key="index">
+                <div class="vr_hospital-item" v-for="(item,index) in sceneList" :key="index" @click="() => changeScene(index)">
                     <img :src="item.image" alt="">
+                    <div>{{ item.name }}</div>
                 </div>
             </div>
         </div>
@@ -346,7 +347,7 @@ export default {
             }
         },
         handleShowList() {
-            this.showList = true;
+            this.showList = !this.showList;
         }
     },
     created() {
@@ -418,7 +419,7 @@ export default {
         position: absolute;
         bottom: 20px;
         padding: 0 40px;
-        max-width: 80%;
+        max-width: 90%;
         display: flex;
         align-items: center;
         .vr_hospital-icon {
@@ -443,13 +444,20 @@ export default {
             margin-left: 15px;
             display: flex;
             align-items: center;
+            overflow-x: scroll;
             .vr_hospital-item {
                 margin-left: 15px;
                 transition: transform .2s ease;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
                 img {
                     width: 150px;
                     height: auto;
                     border-radius: 10px;
+                }
+                div {
+                    color: #fff;
                 }
                 &:hover {
                     transform: scale(1.1);
