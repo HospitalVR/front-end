@@ -48,7 +48,7 @@ export const sceneList = [
                 },
                 content: {
                     title: "",
-                    tip: "这是前台界面",
+                    tip: "点击查看前台大厅信息",
                     type: "tip",
                 }
             },
@@ -133,7 +133,7 @@ export const sceneList = [
                 },
                 content: {
                     title: "",
-                    tip: "手术台，点击进行手术",
+                    tip: "点击查看手术室信息",
                     type: "tip"
                 }
             },
@@ -324,11 +324,19 @@ export const sceneList = [
                     type: "title",
                     directTo: 8
                 }
+            },
+            {
+                position:{
+                    x: 60,
+                    y: -30,
+                    z: 0
+                },
+                content:{
+                    tip:"点击查看手术准备室信息",
+                    title: "",
+                    type: "tip"
+                }
             }
-            // {
-            //     position:{},
-            //     content:{}
-            // }
         ]
     },
     // 第九个场景 --二楼走廊
@@ -394,6 +402,19 @@ export const sceneList = [
                     type: "title",
                     directTo: 11
                 }
+            },
+            {
+                position:{
+                    x: 40,
+                    y: -40,
+                    z: -80
+                },
+                content: {
+
+                    tip: "点击查看住院部信息",
+                    title: "",
+                    type: "tip"
+                }
             }
         ]
     },
@@ -401,7 +422,20 @@ export const sceneList = [
     {
         image: require("@/assets/ArchivesRoom.jpg"),
         name: "档案室",
-        tipList:[]
+        tipList:[
+            {
+                position:{
+                    x: 120,
+                    y: 10,
+                    z: 40
+                },
+                content: {
+                    tip: "点击查看档案室信息",
+                    title: "",
+                    type: "tip"
+                }
+            }
+        ]
     },
     // 第十二个场景 --化验室
     {
@@ -419,6 +453,18 @@ export const sceneList = [
                     title: "通向影像室",
                     type: "title",
                     directTo: 12
+                }
+            },
+            {
+                position:{
+                    x: 40,
+                    y: -20,
+                    z: -80
+                },
+                content: {
+                    tip: "点击查看化验室信息",
+                    title: "",
+                    type: "tip"
                 }
             }
         ]
@@ -453,6 +499,18 @@ export const sceneList = [
                     tip: "",
                     directTo: 14
                 }
+            },
+            {
+                position:{
+                    x: 0,
+                    y: -60,
+                    z: 40
+                },
+                content: {
+                    tip: "点击查看影像室信息",
+                    title: "",
+                    type: "tip"
+                }
             }
         ]
     },
@@ -472,6 +530,18 @@ export const sceneList = [
                     title: "通向影像室",
                     type: "title",
                     directTo: 12
+                }
+            },
+            {
+                position:{
+                    x: 40,
+                    y: -20,
+                    z: 40
+                },
+                content: {
+                    tip: "点击查看处置室信息",
+                    title: "",
+                    type: "tip"
                 }
             }
         ]
@@ -505,6 +575,18 @@ export const sceneList = [
                     title: "通向影像室",
                     type: "title",
                     directTo: 12
+                }
+            },
+            {
+                position:{
+                    x: 30,
+                    y: -30,
+                    z: 20
+                },
+                content: {
+                    tip: "点击查看专科检查室信息",
+                    title: "",
+                    type: "tip"
                 }
             }
         ]
