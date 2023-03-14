@@ -1,0 +1,6 @@
+# 项目的配置文件
+env:
+  test:
+    base_url: "http://localhost/"
+  dev:
+    base_url: ""

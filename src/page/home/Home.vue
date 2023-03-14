@@ -7,6 +7,7 @@
 </template>
 
 <script>
+    import instance from '@/net';
     export default {
         name: "Home",
         data() {

@@ -3,6 +3,9 @@
         <transition name="vr">
             <div class="vr_hospital-info" v-if="showInfo">VR模式</div>
         </transition>
+        <div class="vr_hospital-room" v-if="showInfo === false">
+            <span>{{ currentScene.name }}</span>
+        </div>
         <div class="vr_hospital-three" ref="threeDom"></div>
         <div class="vr_hospital-scene">
             <div class="vr_hospital-icon" @click="handleShowList">
@@ -12,12 +15,15 @@
                 </svg>
                 <div>选择场景</div>
             </div>
-            <div class="vr_hospital-list" v-if="showList">
-                <div class="vr_hospital-item" v-for="(item,index) in sceneList" :key="index" @click="() => changeScene(index)">
-                    <img :src="item.image" alt="">
-                    <div>{{ item.name }}</div>
+            <transition name="list">
+                <div class="vr_hospital-list" v-show="showList">
+                    <div class="vr_hospital-item" v-for="(item,index) in sceneList" :key="index" @click="() => changeScene(index)">
+                        <img :src="item.image" alt="">
+                        <div>{{ item.name }}</div>
+                    </div>
                 </div>
-            </div>
+            </transition>
+            
         </div>
         <div class="vr_hospital-tip" ref="tipBox" v-if="showTip" :style="tipStyle">
             <div v-if="tipContent.type === 'tip'">
@@ -27,6 +33,13 @@
                 {{ tipContent.title }}
             </div>
         </div>
+        <transition name="room">
+            <div class="vr_hospital-roomInfo" v-if="showRoomInfo">
+                <div class="vr_hospital-iconContainer"><i class="el-icon-close" @click="showRoomInfo = false"></i></div>
+                <span>{{ currentScene.desc }}</span>
+            </div>
+        </transition>
+        
     </div>
 </template>
 
@@ -37,7 +50,6 @@ import { OrbitControls } from 'three/addons/controls/OrbitControls'
 import { PointerLockControls } from "three/examples/jsm/controls/PointerLockControls.js"
 import { sceneList } from "@/page/webvr/utils/tips"
 import { nextTick } from 'vue'
-
 
 export default {
     name: "HospitalVR",
@@ -62,6 +74,7 @@ export default {
             showTip: false,
             showInfo: false,
             showList: false,
+            showRoomInfo: false,
             tipStyle: {
                 left: "-100%",
                 top: "-100%"
@@ -74,8 +87,8 @@ export default {
         initScene() {
             this.scene = new THREE.Scene(); //初始化场景
             var ambient = new THREE.AmbientLight(0x444444, 3); //添加光源  颜色和光照强度
-            var axisHelper = new THREE.AxesHelper(600); //添加辅助坐标系 参数位辅助坐标系的长度
-            this.scene.add(ambient, axisHelper); //向场景中添加光源 和 辅助坐标系
+            // var axisHelper = new THREE.AxesHelper(600); //添加辅助坐标系 参数位辅助坐标系的长度
+            this.scene.add(ambient); //向场景中添加光源 和 辅助坐标系
         },
         // 初始化相机
         initCamera() {
@@ -150,6 +163,7 @@ export default {
             sprite.scale.set(10, 10, 10);
             sprite.position.set(tip.position.x, tip.position.y, tip.position.z); // 设置标签位置
             sprite.content = tip.content; // 设置标签内容
+            sprite.tip = tip;
             this.spriteList.push(sprite);
             this.scene.add(sprite);
         },
@@ -221,6 +235,9 @@ export default {
                     
                     this.changeScene(intersects[0].object.content.directTo);
                     this.hideTip(e);
+                } else if(intersects.length > 0 && intersects[0].object.content.type === "tip") {
+                    let tip =  intersects[0].object.tip;
+                    this.showRoomsInfo(tip);
                 }
             })
         },
@@ -290,7 +307,6 @@ export default {
                             this.tipStyle.top = `${top}px`
                         },100)
                     } else if(this.tipContent.type === "tip") { // 显示标签
-                        console.log(document.getElementsByClassName("vr_hospital-tip")[0].clientWidth)
                         let left = Math.round(
                             elementWidth * position.x +
                             elementWidth - 
@@ -329,6 +345,11 @@ export default {
             }
         },
 
+        // 该函数用于展示房间的描述信息
+        showRoomsInfo(tip) {
+            console.log(tip)
+            this.showRoomInfo = true;
+        },
         hideTip() {
             if(document.getElementsByClassName("vr_hospital-tip")[0]) {
                 document.getElementsByClassName("vr_hospital-tip")[0].style.visibility = ""
@@ -346,6 +367,7 @@ export default {
                 type: "tip"
             }
         },
+
         handleShowList() {
             this.showList = !this.showList;
         }
@@ -415,11 +437,27 @@ export default {
 
     }
 
+    .vr_hospital-room {
+        position: absolute;
+        top: 40px;
+        padding: 5px 10px;
+        border-radius: 10px;
+        height: 40px;
+        background: rgba(0,0,0,0.4);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #fff;
+        font-size: 18px;
+        left: 50%;
+        transform: translateX(-50%);
+        cursor: pointer;
+    }
+
     .vr_hospital-scene {
         position: absolute;
         bottom: 20px;
         padding: 0 40px;
-        max-width: 90%;
         display: flex;
         align-items: center;
         .vr_hospital-icon {
@@ -433,11 +471,14 @@ export default {
             justify-content: center;
             font-size: 13px;
             color: #fff;
+            cursor: pointer;
             svg {
                 fill: #fff;
             }
         }
         .vr_hospital-list {
+            width: 80vw;
+            box-sizing: border-box;
             padding: 10px;
             background: rgba(0,0,0,0.4);
             border-radius: 5px;
@@ -466,12 +507,52 @@ export default {
         }
     }
 
+    .vr_hospital-roomInfo {
+        overflow: hidden;
+        background: rgba(0,0,0,0.5);
+        border-radius: 10px;
+        width: 400px;
+        min-height: 200px;
+        box-sizing: border-box;
+        padding: 5px 10px;
+        color: #fff;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+        cursor: pointer;
+        .vr_hospital-iconContainer {
+            margin-bottom: 10px;
+            i {
+                float: right;
+                margin-right: 5px;
+            }
+        }
+    }
+
     .vr-enter,.vr-leave-to {
         transform: translateY(-20px);
         opacity: 0;
     }
     .vr-enter-active,.vr-leave-active {
         transition: all .3s ease;
+    }
+
+    .list-enter,.list-leave-to {
+        width: 0;
+        height: 0;
+    }
+
+    .list-enter-active,.list-leave-active {
+        transition: width .5s ease;
+    }
+
+    .room-enter,.room-leave-to {
+        width: 0;
+    }
+
+    .room-enter-active,.room-leave-active {
+        transition: width  .5s ease, height .5s ease;
     }
 }
 

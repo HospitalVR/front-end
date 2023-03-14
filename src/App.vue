@@ -18,7 +18,16 @@ import Video_editor from './component/Video_editor.vue';
 export default {
   name: 'App',
   components: {
-    HospitalVR,Home,Add_disease,Case_list, Disease_view, Edit_disease, Disease_group, Disease_list, Picture_editor, Video_editor
+    HospitalVR,
+    Home,
+    Add_disease,
+    Case_list, 
+    Disease_view, 
+    Edit_disease, 
+    Disease_group, 
+    Disease_list, 
+    Picture_editor, 
+    Video_editor
   }
 }
 </script>
