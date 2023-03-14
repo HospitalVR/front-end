@@ -13,6 +13,7 @@ specifiers:
   eslint: ^7.32.0
   eslint-plugin-vue: ^8.0.3
   gsap: ^3.11.4
+  js-yaml-loader: ^1.2.2
   less: ^4.1.3
   less-loader: ^11.1.0
   three: ^0.150.1
@@ -40,6 +41,7 @@ devDependencies:
   '@vue/cli-service': 5.0.8_2t7kucga4qs3mcl6kggqf2o3ca
   eslint: 7.32.0
   eslint-plugin-vue: 8.7.1_eslint@7.32.0
+  js-yaml-loader: 1.2.2
   less: 4.1.3
   less-loader: 11.1.0_less@4.1.3
   vue-template-compiler: 2.7.14
@@ -2404,7 +2406,7 @@ packages:
   /axios/1.3.4:
     resolution: {integrity: sha512-toYm+Bsyl6VC5wSkfkbbNB6ROv7KY93PEBBL6xyDczaIHasAiv4wPqQ/c4RjoQzipxRD2W5g21cOqQulZ7rHwQ==}
     dependencies:
-      follow-redirects: 1.15.2_debug@4.3.4
+      follow-redirects: 1.15.2
       form-data: 4.0.0
       proxy-from-env: 1.1.0
     transitivePeerDependencies:
@@ -3303,6 +3305,7 @@ packages:
         optional: true
     dependencies:
       ms: 2.1.2
+    dev: true
 
   /deep-is/0.1.4:
     resolution: {integrity: sha512-oIPzksmTg4/MriiaYGO+okXDT7ztn/w3Eptv/+gSIdMdKsJo0u4CfYNFJPy+4SKMuCqGw2wxnA+URMg3t8a/bQ==}
@@ -3933,7 +3936,7 @@ packages:
     resolution: {integrity: sha512-5nqDSxl8nn5BSNxyR3n4I6eDmbolI6WT+QqR547RwxQapgjQBmtktdP+HTBb/a/zLsbzERTONyUB5pefh5TtjQ==}
     dev: true
 
-  /follow-redirects/1.15.2_debug@4.3.4:
+  /follow-redirects/1.15.2:
     resolution: {integrity: sha512-VQLG33o04KaQ8uYi2tVNbdrWp1QWxNNea+nmIB4EVM28v0hmP17z7aG1+wAkNzVq4KeXTq3221ye5qTJP91JwA==}
     engines: {node: '>=4.0'}
     peerDependencies:
@@ -3941,8 +3944,6 @@ packages:
     peerDependenciesMeta:
       debug:
         optional: true
-    dependencies:
-      debug: 4.3.4
 
   /form-data/4.0.0:
     resolution: {integrity: sha512-ETEklSGi5t0QMZuiXoA/Q6vcnxcLQP5vdugSpuAyi6SVGi2clPPp+xgEhuMaHC+zGgn31Kd235W35f7Hykkaww==}
@@ -4270,7 +4271,7 @@ packages:
     engines: {node: '>=8.0.0'}
     dependencies:
       eventemitter3: 4.0.7
-      follow-redirects: 1.15.2_debug@4.3.4
+      follow-redirects: 1.15.2
       requires-port: 1.0.0
     transitivePeerDependencies:
       - debug
@@ -4523,6 +4524,14 @@ packages:
 
   /js-tokens/4.0.0:
     resolution: {integrity: sha512-RdJUflcE3cUzKiMqQgsCu06FPu9UdIJO0beYbPhHN4k6apgJtifcoCtT9bcxOpYBtpD2kCM6Sbzg4CausW/PKQ==}
+    dev: true
+
+  /js-yaml-loader/1.2.2:
+    resolution: {integrity: sha512-H+NeuNrG6uOs/WMjna2SjkaCw13rMWiT/D7l9+9x5n8aq88BDsh2sRmdfxckWPIHtViYHWRG6XiCKYvS1dfyLg==}
+    dependencies:
+      js-yaml: 3.14.1
+      loader-utils: 1.4.2
+      un-eval: 1.2.0
     dev: true
 
   /js-yaml/3.14.1:
@@ -4909,6 +4918,7 @@ packages:
 
   /ms/2.1.2:
     resolution: {integrity: sha512-sGkPx+VjMtmA6MX27oA4FBFELFCZZ4S4XqeGOXCv68tT+jb3vk/RyaKWP0PTKyWtmLSM0b+adUTEvbs1PEaH2w==}
+    dev: true
 
   /ms/2.1.3:
     resolution: {integrity: sha512-6FlzubTLZG3J2a/NVCAleEhjzq5oxgHyaCU9yYXvcLsvoVaHJq/s5xXI6/XXP6tz7R9xAOtHnSO/tXtF3WRTlA==}
@@ -6538,6 +6548,10 @@ packages:
     dependencies:
       media-typer: 0.3.0
       mime-types: 2.1.35
+    dev: true
+
+  /un-eval/1.2.0:
+    resolution: {integrity: sha512-Wlj/pum6dQtGTPD/lclDtoVPkSfpjPfy1dwnnKw/sZP5DpBH9fLhBgQfsqNhe5/gS1D+vkZUuB771NRMUPA5CA==}
     dev: true
 
   /unicode-canonical-property-names-ecmascript/2.0.0:
