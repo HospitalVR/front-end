@@ -10,3 +10,4 @@ npm install
 ```bash
 npm  run serve
 ```
+PS 如果在npm run serve步骤报错，尝试```npm i pnpm -g```即可完美解决问题
