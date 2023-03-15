@@ -36,10 +36,17 @@
         <transition name="room">
             <div class="vr_hospital-roomInfo" v-if="showRoomInfo">
                 <div class="vr_hospital-iconContainer"><i class="el-icon-close" @click="showRoomInfo = false"></i></div>
-                <span>{{ currentScene.desc }}</span>
+                <div class="vr_hospital-roomDetail">
+                    <h3>科室介绍</h3>
+                    <p>{{ currentScene.desc[0] }}</p>
+                    <h3>主要负责人</h3>
+                    <p>{{ currentScene.desc[1] }}</p>
+                </div>
             </div>
         </transition>
-        
+        <div class="vr_hospital-close" @click="$router.push('/home')">
+            <span>退出导览系统</span>
+        </div>
     </div>
 </template>
 
@@ -132,7 +139,6 @@ export default {
             this.controller.maxPolarAngle = Math.PI; //绕垂直轨道的距离（范围是0-Math.PI,默认为Math.PI）
             this.controller.maxDistance = 30; // 设置移动的最长距离（默认为无穷）
             this.controller.enablePan = false; //禁用右键功能
-            // this.controller.enableDamping = true;
         },
 
         // 初始化第一人称控制器
@@ -411,6 +417,9 @@ export default {
 
 <style lang="less" scoped>
 .vr_hospital-container {
+    position: relative;
+    height: 100vh;
+    width: 100vw;
     .vr_hospital-tip {
         position: absolute;
         background: rgba(0,0,0,0.5);
@@ -421,8 +430,8 @@ export default {
         visibility: hidden;
     }
     .vr_hospital-three {
-        width: 100vw;
-        height: 100vh;
+        width: 100%;
+        height: 100%;
     }
     .vr_hospital-info {
         position: absolute;
@@ -507,6 +516,19 @@ export default {
         }
     }
 
+    .vr_hospital-close {
+        background: rgba(0,0,0,0.5);
+        color: #fff;
+        font-size: 14px;
+        font-weight: 500;
+        padding: 5px 10px;
+        border-radius: 5px;
+        position: absolute;
+        top: 40px;
+        right: 10px;
+        cursor: pointer;
+    }
+
     .vr_hospital-roomInfo {
         overflow: hidden;
         background: rgba(0,0,0,0.5);
@@ -526,6 +548,21 @@ export default {
             i {
                 float: right;
                 margin-right: 5px;
+            }
+
+
+        }
+        .vr_hospital-roomDetail {
+
+            h3 {
+                background: -webkit-linear-gradient(315deg,#42d392 25%,#647eff);
+                background-clip: text;
+                -webkit-text-fill-color: transparent;
+                font-size: 24px;
+                font-weight: 600;
+            }
+            p {
+                font-size: 15px;
             }
         }
     }
@@ -549,10 +586,11 @@ export default {
 
     .room-enter,.room-leave-to {
         width: 0;
+        min-height: 0;
     }
 
     .room-enter-active,.room-leave-active {
-        transition: width  .5s ease, height .5s ease;
+        transition: width  .5s ease;
     }
 }
 
