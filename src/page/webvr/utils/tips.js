@@ -4,6 +4,7 @@ export const sceneList = [
     { 
         image: require("@/assets/Entry.jpg"),
         name: "大门口",
+        
         tipList:[
             {
                 position:{
@@ -26,6 +27,7 @@ export const sceneList = [
     { 
         image: require("@/assets/Hall.jpg"),
         name: "前台大厅",
+        desc: "这是前台大厅",
         tipList: [
             {
                 position: {
