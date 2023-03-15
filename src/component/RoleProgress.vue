@@ -14,8 +14,9 @@
             </el-button>
         </div>
         <div class="role_progress-detail">
-            <div>
-                
+            <h1>步骤具体描述</h1>
+            <div class="role_progress-desc">
+                <p v-for="(item,index) in progress[active].desc" :key="index">{{ item }}</p>
             </div>
         </div>
     </div>  
@@ -47,5 +48,14 @@
 <style lang="less" scoped>
 .role_progress-container {
     padding: 10px;
+
+    .role_progress-progress {
+        border-bottom: 1px solid #dcdfe6;
+        padding: 20px;
+    }
+    .role_progress-detail {
+        padding: 10px;
+        margin-top: 30px;
+    }
 }
 </style>

@@ -11,7 +11,11 @@
                 <div class="nav-right-item" @click="$router.push('/home/case_list')"><span>病例管理</span></div>
                 <div class="nav-right-item" @click="$router.push('/vr')"><span>医院导览</span></div>
             </div>
+            
         </el-header>
+        <el-breadcrumb separator-class="el-icon-arrow-right" class="nav-path" style="marginTop: 70px;marginLeft: 10px">
+                <el-breadcrumb-item v-for="(item, index) in $store.state.path" :key="index" :to="{ path: item.to }">{{ item.name }}</el-breadcrumb-item>
+        </el-breadcrumb>
         <el-main>
             <keep-alive>
                 <router-view></router-view>
@@ -60,6 +64,9 @@ import Video_editor from '@/component/Video_editor.vue';
     top: 0;
     width: 100%;
     z-index: 10;
+    .nav-path {
+        margin-top: 70px;
+    }
     .nav-left {
         float: left;
         height: 100%;
