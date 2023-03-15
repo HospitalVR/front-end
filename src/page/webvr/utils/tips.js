@@ -27,7 +27,7 @@ export const sceneList = [
     { 
         image: require("@/assets/Hall.jpg"),
         name: "前台大厅",
-        desc: "这是前台大厅",
+        desc: ["包括接待挂号、导医咨询、病历档案发出与回收、收费等","前台"],
         tipList: [
             {
                 position: {
