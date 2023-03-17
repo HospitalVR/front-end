@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import App from './App.vue'
 import router from "@/router"
+import {store} from "@/store"
 import VueRouter from 'vue-router'
 import "@/style/global.less"
 import ElementUI from 'element-ui';
@@ -12,6 +13,6 @@ new Vue({
   components: {
     App
   },
-  router,
+  router,store,
   render: h => h(App)
 }).$mount('#app') //挂载节点

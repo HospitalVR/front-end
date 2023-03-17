@@ -55,7 +55,6 @@ import RoleProgress from "@/component/RoleProgress.vue"
 
 <style lang="less" scoped>
 .hospital_roleDetail-cotainer {
-    padding-top: 60px;
     display: flex;
     .hospital_roleDetail-main {
         flex: 1;

@@ -1,6 +1,7 @@
 import VueRouter from "vue-router"
+import {store} from "@/store"
 // 路由的配置信息
-export default new VueRouter({
+const router = new VueRouter({
     routes:[
         { path: "/", redirect: "/home" },
         { path:"/vr",component:()=>import("@/page/webvr/HospitalVR.vue") },
@@ -42,3 +43,53 @@ export default new VueRouter({
         },
     ]
 })
+
+router.beforeEach((to,from,next) => {
+    switch(to.path) {
+        case "/home":
+            store.commit("changePath",{
+                index: 0,
+                router: to,
+                name: "首页"
+            })
+            break;
+        case "/home/case_list":
+            store.commit("changePath",{
+                index: 1,
+                router: to,
+                name: "病例管理"
+            })
+            break;
+        case "/home/role":
+            store.commit("changePath",{
+                index: 1,
+                router: to,
+                name: "角色扮演"
+            })
+            break;
+        case "/home/roleDetail":
+            let name = "";
+            switch(to.query.role) {
+                case "yizhu":
+                    name = "医助"
+                    break;
+                case "shouyi":
+                    name = "兽医";
+                    break;
+                case "qiantai":
+                    name = "前台";
+                    break;
+                default:
+                    name = "游客"
+            }
+            store.commit("changePath",{
+                index: 2,
+                router: to,
+                name
+            })
+            break;
+    }
+    next();
+})
+
+export default router;
