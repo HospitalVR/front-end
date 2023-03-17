@@ -30,7 +30,7 @@ export default {
     },
     methods: {
         confirm: function () {
-            this.$router.replace('/case_list')
+            this.$router.replace('/home/case_list')
             alert("修改成功");
         },
         back: function () {
@@ -46,8 +46,8 @@ export default {
 #edit_disease {
     width: 100vw;
     height: wrap-content;
-    background: rgb(34, 218, 188);
-    padding: 0;
+    //background: rgb(34, 218, 188);
+    padding-top: 60px;
     margin: 0;
 }
 .header{

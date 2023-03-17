@@ -31,7 +31,7 @@ export default {
     width: 100vw;
     height: wrap-content;
     //background: rgb(114, 239, 139);
-    padding: 0;
+    padding-top: 60px;
     margin: 0;
 }
 

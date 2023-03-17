@@ -20,9 +20,8 @@ import { NetLoader } from '@/net';
 export default {
     name: "disease_view",
     data() {
-        let disease_name = this.$route.query.disease_name;
         return {
-            disease_name: disease_name,
+            disease_name: this.$route.query.disease_name,
             disease_data: {
                 "name": {
                     "text": "",
@@ -57,7 +56,7 @@ export default {
     methods: {
         edit: function () {
             this.$router.push({
-                path: '/edit_disease', query: {
+                path: '/home/edit_disease', query: {
                     disease_name: this.disease_name,
                     disease_group: this.disease_group,
                     disease_data: this.disease_data
@@ -69,15 +68,24 @@ export default {
             this.$router.go(-1)
         },
         get_data: function () {
+            let resurl="http://localhost:8888/res/"
             let loader = new NetLoader("test")
-            loader.get("/case/findByName?name="+this.disease_name).then((value) => {
+            loader.get("/case/findByName?name=" + this.disease_name).then((value) => {
+                for (let key in value.data) {
+                    if (value.data[key].image != null) {
+                        value.data[key].image = resurl + this.disease_name+ "/" + value.data[key].image
+                    }
+                    if (value.data[key].video != null) {
+                        value.data[key].video = resurl + this.disease_name+ "/" + value.data[key].video
+                    }
+                }
                 console.log(value.data)
                 this.disease_data=value.data
             })
         }
     },
     components: { Case_editor },
-    created() {
+    mounted() {
         this.get_data()
     }
 }
@@ -87,8 +95,8 @@ export default {
 #disease_view {
     width: 100vw;
     height: wrap-content;
-    background: rgb(114, 239, 139);
-    padding: 0;
+    //background: rgb(114, 239, 139);
+    padding-top: 60px;
     margin: 0;
 }
 #header{

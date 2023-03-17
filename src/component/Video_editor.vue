@@ -2,21 +2,32 @@
     <div id="video_editor">
         <h3>疾病视频</h3>
         <div class="pic_video_button">
-            <div class="pic_video">
-                <template v-if="video_url!=''">
-                    <video id="video" controls="controls" :src="video_url"></video>
-                </template>
-                <template v-else>
-                    <div style="margin-top:100px;">
-                        <template v-if="component_type==1"><h1>请导入视频资源</h1></template>
-                        <template v-else><h1>不存在视频资源</h1></template>
-                    </div>
-                </template>
-            </div>
             <template v-if="component_type!=2">
+                <div class="pic_video">
+                    <template v-if="video_url != null">
+                        <video id="video" controls="controls" :src="video_url"></video>
+                    </template>
+                    <template v-else>
+                        <div style="margin-top:100px;">
+                            <template v-if="component_type == 1"><h1>请导入视频资源</h1></template>
+                            <template v-else><h1>不存在视频资源</h1></template>
+                        </div>
+                    </template>
+                </div>
                 <input class="button1" type="file" ref="file">
             </template>
             <template v-else>
+                <div class="pic_video">
+                    <template v-if="disease_video != null">
+                        <video id="video" controls="controls" :src="disease_video"></video>
+                    </template>
+                    <template v-else>
+                        <div style="margin-top:100px;">
+                            <template v-if="component_type == 1"><h1>请导入视频资源</h1></template>
+                            <template v-else><h1>不存在视频资源</h1></template>
+                        </div>
+                    </template>
+                </div>
                 <div style="display: none;">
                     <input class="button1" type="file" ref="file">
                 </div>

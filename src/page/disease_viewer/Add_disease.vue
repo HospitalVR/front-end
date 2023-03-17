@@ -56,11 +56,11 @@ export default {
     },
     methods: {
         confirm: function () {
-            this.$router.replace('/case_list')
+            this.$router.replace('/home/case_list')
             alert("添加成功");
         },
         back: function () {
-            this.$router.replace('/case_list')
+            this.$router.replace('/home/case_list')
         }
     },
     components: { Case_editor }
@@ -71,8 +71,8 @@ export default {
 #add_disease {
     width: 100vw;
     height: wrap-content;
-    background: rgb(245, 30, 70);
-    padding: 0;
+    //background: rgb(245, 30, 70);
+    padding-top: 60px;
     margin: 0;
 }
 
