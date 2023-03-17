@@ -4,7 +4,7 @@
             <h2>{{ disease_group }}</h2>
             <button v-on:click="add_disease">添加疾病</button>
         </div>
-        <div class="item_div" v-for="item in disease_name_list" v-on:click="show_data(item)">
+        <div class="item_div" v-for="(item,index) in disease_name_list" :key="index" v-on:click="show_data(item)">
             <h3>{{item}}</h3>
             <button v-on:click.stop="delete_disease(item)">删除该病</button>
         </div>
@@ -20,7 +20,7 @@ export default {
     methods: {
         show_data: function (name) {
             this.$router.push({
-                path: '/disease_view', query: {disease_name: name}
+                path: '/home/disease_view', query: {disease_name: name}
             })
         },
         delete_disease: function (name) {
@@ -28,7 +28,7 @@ export default {
         },
         add_disease: function () {
             this.$router.push({
-                path: '/add_disease', query: { disease_group: this.disease_group }
+                path: '/home/add_disease', query: { disease_group: this.disease_group }
             })
         }
     },

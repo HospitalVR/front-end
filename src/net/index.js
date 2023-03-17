@@ -14,7 +14,10 @@ export class NetLoader {
         this.instance = axios.create({
             timeout: 1000,
             baseURL: this.baseURL,
+<<<<<<< HEAD
             
+=======
+>>>>>>> 11527515b0e1cf0dbdde03e4625555c528d274e9
             headers: {
                 "Content-Encoding": "utf-8"
             }
