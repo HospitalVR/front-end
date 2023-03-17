@@ -7,6 +7,7 @@
                 </div>
             </div>
             <div class="nav-right">
+                <div class="nav-right-item" @click="$router.push('/login')"><span>管理员登录</span></div>
                 <div class="nav-right-item" @click="$router.push('/home/role')"><span>角色扮演</span></div>
                 <div class="nav-right-item" @click="$router.push('/home/case_list')"><span>病例管理</span></div>
                 <div class="nav-right-item" @click="$router.push('/vr')"><span>医院导览</span></div>
