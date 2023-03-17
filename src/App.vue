@@ -1,4 +1,5 @@
 <template>
+<<<<<<< HEAD
   <keep-alive>
     <router-view></router-view>
   </keep-alive>
@@ -23,4 +24,18 @@ body,html {
   margin: 0;
   padding: 0;
 }
+=======
+  <div id="app">
+    
+  </div>
+</template>
+
+<script>
+export default {
+  
+}
+</script>
+
+<style>
+>>>>>>> c85a8b8 (init project)
 </style>
