@@ -19,7 +19,6 @@ export default {
     },
     methods: {
         show_data: function (name) {
-            alert("展示疾病 " + name)
             this.$router.push({
                 path: '/disease_view', query: {disease_name: name}
             })

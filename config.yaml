@@ -1,6 +1,6 @@
 # 项目的配置文件
 env:
   test:
-    base_url: "http://localhost/"
+    base_url: "http://127.0.0.1:8888/"
   dev:
     base_url: ""

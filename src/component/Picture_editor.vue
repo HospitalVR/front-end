@@ -1,6 +1,6 @@
 <template>
     <div id="picture_editor">
-        <h2>疾病图片</h2>
+        <h3>疾病图片</h3>
         <div class="pic_video_button">
             <div class="pic_video">
                 <template v-if="image_url != ''">
