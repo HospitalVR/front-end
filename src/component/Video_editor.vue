@@ -45,9 +45,6 @@ export default {
         }
     },
     methods: {
-        change_picture: function () {
-            alert("修改视频");
-        },
     },
     props: {
         disease_video: String,

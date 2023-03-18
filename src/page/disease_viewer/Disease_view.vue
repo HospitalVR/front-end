@@ -70,7 +70,6 @@ export default {
         get_data: function () {
             let resurl="http://localhost:8888/res/"
             let loader = new NetLoader("test")
-            console.log(this.disease_name)
             loader.get("/case/findByName?name=" + this.disease_name).then((value) => {
                 for (let key in value.data) {
                     if (value.data[key].image != null) {
