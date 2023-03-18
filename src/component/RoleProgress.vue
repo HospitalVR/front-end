@@ -8,14 +8,15 @@
             </el-steps>
             <el-button type="primary" @click="enterNext" v-if="progress.length > 0">
                 <template>
-                    <span v-if="active === 5">重新开始</span>
+                    <span v-if="active === progress.length">重新开始</span>
                     <span v-else>下一步</span>
                 </template>
             </el-button>
         </div>
-        <div class="role_progress-detail">
-            <div>
-                
+        <div class="role_progress-detail" v-if="active < progress.length">
+            <h1>步骤具体描述</h1>
+            <div class="role_progress-desc">
+                <p v-for="(item,index) in progress[active].desc" :key="index">{{ item }}</p>
             </div>
         </div>
     </div>  
@@ -37,7 +38,7 @@
         },
         methods: {
             enterNext() {
-                this.active = (++this.active)%(this.progress.length+1);
+                this.active = (this.active + 1)%(this.progress.length + 1);
                 
             }
         }
@@ -47,5 +48,15 @@
 <style lang="less" scoped>
 .role_progress-container {
     padding: 10px;
+
+    .role_progress-progress {
+        border-bottom: 1px solid #dcdfe6;
+        padding: 20px;
+    }
+    .role_progress-detail {
+        padding: 10px;
+        margin-top: 30px;
+        overflow-y: scroll;
+    }
 }
 </style>
