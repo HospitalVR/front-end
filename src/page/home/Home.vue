@@ -100,10 +100,15 @@ import Video_editor from '@/component/Video_editor.vue';
             align-items: center;
             margin-right: 15px;
             cursor: pointer;
-            background: -webkit-linear-gradient(315deg,#42d392 25%,#647eff);
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-            font-weight: 600;
+            color: #fff;
+            // background: -webkit-linear-gradient(315deg,#42d392 25%,#647eff);
+            // background-clip: text;
+            // -webkit-text-fill-color: transparent;
+            font-weight: 200;
+
+            &:hover {
+                color: blue;
+            }
         }
     }
 }
