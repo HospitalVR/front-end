@@ -1,13 +1,12 @@
 <template>
     <div id="disease_group">
-        <div id="header">
-            <h2>{{ disease_group }}</h2>
-            <button v-on:click="add_disease">添加疾病</button>
-        </div>
-        <div class="item_div" v-for="(item,index) in disease_name_list" :key="index" v-on:click="show_data(item)">
-            <h3>{{item}}</h3>
-            <button v-on:click.stop="delete_disease(item)">删除该病</button>
-        </div>
+        <el-card class="box-card">
+          <div slot="header" class="clearfix">
+            <span>{{ disease_group }}</span>
+            <el-button style="float: right; padding: 3px 0" type="text" v-on:click="add_disease">添加疾病</el-button>
+          </div>
+          <el-tag id="tag" v-for="(item, index) in disease_name_list" :key="index" v-on:click="show_data(item)" closable :disable-transitions="false" @close="delete_disease(item)">{{ item }}</el-tag>
+        </el-card>
     </div>
 </template>
 
@@ -41,28 +40,37 @@ export default {
 
 <style scoped lang="less">
 #disease_group {
-    width: 100vw;
+    width: 100%;
     height: wrap-content;
-    background: rgb(227, 81, 171);
+    //background: rgb(227, 81, 171);
     padding: 0;
     margin: 0;
     margin-top:30px;
 }
-.item_div{
-    width:27%;
-    height:30px;
-    background: rgb(86, 201, 221);
-    padding: 0;
-    margin-top:10px;
-    margin-bottom:10px;
-    margin-left:20px;
-    margin-right:20px;
-    display: inline-flex;
-    justify-content: center;
-}
+
 #header{
     display: flex;
     flex-direction: row;
     justify-content: left;
 }
+
+  .clearfix:before,
+  .clearfix:after {
+    display: table;
+    content: "";
+  }
+  .clearfix:after {
+    clear: both
+  }
+
+  .box-card {
+    width: 100%;
+  }
+
+  #tag{
+    margin-left:10px;
+    margin-right:10px;
+    margin-top:5px;
+    margin-bottom:10px;
+  }
 </style>

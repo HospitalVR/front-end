@@ -38,9 +38,9 @@ export default {
 
 <style scoped lang="less">
 #disease_list {
-    width: 100vw;
+    width: 70%;
     height: wrap-content;
-    background: rgb(127, 60, 199);
+    //background: rgb(148, 254, 0);
     padding: 0;
     margin: 0;
 }

@@ -3,7 +3,7 @@
         <h3>疾病图片</h3>
         <div class="pic_video_button">
             <template v-if="component_type!=2">
-                <div class="pic_video">
+                <div class="box-card">
                     <template v-if="image_url != null">
                         <img id="img" :src="image_url">
                     </template>
@@ -17,7 +17,7 @@
                 <input class="button1" type="file" ref="file">
             </template>
             <template v-else>
-                <div class="pic_video">
+                <div class="box-card">
                     <template v-if="disease_picture != null">
                         <img id="img" :src="disease_picture">
                     </template>
@@ -70,10 +70,12 @@ export default {
     padding: 0;
     margin: 0;
 }
-.pic_video {
+.box-card {
     width: 400px;
     height: 280px;
     text-align: center;
+    border: solid;
+    border-color: gray;
 }
 
 .pic_video_button {

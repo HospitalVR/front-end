@@ -1,15 +1,19 @@
 <template>
     <div id="case_editor">
-        <h2>{{title}}</h2>
-        <h3>文字</h3>
-        <template v-if="component_type==2">
-            <p>{{ text }}</p>
-        </template>
-        <template v-else>
-            <textarea :value="text"></textarea>
-        </template>
-        <Picture_editor :disease_picture="disease_picture" :component_type="component_type"></Picture_editor>
-        <Video_editor :disease_video="disease_video" :component_type="component_type"></Video_editor>
+        <el-card class="box-card">
+            <h2>{{title}}</h2>
+            <h3>文字</h3>
+            <template v-if="component_type==2">
+                <p>{{ text }}</p>
+            </template>
+            <template v-else>
+                <div id="input">
+                    <el-input type="textarea" autosize placeholder="请输入文字" v-model="text"></el-input>
+                </div>
+            </template>
+            <Picture_editor :disease_picture="disease_picture" :component_type="component_type"></Picture_editor>
+            <Video_editor :disease_video="disease_video" :component_type="component_type"></Video_editor>
+        </el-card>
     </div>
 </template>
 
@@ -39,12 +43,14 @@ export default {
 
 <style scoped lang="less">
 #case_editor {
-    width: 100vw;
+    width: 95%;
     height: wrap-content;
-    background: rgb(154, 113, 236);
+//    background: rgb(154, 113, 236);
     padding: 0;
     margin: 0;
     margin-top: 30px;
 }
-
+#input {
+    width:680px;
+}
 ;</style>

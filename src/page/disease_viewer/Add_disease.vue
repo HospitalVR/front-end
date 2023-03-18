@@ -28,28 +28,28 @@ export default {
             disease_data: {
                 "name": {
                     "text": "",
-                    "image": "",
-                    "video": ""
+                    "image": null,
+                    "video": null
                 },
                 "treat": {
                     "text": "",
-                    "image": "",
-                    "video": ""
+                    "image": null,
+                    "video": null
                 },
                 "check": {
                     "text": "",
-                    "image": "",
-                    "video": ""
+                    "image": null,
+                    "video": null
                 },
                 "result": {
                     "text": "",
-                    "image": "",
-                    "video": ""
+                    "image": null,
+                    "video": null
                 },
                 "plan": {
                     "text": "",
-                    "image": "",
-                    "video": ""
+                    "image": null,
+                    "video": null
                 }
             },
         };
