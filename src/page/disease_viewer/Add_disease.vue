@@ -3,14 +3,13 @@
         <div class="header">
             <h1>添加疾病</h1>
         </div>
-        <h2>疾病名称</h2>
-        <input v-model="disease_name" placeholder="在此处输入疾病名称">
         <h2>疾病类别</h2>
         <p>{{this.$route.query.disease_group}}</p>
-        <h2>疾病信息</h2>
-        <textarea id="textarea" v-model="disease_description" placeholder="在此处输入疾病信息"></textarea>
-        <Picture_editor :disease_picture="disease_picture" :component_type="1"></Picture_editor>
-        <Video_editor :disease_video="disease_video" :component_type="1"></Video_editor>
+        <Case_editor title="疾病名称" :text="disease_data.name.text" :disease_picture="disease_data.name.image" :disease_video="disease_data.name.video" :component_type="component_type"></Case_editor>
+        <Case_editor title="接诊" :text="disease_data.treat.text" :disease_picture="disease_data.treat.image" :disease_video="disease_data.treat.video" :component_type="component_type"></Case_editor>
+        <Case_editor title="病例检查" :text="disease_data.check.text" :disease_picture="disease_data.check.image" :disease_video="disease_data.check.video" :component_type="component_type"></Case_editor>
+        <Case_editor title="诊断结果" :text="disease_data.result.text" :disease_picture="disease_data.result.image" :disease_video="disease_data.result.video" :component_type="component_type"></Case_editor>
+        <Case_editor title="治疗方案" :text="disease_data.plan.text" :disease_picture="disease_data.plan.image" :disease_video="disease_data.plan.video" :component_type="component_type"></Case_editor>
         <div class="header">
             <button v-on:click="confirm">确认添加</button>
             <button v-on:click="back">返回</button>
@@ -19,29 +18,52 @@
 </template>
 
 <script>
-import Picture_editor from '@/component/Picture_editor.vue'
-import Video_editor from '@/component/Video_editor.vue'
+import Case_editor from '@/component/Case_editor.vue';
 
 export default {
     name: "Add_disease",
     data() {
         return {
-            disease_name: "",
-            disease_description: "",
-            disease_picture: "",
-            disease_video: ""
+            component_type: 1, 
+            disease_data: {
+                "name": {
+                    "text": "",
+                    "image": null,
+                    "video": null
+                },
+                "treat": {
+                    "text": "",
+                    "image": null,
+                    "video": null
+                },
+                "check": {
+                    "text": "",
+                    "image": null,
+                    "video": null
+                },
+                "result": {
+                    "text": "",
+                    "image": null,
+                    "video": null
+                },
+                "plan": {
+                    "text": "",
+                    "image": null,
+                    "video": null
+                }
+            },
         };
     },
     methods: {
         confirm: function () {
-            this.$router.replace('/case_list')
+            this.$router.replace('/home/case_list')
             alert("添加成功");
         },
         back: function () {
-            this.$router.replace('/case_list')
+            this.$router.replace('/home/case_list')
         }
     },
-    components: { Picture_editor,Video_editor }
+    components: { Case_editor }
 }
 </script>
 
@@ -49,8 +71,8 @@ export default {
 #add_disease {
     width: 100vw;
     height: wrap-content;
-    background: rgb(245, 30, 70);
-    padding: 0;
+    //background: rgb(245, 30, 70);
+    padding-top: 60px;
     margin: 0;
 }
 
@@ -58,10 +80,5 @@ export default {
     display: flex;
     flex-direction: row;
     justify-content: center;
-}
-
-#textarea {
-    width: 800px;
-    height: 300px;
 }
 </style>

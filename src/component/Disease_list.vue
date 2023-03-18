@@ -6,30 +6,42 @@
 
 <script>
 import Disease_group from '@/component/Disease_group.vue'
+import { NetLoader } from '@/net';
 export default {
     name: "Disease_list",
     data() {
         return {
             disease_data: [
-                { disease_group: "A类病", disease_name_list: ["A1病", "A2病", "A3病", "A4病", "A5病"] },
-                { disease_group: "B类病", disease_name_list: ["B1病", "B2病"] },
-                { disease_group: "C类病", disease_name_list: ["C1病", "C2病", "C3病"] },
-                { disease_group: "D类病", disease_name_list: ["D1病"] }
+
             ]
         };
     },
     methods: {
-        
+        get_data: function () {
+            let loader = new NetLoader("test")
+            this.disease_data=[]
+            loader.get("/case/findAllByType").then((value) => {
+                for (let key in value.data) {
+                    let disease = { disease_group: key, disease_name_list: value.data[key] }
+                    this.disease_data.push(disease)
+                }
+            })
+        }
     },
-    components: { Disease_group }
+    components: { Disease_group },
+    created() {
+        this.get_data();
+    }
+    
 }
 </script>
 
 <style scoped lang="less">
 #disease_list {
-    width: 100vw;
+    width: 70%;
+    float:left;
     height: wrap-content;
-    background: rgb(127, 60, 199);
+    //background: rgb(148, 254, 0);
     padding: 0;
     margin: 0;
 }

@@ -157,9 +157,9 @@ export default {
         addTip(tip) {
             let source = null;
             if(tip.content.type === "tip") {
-                source = require("@/assets/tip.png")
+                source = require("@/assets/vr/tip.png")
             } else {
-                source = require("@/assets/title.png")
+                source = require("@/assets/vr/title.png")
             }
             let tipTexture = new THREE.TextureLoader().load(
                 source

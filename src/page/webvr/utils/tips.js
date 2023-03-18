@@ -2,7 +2,7 @@
 export const sceneList = [
     // 第一个场景-- 大门口
     { 
-        image: require("@/assets/Entry.jpg"),
+        image: require("@/assets/vr/Entry.jpg"),
         name: "大门口",
         
         tipList:[
@@ -25,7 +25,7 @@ export const sceneList = [
     },
     // 第二个场景-- 前台大厅
     { 
-        image: require("@/assets/Hall.jpg"),
+        image: require("@/assets/vr/Hall.jpg"),
         name: "前台大厅",
         desc: ["包括接待挂号、导医咨询、病历档案发出与回收、收费等","前台"],
         tipList: [
@@ -124,8 +124,9 @@ export const sceneList = [
     },
     // 第三个场景 --手术室
     {
-        image: require("@/assets/Operating.jpg"),
+        image: require("@/assets/vr/Operating.jpg"),
         name: "手术室",
+        desc: ["1","2"],
         tipList:[
             {
                 position: {
@@ -156,7 +157,7 @@ export const sceneList = [
     }, 
     // 第四个场景 --诊室
     {
-        image: require("@/assets/ConsultRoom.jpg"),
+        image: require("@/assets/vr/ConsultRoom.jpg"),
         name: "诊室",
         tipList:[
             {
@@ -188,7 +189,7 @@ export const sceneList = [
     },
     // 第五个场景 --病例剖析室
     {
-        image: require("@/assets/PathologicalAutopsyRoom.jpg"),
+        image: require("@/assets/vr/PathologicalAutopsyRoom.jpg"),
         name: "病例剖析室",
         tipList: [
             {
@@ -220,7 +221,7 @@ export const sceneList = [
     },
     // 第六个场景 --免疫室
     {
-        image: require("@/assets/ImmunologyRoom.jpg"),
+        image: require("@/assets/vr/ImmunologyRoom.jpg"),
         name: "免疫室",
         tipList:[
             {
@@ -252,7 +253,7 @@ export const sceneList = [
     },
     // 第七个场景 --药房
     {
-        image: require("@/assets/PharmacyRoom.jpg"),
+        image: require("@/assets/vr/PharmacyRoom.jpg"),
         name: "药房",
         tipList:[
             {
@@ -298,7 +299,7 @@ export const sceneList = [
     },
     // 第八个场景 --手术准备室
     {
-        image: require("@/assets/SurgicalPreparationRoom.jpg"),
+        image: require("@/assets/vr/SurgicalPreparationRoom.jpg"),
         name: "手术准备室",
         tipList:[
             {
@@ -343,7 +344,7 @@ export const sceneList = [
     },
     // 第九个场景 --二楼走廊
     {
-        image: require("@/assets/Corridor.jpg"),
+        image: require("@/assets/vr/Corridor.jpg"),
         name: "二楼走廊",
         tipList:[
             {
@@ -376,7 +377,7 @@ export const sceneList = [
     },
     // 第十个场景 --住院部
     {
-        image: require("@/assets/InpatientDepartment.jpg"),
+        image: require("@/assets/vr/InpatientDepartment.jpg"),
         name:" 住院部",
         tipList:[
             {
@@ -422,7 +423,7 @@ export const sceneList = [
     },
     // 第十一个场景 --档案室
     {
-        image: require("@/assets/ArchivesRoom.jpg"),
+        image: require("@/assets/vr/ArchivesRoom.jpg"),
         name: "档案室",
         tipList:[
             {
@@ -441,7 +442,7 @@ export const sceneList = [
     },
     // 第十二个场景 --化验室
     {
-        image: require("@/assets/Laboratory.jpg"),
+        image: require("@/assets/vr/Laboratory.jpg"),
         name: "化验室",
         tipList:[
             {
@@ -473,7 +474,7 @@ export const sceneList = [
     },
     // 第十三个场景 --影像室
     {
-        image: require("@/assets/ImageRoom.jpg"),
+        image: require("@/assets/vr/ImageRoom.jpg"),
         name: "影像室",
         tipList:[
             {
@@ -518,7 +519,7 @@ export const sceneList = [
     },
     // 第十四个场景 --处置室
     {
-        image: require("@/assets/DisposalRoom.jpg"),
+        image: require("@/assets/vr/DisposalRoom.jpg"),
         name: "处置室",
         tipList:[
             {
@@ -550,7 +551,7 @@ export const sceneList = [
     },
     // 第十五个场景 --专科检查室
     {
-        image: require("@/assets/SpecialistExaminationRoom.jpg"),
+        image: require("@/assets/vr/SpecialistExaminationRoom.jpg"),
         name: "专科检查室",
         tipList:[
             {
