@@ -1,5 +1,6 @@
 import VueRouter from "vue-router"
-import {store} from "@/store"
+import { store } from "@/store"
+import { NetLoader } from "@/net"
 // 路由的配置信息
 const router = new VueRouter({
     routes:[
@@ -42,8 +43,25 @@ const router = new VueRouter({
                 }
             ] 
         },
+        {
+            path: "/admin",
+            component: () => import("@/page/admin/Admin.vue"),
+            children:[
+                {
+                    path: "user",
+                    component: () => import("@/page/admin/User.vue")
+                },
+                {
+                    path: "case",
+                    component: () => import("@/page/disease_viewer/Case_list.vue")
+                }
+            ]
+        }
     ]
 })
+
+
+const net = new NetLoader("test");
 
 router.beforeEach((to,from,next) => {
     switch(to.path) {
@@ -93,4 +111,14 @@ router.beforeEach((to,from,next) => {
     next();
 })
 
+
+router.beforeEach((to,from,next) => {
+    let path = to.path;
+    if(/\/admin(\/)?.*/g.test(path)) {
+        //TODO 如果是想访问后台页面的话则需要发送请求进行验证，这部分需要和后端对接
+        next();
+    } else {
+        next();
+    }
+})
 export default router;
