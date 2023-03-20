@@ -31,8 +31,10 @@
             }
         },
         methods: {
+            //TODO 将用户名和密码作为请求体向后端发送请求进行登录，这部分还需要和后端对接
             login() {
-                console.log(this.password,this.username)
+                console.log(this.password,this.username);
+                this.$router.push("/admin")
             }
         },
         mounted() {
