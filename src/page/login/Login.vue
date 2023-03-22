@@ -45,7 +45,7 @@
         methods: {
             //TODO 将用户名和密码作为请求体向后端发送请求进行登录，这部分还需要和后端对接
             login() {
-                console.log(this.$store.state.type);
+                console.log(this.$store.state.type)
                 if(this.$store.state.type === "admin") {
                     this.$router.push("/admin");
                 } else {
@@ -54,11 +54,9 @@
             },
             handleClick(e) {
                 if(e.target.innerText === "普通用户") {
-                    console.log("user")
                     this.type = "user";
                     
                 } else if(e.target.innerText === "管理员") {
-                    console.log("admin")
                     this.type = "admin"
                 }
                 this.$store.commit("changeType",this.type);
