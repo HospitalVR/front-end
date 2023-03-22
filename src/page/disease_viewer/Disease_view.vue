@@ -56,7 +56,7 @@ export default {
     methods: {
         edit: function () {
             this.$router.push({
-                path: '/home/edit_disease', query: {
+                path: '/admin/edit_disease', query: {
                     disease_name: this.disease_name,
                     disease_group: this.disease_group,
                     disease_data: this.disease_data

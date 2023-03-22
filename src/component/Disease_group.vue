@@ -27,7 +27,7 @@ export default {
         },
         add_disease: function () {
             this.$router.push({
-                path: '/home/add_disease', query: { disease_group: this.disease_group }
+                path: '/admin/add_disease', query: { disease_group: this.disease_group }
             })
         }
     },

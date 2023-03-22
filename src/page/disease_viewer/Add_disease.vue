@@ -19,6 +19,7 @@
 
 <script>
 import Case_editor from '@/component/Case_editor.vue';
+import { NetLoader } from '@/net';
 
 export default {
     name: "Add_disease",
@@ -55,12 +56,18 @@ export default {
         };
     },
     methods: {
-        confirm: function () {
-            this.$router.replace('/home/case_list')
+        confirm: async function () {
+            let url = "http://127.0.0.1:8888/case/save"
+            let loader = new NetLoader("test")
+            await loader.post(url,this.disease_data).then((value) => {
+                console.log(value)
+            })
+
+            this.$router.replace('/admin/case')
             alert("添加成功");
         },
         back: function () {
-            this.$router.replace('/home/case_list')
+            this.$router.replace('/admin/case')
         }
     },
     components: { Case_editor }

@@ -4,7 +4,7 @@
         <div slot="header">
           <span style="font-size: large;">病例检索</span>
         </div>
-        <el-input placeholder="在此输入检索病例" v-model="input" size="small" style="width:225px" clearable> </el-input>
+        <el-input placeholder="在此输入检索病例" v-model="input" size="small" style="width:80%" clearable> </el-input>
         <el-button type="primary" icon="el-icon-search" size="small" v-on:click="search"></el-button>
         <p id="select">选择检索方式：</p>
         <el-radio-group v-model="radio" style="display:flex; flex-flow:column nowrap; align-items: flex-start;">

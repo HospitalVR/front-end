@@ -54,6 +54,18 @@ const router = new VueRouter({
                 {
                     path: "case",
                     component: () => import("@/page/disease_viewer/Case_list.vue")
+                },
+                {
+                    path: "add_disease",
+                    component: () => import("@/page/disease_viewer/Add_disease.vue")
+                },
+                {
+                    path: "disease_view",
+                    component: () => import("@/page/disease_viewer/Disease_view.vue")
+                },
+                {
+                    path: "edit_disease",
+                    component: () => import("@/page/disease_viewer/Edit_disease.vue")
                 }
             ]
         }
