@@ -21,6 +21,9 @@ export const store = new Vuex.Store({
                 name: name,
                 to: router.fullPath
             })
+        },
+        changeType(state,type) {
+            state.type = type;
         }
     },// 只能执行同步操作
     actions: {} //异步操作

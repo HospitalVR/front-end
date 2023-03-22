@@ -10,10 +10,10 @@
                 </div>
                 <div class="hospital_login-choice">
                     <div class="hospital_login-user">
-                        <span :class="userClass" @click="type='user'">普通用户</span>
+                        <span :class="userClass" @click="handleClick($event)">普通用户</span>
                     </div>
                     <div class="hospital_login-admin">
-                        <span :class="adminClass" @click="type='admin'">管理员</span>
+                        <span :class="adminClass" @click="handleClick($event)">管理员</span>
                     </div>
                 </div>
                 <div class="hospital_login-username">
@@ -45,8 +45,23 @@
         methods: {
             //TODO 将用户名和密码作为请求体向后端发送请求进行登录，这部分还需要和后端对接
             login() {
-                console.log(this.password,this.username);
-                this.$router.push("/admin")
+                console.log(this.$store.state.type);
+                if(this.$store.state.type === "admin") {
+                    this.$router.push("/admin");
+                } else {
+                    this.$router.push("/home")
+                }
+            },
+            handleClick(e) {
+                if(e.target.innerText === "普通用户") {
+                    console.log("user")
+                    this.type = "user";
+                    
+                } else if(e.target.innerText === "管理员") {
+                    console.log("admin")
+                    this.type = "admin"
+                }
+                this.$store.commit("changeType",this.type);
             }
         },
         computed: {
