@@ -26,10 +26,8 @@ export default {
 
 <style scoped lang="less">
 #case_list {
-    width: 100vw;
+    width: 100%;
     height: wrap-content;
-    //background: rgb(114, 239, 139);
-    padding-top: 60px;
     margin: 0;
 }
 
