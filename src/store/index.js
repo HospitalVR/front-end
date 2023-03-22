@@ -6,7 +6,8 @@ Vue.use(Vuex)
 
 export const store = new Vuex.Store({
     state: {
-        path: []
+        path: [],
+        type: "user"
     }, //存储具体的数据
     mutations: {
         changePath(state, payload) {
