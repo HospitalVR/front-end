@@ -12,6 +12,14 @@ const router = new VueRouter({
             component: () => import("@/page/home/Home.vue"),
             children:[
                 {
+                    path: "",
+                    redirect: "main"
+                },
+                {
+                    path: "main",
+                    component: () => import("@/page/home/Main.vue")
+                },
+                {
                     path: "case_list",
                     component: () => import("@/page/disease_viewer/Case_list.vue")
                 },
@@ -65,7 +73,7 @@ const net = new NetLoader("test");
 
 router.beforeEach((to,from,next) => {
     switch(to.path) {
-        case "/home":
+        case "/home/main":
             store.commit("changePath",{
                 index: 0,
                 router: to,
