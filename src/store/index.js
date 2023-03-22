@@ -6,7 +6,8 @@ Vue.use(Vuex)
 
 export const store = new Vuex.Store({
     state: {
-        path: []
+        path: [],
+        type: "user"
     }, //存储具体的数据
     mutations: {
         changePath(state, payload) {
@@ -20,6 +21,9 @@ export const store = new Vuex.Store({
                 name: name,
                 to: router.fullPath
             })
+        },
+        changeType(state,type) {
+            state.type = type;
         }
     },// 只能执行同步操作
     actions: {} //异步操作
