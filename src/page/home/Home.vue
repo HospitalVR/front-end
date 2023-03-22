@@ -18,9 +18,7 @@
                 <el-breadcrumb-item v-for="(item, index) in $store.state.path" :key="index" :to="{ path: item.to }">{{ item.name }}</el-breadcrumb-item>
         </el-breadcrumb>
         <el-main>
-            <keep-alive>
-                <router-view></router-view>
-            </keep-alive>
+            <router-view></router-view>
         </el-main>
     </el-container>
 </template>

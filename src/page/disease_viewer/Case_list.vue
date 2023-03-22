@@ -2,7 +2,6 @@
     <div id="case_list">
         <div id="header">
             <h1>病例总览</h1>
-            <button v-on:click="return_to_home">返回上一页</button>
         </div>
         <Disease_list />
         <Disease_selector />
@@ -20,9 +19,6 @@ export default {
         };
     },
     methods: {
-        return_to_home: function (event) {
-            this.$router.replace('/home')
-        }
     },
     components: { Disease_list,Disease_selector }
 }
