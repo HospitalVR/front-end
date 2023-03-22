@@ -30,7 +30,7 @@ export default {
     },
     methods: {
         confirm: function () {
-            this.$router.replace('/home/case_list')
+            this.$router.replace('/admin/case_list')
             alert("修改成功");
         },
         back: function () {

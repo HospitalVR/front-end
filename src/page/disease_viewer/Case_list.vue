@@ -1,5 +1,6 @@
 <template>
     <div id="case_list">
+        <button v-on:click="test">测试</button>
         <div id="header">
             <h1>病例总览</h1>
         </div>
@@ -19,6 +20,9 @@ export default {
         };
     },
     methods: {
+        test: function () {
+            console.log(this.$store.state.type)
+        }
     },
     components: { Disease_list,Disease_selector }
 }

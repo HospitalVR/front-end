@@ -2,7 +2,7 @@
     <div id="disease_view">
         <div id="header">
             <h1>{{disease_name}}</h1>
-            <button v-on:click="edit">编辑</button>
+            <template v-if="this.$store.state.type=='admin'"><button v-on:click="edit">编辑</button></template>
             <button v-on:click="back">返回</button>
         </div>
         <Case_editor title="疾病名称" :text="disease_data.name.text" :disease_picture="disease_data.name.image" :disease_video="disease_data.name.video" :component_type="component_type"></Case_editor>
