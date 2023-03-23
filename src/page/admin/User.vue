@@ -9,6 +9,9 @@
         name: "User",
         data() {
             return {}
+        },
+        methods: {
+
         }
     }
 </script>

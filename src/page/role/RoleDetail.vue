@@ -46,10 +46,6 @@ import RoleProgress from "@/component/RoleProgress.vue"
             this.$destroy();
             next();
         },
-        beforeRouteEnter(from,to,next) {
-            console.log(1)
-            next();   
-        },
         created() {
             this.knowledge = roles[this.$router.currentRoute.query.role].knowledge;          
         },

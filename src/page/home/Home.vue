@@ -14,11 +14,12 @@
             </div>
             
         </el-header>
-        <el-breadcrumb separator-class="el-icon-arrow-right" class="nav-path" style="marginTop: 70px;marginLeft: 10px">
+        <el-breadcrumb separator-class="el-icon-arrow-right" class="nav-path" style="marginTop: 70px;marginLeft: 10px" v-if="$router.currentRoute.path !== '/home/main'">
                 <el-breadcrumb-item v-for="(item, index) in $store.state.path" :key="index" :to="{ path: item.to }">{{ item.name }}</el-breadcrumb-item>
         </el-breadcrumb>
         <el-main>
-            <router-view></router-view>
+            <router-view>
+            </router-view>
         </el-main>
     </el-container>
 </template>
@@ -51,13 +52,13 @@ import Video_editor from '@/component/Video_editor.vue';
         },
         methods: {
 
-        }
+        },
     }
 </script>
 
 <style lang="less" scoped>
 .nav {
-    background: rgba(0,0,0,0.5);
+    background: rgba(0,0,0,0.8);
     position: fixed;
     left:0;
     top: 0;
@@ -96,19 +97,22 @@ import Video_editor from '@/component/Video_editor.vue';
             display: flex;
             justify-content: center;
             align-items: center;
-            margin-right: 15px;
+            margin-right: 25px;
             cursor: pointer;
             color: #fff;
-            // background: -webkit-linear-gradient(315deg,#42d392 25%,#647eff);
-            // background-clip: text;
-            // -webkit-text-fill-color: transparent;
+            opacity: 0.6;
             font-weight: 200;
 
             &:hover {
-                color: blue;
+                opacity: 1;
             }
+
         }
     }
+}
+
+.el-main {
+    padding: 0!important;
 }
 
 </style>
