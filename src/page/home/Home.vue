@@ -97,17 +97,16 @@ import Video_editor from '@/component/Video_editor.vue';
             display: flex;
             justify-content: center;
             align-items: center;
-            margin-right: 15px;
+            margin-right: 25px;
             cursor: pointer;
             color: #fff;
-            // background: -webkit-linear-gradient(315deg,#42d392 25%,#647eff);
-            // background-clip: text;
-            // -webkit-text-fill-color: transparent;
+            opacity: 0.6;
             font-weight: 200;
 
             &:hover {
-                color: blue;
+                opacity: 1;
             }
+
         }
     }
 }
