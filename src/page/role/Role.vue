@@ -46,7 +46,6 @@ import imgShouyi from "@/assets/role/shouyi.png"
 
 <style lang="less" scoped>
 .hospital_role-wrapper {
-    padding-top: 60px;
     h1 {
         background: -webkit-linear-gradient(315deg,#42d392 25%,#647eff);
         background-clip: text;
