@@ -1,5 +1,9 @@
 <template>
     <div class="hospital_main-container">
+        <div class="hospital_main-logo">
+            <img src="@/assets/logo.png" alt="">
+            <div class="hospital_main-title">虚拟宠物医院学习系统</div>
+        </div>
         <div class="hospital_main-box">
             <div class="hospital_main-item hospital_main-vr" @mouseenter="handleEnter($event)" @mouseleave="handleLeave($event)" @click="$router.push('/vr')">
                 <transition name="text">
@@ -76,9 +80,29 @@ import Hexagon from '@/component/Hexagon.vue';
     background-position: center center;
     background-repeat: no-repeat;
     background-size: cover;
-    
+    .hospital_main-logo {
+        backdrop-filter: blur(8px);
+        padding: 10px;
+        box-sizing: border-box;
+        img {
+            display: block;
+            margin: 0px auto;
+            width: 220px;
+            height: auto;
+        }
+        .hospital_main-title {
+            text-align: center;
+            font-size: 30px;
+            font-weight: 600;
+            margin-top: 10px;
+            // background: -webkit-linear-gradient(315deg,#42d392 25%,#647eff);
+            // background-clip: text;
+            // -webkit-text-fill-color: transparent;
+        }
+        
+    }
     .hospital_main-box {
-
+        
         width: 100%;
         display: flex;
         flex-wrap: nowrap;
@@ -87,6 +111,7 @@ import Hexagon from '@/component/Hexagon.vue';
         top: 60%;
 
         .hospital_main-item {
+            backdrop-filter: blur(8px);
             height: 150px;
             width: 150px;
             border-radius: 100%;
@@ -127,8 +152,8 @@ import Hexagon from '@/component/Hexagon.vue';
 
             svg {
                 position: absolute;
-                width: 40px;
-                height: 40px;
+                width: 60px;
+                height: 60px;
             }
         }
     }
