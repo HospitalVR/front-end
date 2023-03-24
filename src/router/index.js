@@ -52,7 +52,7 @@ const router = new VueRouter({
                     component: () => import("@/page/admin/User.vue")
                 },
                 {
-                    path: "case",
+                    path: "case_list",
                     component: () => import("@/page/disease_viewer/Case_list.vue")
                 },
                 {

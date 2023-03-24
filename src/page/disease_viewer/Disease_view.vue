@@ -62,7 +62,6 @@ export default {
                     disease_data: this.disease_data
                 }
             })
-            alert("修改  "+this.disease_name)
         },
         back: function () {
             this.$router.go(-1)
@@ -71,15 +70,15 @@ export default {
             let resurl="http://localhost:8888/res/"
             let loader = new NetLoader("test")
             loader.get("/case/findByName?name=" + this.disease_name).then((value) => {
+                this.disease_group=value.data.type
                 for (let key in value.data) {
                     if (value.data[key].image != null) {
-                        value.data[key].image = resurl + this.disease_name+ "/" + value.data[key].image
+                        value.data[key].image = resurl  + value.data[key].image
                     }
                     if (value.data[key].video != null) {
-                        value.data[key].video = resurl + this.disease_name+ "/" + value.data[key].video
+                        value.data[key].video = resurl + value.data[key].video
                     }
                 }
-                console.log(value.data)
                 this.disease_data=value.data
             })
         }

@@ -46,7 +46,7 @@ export class NetLoader {
      */
     post(url, data, headers = {}) {
         return new Promise((res,rej) => {
-            this.instance.post(url,{headers,data}).then((val) => {
+            this.instance.post(url, data, {headers}).then((val) => {
                 res(val);
             },(err) => {
                 rej(err);

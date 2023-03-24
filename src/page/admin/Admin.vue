@@ -5,13 +5,11 @@
             <div class="hospital_admin-nav">
                 <el-menu router>
                     <el-menu-item index="/admin/user">用户管理</el-menu-item>
-                    <el-menu-item index="/admin/case" >病例管理</el-menu-item>
+                    <el-menu-item index="/admin/case_list" >病例管理</el-menu-item>
                 </el-menu>
             </div>
             <div class="hospital_admin-page">
-                <keep-alive>
                     <router-view></router-view>
-                </keep-alive>
             </div>
         </el-main>
     </el-container>
