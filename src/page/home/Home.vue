@@ -33,6 +33,7 @@ import Disease_group from '@/component/Disease_group.vue';
 import Disease_list from '@/component/Disease_list.vue';
 import Picture_editor from '@/component/Picture_editor.vue';
 import Video_editor from '@/component/Video_editor.vue';
+import { NetLoader } from '@/net';
     export default {
         name: "Home",
         components:{
@@ -47,12 +48,18 @@ import Video_editor from '@/component/Video_editor.vue';
         },
         data() {
             return {
-
+                loader: new NetLoader("test")
             }
         },
         methods: {
 
         },
+        beforeRouteEnter(to,from,next) {
+            if(window.localStorage.getItem("token")) {
+                //TODO 此处需要发送请求来验证该token的具体身份方便在导航栏出展示用户名和用户的信息
+            }
+            next();
+        }
     }
 </script>
 
