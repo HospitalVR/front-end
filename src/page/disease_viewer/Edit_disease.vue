@@ -43,7 +43,7 @@ export default {
             })
 
             this.$router.replace('/admin/case_list')
-            alert("修改成功");
+            this.$message('修改成功');
         },
         back: function () {
             this.$router.go(-1)

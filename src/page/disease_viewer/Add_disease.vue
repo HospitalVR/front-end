@@ -72,7 +72,7 @@ export default {
             })
             
             this.$router.replace('/admin/case_list')
-            alert("添加成功");
+            this.$message('添加成功');
         },
         back: function () {
             this.$router.replace('/admin/case_list')

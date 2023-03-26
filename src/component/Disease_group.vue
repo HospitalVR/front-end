@@ -11,6 +11,7 @@
 </template>
 
 <script>
+import { NetLoader } from '@/net';
 export default {
     name: "Disease_group",
     data() {
@@ -26,9 +27,12 @@ export default {
             path: '/'+usr+'/disease_view', query: {disease_name: name}
           })
         },
-        delete_disease: function (name) {
-            alert("删除疾病 "+name)
-        },
+      delete_disease: function (name) {
+          let loader = new NetLoader("test")
+          loader.get("/case/deleteByName?name='"+name+"'").then((value) => {
+            alert("删除疾病 " + name)
+          })
+      },
         add_disease: function () {
             this.$router.push({
                 path: '/admin/add_disease', query: { disease_group: this.disease_group }

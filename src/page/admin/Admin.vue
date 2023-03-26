@@ -5,6 +5,7 @@
             <div class="hospital_admin-nav">
                 <el-menu router>
                     <el-menu-item index="/admin/user">用户管理</el-menu-item>
+                    <el-menu-item index="/admin/basic_structure">基本结构与功能管理</el-menu-item>
                     <el-menu-item index="/admin/case_list" >病例管理</el-menu-item>
                 </el-menu>
             </div>
