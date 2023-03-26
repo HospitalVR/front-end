@@ -11,7 +11,7 @@
 
 <script>
 import { NetLoader } from '@/net';
-import { exams } from './exams.js';
+//import { exams } from './data/exams.js';
 export default {
     data() {
         return {
@@ -31,7 +31,7 @@ export default {
         loader.get("/test/findAll").then((value) => {
             exams = value.data
         })
-        
+
         //this.exams = exams
     }
 }

@@ -22,7 +22,7 @@
 </template>
 
 <script>
-import { questions } from './questions.js';
+//import { questions } from './data/questions.js';
 export default {
     data() {
         return {
@@ -40,7 +40,7 @@ export default {
             })
 
             let questionIds = this.paper.questions.split(',')
-            
+
             for(let i = 0; i < questionIds.length; i++) {
                 loader.get("/question/findById?id=" + questionIds[i]).then((value) => {
                 this.questions.push(value.data)
