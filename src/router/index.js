@@ -40,6 +40,26 @@ const router = new VueRouter({
                 {
                     path: "roleDetail",
                     component: () => import("@/page/role/RoleDetail.vue")
+                },
+                {
+                    path: "test",
+                    component: () => import("@/page/test/Test.vue"),
+                },
+                {
+                    path: "exams",
+                    component: () => import("@/page/test/Exams.vue")
+                },
+                {
+                    path: "testPaper",
+                    component: () => import("@/page/test/TestPaper.vue")
+                },
+                {
+                    path: "testResult",
+                    component: () => import("@/page/test/TestResult.vue")
+                },
+                {
+                    path: "testManage",
+                    component: () => import("@/page/test/TestManage.vue")
                 }
             ] 
         },
@@ -97,6 +117,13 @@ router.beforeEach((to,from,next) => {
                 index: 1,
                 router: to,
                 name: "病例管理"
+            })
+            break;
+        case "/home/test":
+            store.commit("changePath",{
+                index: 1,
+                router: to,
+                name: "测试"
             })
             break;
         case "/home/role":
