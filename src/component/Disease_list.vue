@@ -11,16 +11,13 @@ export default {
     name: "Disease_list",
     data() {
         return {
-            disease_data: [
-
-            ]
+            loader: new NetLoader("test"),
+            disease_data: []
         };
     },
     methods: {
-        get_data: function () {
-            let loader = new NetLoader("test")
-            this.disease_data=[]
-            loader.get("/case/findAllByType").then((value) => {
+        get_data() {
+            this.loader.get("/case/findAll").then((value) => {
                 for (let key in value.data) {
                     let disease = { disease_group: key, disease_name_list: value.data[key] }
                     this.disease_data.push(disease)

@@ -22,6 +22,7 @@ export default {
     data() {
         return {
             disease_name: this.$route.query.disease_name,
+            loader: new NetLoader("test"),
             disease_data: {
                 "name": {
                     "text": "",
@@ -54,7 +55,7 @@ export default {
         };
     },
     methods: {
-        edit: function () {
+        edit() {
             this.$router.push({
                 path: '/home/edit_disease', query: {
                     disease_name: this.disease_name,
@@ -64,13 +65,12 @@ export default {
             })
             alert("修改  "+this.disease_name)
         },
-        back: function () {
+        back() {
             this.$router.go(-1)
         },
-        get_data: function () {
+        get_data() {
             let resurl="http://localhost:8888/res/"
-            let loader = new NetLoader("test")
-            loader.get("/case/findByName?name=" + this.disease_name).then((value) => {
+            this.loader.get("/case/findByName?name=" + this.disease_name).then((value) => {
                 for (let key in value.data) {
                     if (value.data[key].image != null) {
                         value.data[key].image = resurl + this.disease_name+ "/" + value.data[key].image
@@ -80,7 +80,7 @@ export default {
                     }
                 }
                 console.log(value.data)
-                this.disease_data=value.data
+                this.disease_data = value.data
             })
         }
     },
