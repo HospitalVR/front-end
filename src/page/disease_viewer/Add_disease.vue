@@ -5,11 +5,11 @@
         </div>
         <h2>疾病类别</h2>
         <p>{{this.$route.query.disease_group}}</p>
-        <Case_editor title="疾病名称" :text="disease_data.name.text" :disease_picture="disease_data.name.image" :disease_video="disease_data.name.video" :component_type="component_type"></Case_editor>
-        <Case_editor title="接诊" :text="disease_data.treat.text" :disease_picture="disease_data.treat.image" :disease_video="disease_data.treat.video" :component_type="component_type"></Case_editor>
-        <Case_editor title="病例检查" :text="disease_data.check.text" :disease_picture="disease_data.check.image" :disease_video="disease_data.check.video" :component_type="component_type"></Case_editor>
-        <Case_editor title="诊断结果" :text="disease_data.result.text" :disease_picture="disease_data.result.image" :disease_video="disease_data.result.video" :component_type="component_type"></Case_editor>
-        <Case_editor title="治疗方案" :text="disease_data.plan.text" :disease_picture="disease_data.plan.image" :disease_video="disease_data.plan.video" :component_type="component_type"></Case_editor>
+        <Case_editor ref="name" title="疾病名称" :text="disease_data.name.text" :disease_picture="disease_data.name.image" :disease_video="disease_data.name.video" :component_type="component_type"></Case_editor>
+        <Case_editor ref="treat" title="接诊" :text="disease_data.treat.text" :disease_picture="disease_data.treat.image" :disease_video="disease_data.treat.video" :component_type="component_type"></Case_editor>
+        <Case_editor ref="check" title="病例检查" :text="disease_data.check.text" :disease_picture="disease_data.check.image" :disease_video="disease_data.check.video" :component_type="component_type"></Case_editor>
+        <Case_editor ref="result" title="诊断结果" :text="disease_data.result.text" :disease_picture="disease_data.result.image" :disease_video="disease_data.result.video" :component_type="component_type"></Case_editor>
+        <Case_editor ref="plan" title="治疗方案" :text="disease_data.plan.text" :disease_picture="disease_data.plan.image" :disease_video="disease_data.plan.video" :component_type="component_type"></Case_editor>
         <div class="header">
             <button v-on:click="confirm">确认添加</button>
             <button v-on:click="back">返回</button>
@@ -19,6 +19,7 @@
 
 <script>
 import Case_editor from '@/component/Case_editor.vue';
+import { NetLoader } from '@/net';
 
 export default {
     name: "Add_disease",
@@ -55,12 +56,26 @@ export default {
         };
     },
     methods: {
-        confirm: function () {
-            this.$router.replace('/home/case_list')
-            alert("添加成功");
+        confirm: async function () {
+            let formData = new FormData();
+            formData.append("type", this.$route.query.disease_group)
+            for (let key in this.$refs) {
+                formData.append(key + 1, this.$refs[key].case_text)
+                if (this.$refs[key].$refs.pic.image != null) {
+                    formData.append(key + 2, this.$refs[key].$refs.pic.image)
+                }
+            }
+
+            let url = "http://127.0.0.1:8888/case/save"
+            let loader = new NetLoader("test")
+            await loader.post(url,formData).then((value) => {
+            })
+            
+            this.$router.replace('/admin/case_list')
+            this.$message('添加成功');
         },
         back: function () {
-            this.$router.replace('/home/case_list')
+            this.$router.replace('/admin/case_list')
         }
     },
     components: { Case_editor }

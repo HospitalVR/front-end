@@ -6,6 +6,8 @@ import VueRouter from 'vue-router'
 import "@/style/global.less"
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
+// import '@/style/tailwindcss.css'
+
 Vue.config.productionTip = false
 
 Vue.use(ElementUI).use(VueRouter);
