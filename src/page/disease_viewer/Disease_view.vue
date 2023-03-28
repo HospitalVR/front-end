@@ -69,13 +69,7 @@ export default {
         },
         get_data() {
             let resurl="http://localhost:8888/res/"
-<<<<<<< HEAD
             this.loader.get("/case/findByName?name=" + this.disease_name).then((value) => {
-=======
-            let loader = new NetLoader("test")
-            loader.get("/case/findByName?name=" + this.disease_name).then((value) => {
-                this.disease_group=value.data.type
->>>>>>> 7378f3fcd1d26ebb787b17e57b277ec56158c5b3
                 for (let key in value.data) {
                     if (value.data[key].image != null) {
                         value.data[key].image = resurl  + value.data[key].image
@@ -84,12 +78,7 @@ export default {
                         value.data[key].video = resurl + value.data[key].video
                     }
                 }
-<<<<<<< HEAD
-                console.log(value.data)
                 this.disease_data = value.data
-=======
-                this.disease_data=value.data
->>>>>>> 7378f3fcd1d26ebb787b17e57b277ec56158c5b3
             })
         }
     },

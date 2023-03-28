@@ -55,6 +55,7 @@ import { NetLoader } from '@/net';
 
         },
         beforeRouteEnter(to,from,next) {
+            console.log("enter home")
             if(window.localStorage.getItem("token")) {
                 //TODO 此处需要发送请求来验证该token的具体身份方便在导航栏出展示用户名和用户的信息
             }

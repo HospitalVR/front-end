@@ -37,7 +37,6 @@ export default {
     width: 70%;
     float:left;
     height: wrap-content;
-    //background: rgb(148, 254, 0);
     padding: 0;
     margin: 0;
 }
