@@ -24,16 +24,8 @@ const router = new VueRouter({
                     component: () => import("@/page/disease_viewer/Case_list.vue")
                 },
                 {
-                    path: "add_disease",
-                    component: () => import("@/page/disease_viewer/Add_disease.vue")
-                },
-                {
                     path: "disease_view",
                     component: () => import("@/page/disease_viewer/Disease_view.vue")
-                },
-                {
-                    path: "edit_disease",
-                    component: () => import("@/page/disease_viewer/Edit_disease.vue")
                 },
                 {
                     path: "role",
@@ -60,8 +52,28 @@ const router = new VueRouter({
                     component: () => import("@/page/admin/User.vue")
                 },
                 {
-                    path: "case",
+                    path: "case_list",
                     component: () => import("@/page/disease_viewer/Case_list.vue")
+                },
+                {
+                    path: "add_disease",
+                    component: () => import("@/page/disease_viewer/Add_disease.vue")
+                },
+                {
+                    path: "disease_view",
+                    component: () => import("@/page/disease_viewer/Disease_view.vue")
+                },
+                {
+                    path: "edit_disease",
+                    component: () => import("@/page/disease_viewer/Edit_disease.vue")
+                },
+                {
+                    path: "basic_structure",
+                    component: () => import("@/page/basic_structure/Basic_structure.vue")
+                },
+                {
+                    path: "medicine",
+                    component: () => import("@/page/basic_structure/Medicine_management.vue")
                 }
             ]
         }

@@ -2,7 +2,7 @@
     <div id="disease_view">
         <div id="header">
             <h1>{{disease_name}}</h1>
-            <button v-on:click="edit">编辑</button>
+            <template v-if="this.$store.state.type=='admin'"><button v-on:click="edit">编辑</button></template>
             <button v-on:click="back">返回</button>
         </div>
         <Case_editor title="疾病名称" :text="disease_data.name.text" :disease_picture="disease_data.name.image" :disease_video="disease_data.name.video" :component_type="component_type"></Case_editor>
@@ -57,30 +57,39 @@ export default {
     methods: {
         edit() {
             this.$router.push({
-                path: '/home/edit_disease', query: {
+                path: '/admin/edit_disease', query: {
                     disease_name: this.disease_name,
                     disease_group: this.disease_group,
                     disease_data: this.disease_data
                 }
             })
-            alert("修改  "+this.disease_name)
         },
         back() {
             this.$router.go(-1)
         },
         get_data() {
             let resurl="http://localhost:8888/res/"
+<<<<<<< HEAD
             this.loader.get("/case/findByName?name=" + this.disease_name).then((value) => {
+=======
+            let loader = new NetLoader("test")
+            loader.get("/case/findByName?name=" + this.disease_name).then((value) => {
+                this.disease_group=value.data.type
+>>>>>>> 7378f3fcd1d26ebb787b17e57b277ec56158c5b3
                 for (let key in value.data) {
                     if (value.data[key].image != null) {
-                        value.data[key].image = resurl + this.disease_name+ "/" + value.data[key].image
+                        value.data[key].image = resurl  + value.data[key].image
                     }
                     if (value.data[key].video != null) {
-                        value.data[key].video = resurl + this.disease_name+ "/" + value.data[key].video
+                        value.data[key].video = resurl + value.data[key].video
                     }
                 }
+<<<<<<< HEAD
                 console.log(value.data)
                 this.disease_data = value.data
+=======
+                this.disease_data=value.data
+>>>>>>> 7378f3fcd1d26ebb787b17e57b277ec56158c5b3
             })
         }
     },

@@ -8,11 +8,11 @@
             </template>
             <template v-else>
                 <div id="input">
-                    <el-input type="textarea" autosize placeholder="请输入文字" v-model="text"></el-input>
+                    <el-input type="textarea" autosize placeholder="请输入文字" v-model="case_text"></el-input>
                 </div>
             </template>
-            <Picture_editor :disease_picture="disease_picture" :component_type="component_type"></Picture_editor>
-            <Video_editor :disease_video="disease_video" :component_type="component_type"></Video_editor>
+            <Picture_editor ref="pic" :disease_picture="disease_picture" :component_type="component_type"></Picture_editor>
+            <Video_editor ref="vid" :disease_video="disease_video" :component_type="component_type"></Video_editor>
         </el-card>
     </div>
 </template>
@@ -25,6 +25,7 @@ export default {
     name: "case_editor",
     data() {
         return {
+            case_text:this.text
         };
     },
     props: {

@@ -3,11 +3,11 @@
         <div class="header">
             <h1>修改疾病</h1>
         </div>
-        <Case_editor title="疾病名称" :text="disease_data.name.text" :disease_picture="disease_data.name.image" :disease_video="disease_data.name.video" :component_type="component_type"></Case_editor>
-        <Case_editor title="接诊" :text="disease_data.treat.text" :disease_picture="disease_data.treat.image" :disease_video="disease_data.treat.video" :component_type="component_type"></Case_editor>
-        <Case_editor title="病例检查" :text="disease_data.check.text" :disease_picture="disease_data.check.image" :disease_video="disease_data.check.video" :component_type="component_type"></Case_editor>
-        <Case_editor title="诊断结果" :text="disease_data.result.text" :disease_picture="disease_data.result.image" :disease_video="disease_data.result.video" :component_type="component_type"></Case_editor>
-        <Case_editor title="治疗方案" :text="disease_data.plan.text" :disease_picture="disease_data.plan.image" :disease_video="disease_data.plan.video" :component_type="component_type"></Case_editor>
+        <Case_editor ref="name" title="疾病名称" :text="disease_data.name.text" :disease_picture="disease_data.name.image" :disease_video="disease_data.name.video" :component_type="component_type"></Case_editor>
+        <Case_editor ref="treat" title="接诊" :text="disease_data.treat.text" :disease_picture="disease_data.treat.image" :disease_video="disease_data.treat.video" :component_type="component_type"></Case_editor>
+        <Case_editor ref="check" title="病例检查" :text="disease_data.check.text" :disease_picture="disease_data.check.image" :disease_video="disease_data.check.video" :component_type="component_type"></Case_editor>
+        <Case_editor ref="result" title="诊断结果" :text="disease_data.result.text" :disease_picture="disease_data.result.image" :disease_video="disease_data.result.video" :component_type="component_type"></Case_editor>
+        <Case_editor ref="plan" title="治疗方案" :text="disease_data.plan.text" :disease_picture="disease_data.plan.image" :disease_video="disease_data.plan.video" :component_type="component_type"></Case_editor>
         <div class="header">
             <button v-on:click="confirm">确认修改</button>
             <button v-on:click="back">返回</button>
@@ -17,6 +17,7 @@
 
 <script>
 import Case_editor from '@/component/Case_editor.vue';
+import { NetLoader } from '@/net';
 
 export default {
     name: "Edit_disease",
@@ -29,13 +30,23 @@ export default {
         };
     },
     methods: {
-        confirm: function () {
-            this.$router.replace('/home/case_list')
-            alert("修改成功");
+        confirm:async function () {
+            let formData = new FormData();
+            formData.append("type", this.$route.query.disease_group)
+            for (let key in this.$refs) {
+                formData.append(key + 1, this.$refs[key].case_text)
+            }
+
+            let url = "http://127.0.0.1:8888/case/save"
+            let loader = new NetLoader("test")
+            await loader.post(url, formData).then((value) => {
+            })
+
+            this.$router.replace('/admin/case_list')
+            this.$message('修改成功');
         },
         back: function () {
             this.$router.go(-1)
-            alert("返回上一页");
         }
     },
     components: { Case_editor }
