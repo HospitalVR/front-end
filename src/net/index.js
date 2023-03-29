@@ -2,13 +2,7 @@
 import config from "../../config.yaml"
 import axios from "axios";
 import { AxiosHeaders } from "axios";
-// 配置请求拦截器
-axios.interceptors.request.use(config => {
-    if(window.localStorage.getItem("token")) {
-        config.headers.token = window.localStorage.getItem("token")
-    }
-    return config;
-})
+
 
 export class NetLoader {
     /**
@@ -19,11 +13,18 @@ export class NetLoader {
         this.env = env;
         this.baseURL = config.env[this.env].base_url;
         this.instance = axios.create({
-            timeout: 1000,
+            timeout: 2000,
             baseURL: this.baseURL,
             headers: {
                 "Content-Encoding": "utf-8"
             }
+        })
+
+        this.instance.interceptors.request.use(config => {
+            if(window.localStorage.getItem("token")) {
+                config.headers["token"] = window.localStorage.getItem("token")
+            }
+            return config;
         })
     }
 

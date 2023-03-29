@@ -165,7 +165,8 @@ router.beforeEach((to,from,next) => {
 
 router.beforeEach((to,from,next) => {
     let path = to.path;
-    if(/\/admin(\/)?.*/g.test(path)) {
+    if(/\/admin.*/g.test(path)) {
+        console.log("admin")
         //TODO 如果是想访问后台页面的话则需要发送请求进行验证，这部分需要和后端对接
         if(!window.localStorage.getItem("token")) {
             next("/login");
