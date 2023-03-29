@@ -41,7 +41,8 @@ export default {
     name: "Picture_editor",
     data() {
         return {
-            image_url: this.disease_picture
+            image_url: this.disease_picture,
+            image:null
         }
     },
     methods: {
@@ -55,8 +56,8 @@ export default {
         let file = this.$refs.file;
         file.addEventListener("change", (e) => {
             console.log(e.target.files)
-            let image = e.target.files[0]
-            this.image_url = window.URL.createObjectURL(new Blob([image]))
+            this.image = e.target.files[0]
+            this.image_url = window.URL.createObjectURL(new Blob([this.image]))
         })
     }
 }

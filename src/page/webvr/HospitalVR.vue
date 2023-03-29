@@ -39,8 +39,6 @@
                 <div class="vr_hospital-roomDetail">
                     <h3>科室介绍</h3>
                     <p>{{ currentScene.desc[0] }}</p>
-                    <h3>主要负责人</h3>
-                    <p>{{ currentScene.desc[1] }}</p>
                 </div>
             </div>
         </transition>
@@ -563,6 +561,7 @@ export default {
             }
             p {
                 font-size: 15px;
+                margin-top: 20px;
             }
         }
     }

@@ -21,6 +21,7 @@ export default {
             let loader = new NetLoader("test")
             this.disease_data=[]
             loader.get("/case/findAllByType").then((value) => {
+                console.log(value)
                 for (let key in value.data) {
                     let disease = { disease_group: key, disease_name_list: value.data[key] }
                     this.disease_data.push(disease)
@@ -32,7 +33,6 @@ export default {
     created() {
         this.get_data();
     }
-    
 }
 </script>
 

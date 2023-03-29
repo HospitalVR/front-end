@@ -24,16 +24,8 @@ const router = new VueRouter({
                     component: () => import("@/page/disease_viewer/Case_list.vue")
                 },
                 {
-                    path: "add_disease",
-                    component: () => import("@/page/disease_viewer/Add_disease.vue")
-                },
-                {
                     path: "disease_view",
                     component: () => import("@/page/disease_viewer/Disease_view.vue")
-                },
-                {
-                    path: "edit_disease",
-                    component: () => import("@/page/disease_viewer/Edit_disease.vue")
                 },
                 {
                     path: "role",
@@ -80,8 +72,28 @@ const router = new VueRouter({
                     component: () => import("@/page/admin/User.vue")
                 },
                 {
-                    path: "case",
+                    path: "case_list",
                     component: () => import("@/page/disease_viewer/Case_list.vue")
+                },
+                {
+                    path: "add_disease",
+                    component: () => import("@/page/disease_viewer/Add_disease.vue")
+                },
+                {
+                    path: "disease_view",
+                    component: () => import("@/page/disease_viewer/Disease_view.vue")
+                },
+                {
+                    path: "edit_disease",
+                    component: () => import("@/page/disease_viewer/Edit_disease.vue")
+                },
+                {
+                    path: "basic_structure",
+                    component: () => import("@/page/basic_structure/Basic_structure.vue")
+                },
+                {
+                    path: "medicine",
+                    component: () => import("@/page/basic_structure/Medicine_management.vue")
                 }
             ]
         }
@@ -151,10 +163,16 @@ router.beforeEach((to,from,next) => {
     let path = to.path;
     if(/\/admin(\/)?.*/g.test(path)) {
         //TODO 如果是想访问后台页面的话则需要发送请求进行验证，这部分需要和后端对接
-        store.commit("changeType","admin");
-        next();
+        if(!window.localStorage.getItem("token")) {
+            next("/login");
+        } else {
+            //TODO 如果本次存储有token数据的话需要对该token进行验证才能继续进行下一步操作
+            store.commit("changeType","admin");// 将用户的类型修改为admin
+            next();
+        }
     } else {
         next();
+        store.commit("changeType","user");
     }
 })
 export default router;

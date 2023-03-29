@@ -33,23 +33,56 @@
 </template>
 
 <script>
+import { NetLoader } from '@/net';
     export default {
         name: "Login",
         data() {
             return {
                 username: "",
                 password: "",
-                type: "user"
+                type: "user",
+                loader: new NetLoader("test")
             }
         },
         methods: {
             //TODO 将用户名和密码作为请求体向后端发送请求进行登录，这部分还需要和后端对接
             login() {
-                console.log(this.$store.state.type)
+                // 1. 管理员登录
                 if(this.$store.state.type === "admin") {
-                    this.$router.push("/admin");
+                    this.loader.post("/user/login",{
+                        userName: this.username,
+                        password: this.password
+                    }).then(val => {
+                        if(val.status === 200 && val.data.type === 'admin') {
+                            window.localStorage.setItem("token",val.data.token);
+                            this.$router.push("/admin")
+                        } else {
+                            this.$message.error('登陆失败，用户名或密码错误');
+                        }
+                    },err => {
+                        this.$message.error('登陆失败，用户名或密码错误');
+                    }).finally(() => {
+                        this.username = "";
+                        this.password = "";
+                    })
                 } else {
-                    this.$router.push("/home")
+                    this.loader.post("/user/login",{
+                        userName: this.username,
+                        password: this.password
+                    }).then(val => {
+                        if(val.status === 200 && val.data.type === 'user') {
+                            window.localStorage.setItem("token",val.data.token);
+                            this.$router.push("/home")
+                        } else {
+                            this.$message.error('登陆失败，用户名或密码错误');
+                            
+                        }
+                    }, err => {
+                        this.$message.error('登陆失败，用户名或密码错误');
+                    }).finally(() => {
+                        this.username = "";
+                        this.password = "";
+                    })
                 }
             },
             handleClick(e) {

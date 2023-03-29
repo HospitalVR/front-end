@@ -3,7 +3,7 @@
         <el-card class="box-card">
           <div slot="header" class="clearfix">
             <span>{{ disease_group }}</span>
-            <el-button style="float: right; padding: 3px 0" type="text" v-on:click="add_disease">添加疾病</el-button>
+            <template v-if="this.$store.state.type == 'admin'"><el-button style="float: right; padding: 3px 0" type="text" v-on:click="add_disease">添加疾病</el-button></template>
           </div>
           <el-tag id="tag" v-for="(item, index) in disease_name_list" :key="index" v-on:click="show_data(item)" closable :disable-transitions="false" @close="delete_disease(item)">{{ item }}</el-tag>
         </el-card>
@@ -11,23 +11,31 @@
 </template>
 
 <script>
+import { NetLoader } from '@/net';
 export default {
     name: "Disease_group",
     data() {
         return {};
     },
     methods: {
-        show_data: function (name) {
-            this.$router.push({
-                path: '/home/disease_view', query: {disease_name: name}
-            })
+      show_data: function (name) {
+          let usr = "home"
+          if (this.$store.state.type == "admin") {
+            usr = "admin"
+          }
+          this.$router.push({
+            path: '/'+usr+'/disease_view', query: {disease_name: name}
+          })
         },
-        delete_disease: function (name) {
-            alert("删除疾病 "+name)
-        },
+      delete_disease: function (name) {
+          let loader = new NetLoader("test")
+          loader.get("/case/deleteByName?name='"+name+"'").then((value) => {
+            alert("删除疾病 " + name)
+          })
+      },
         add_disease: function () {
             this.$router.push({
-                path: '/home/add_disease', query: { disease_group: this.disease_group }
+                path: '/admin/add_disease', query: { disease_group: this.disease_group }
             })
         }
     },
