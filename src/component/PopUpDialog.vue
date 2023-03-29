@@ -4,7 +4,6 @@
         <el-form-item v-for="value,key,index in data" :label="label[index]" :label-width="formLabelWidth">
           <el-input v-model="data[key]" autocomplete="off" ref="inputs"></el-input>
         </el-form-item>
-        <button v-on:click="test">test</button>
       </el-form>
       <span slot="footer" class="dialog-footer">
         <el-button @click="dialogFormVisible = false">Cancel</el-button>
@@ -25,9 +24,6 @@ export default {
         }
     },
     methods: {
-        test: function () {
-            console.log(this.data)
-        },
         confirm: function () {
             this.dialogFormVisible = false
             for (let i in this.$refs.inputs) {

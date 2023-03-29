@@ -22,6 +22,7 @@ export default {
             let s = ""
             switch (name) {
                 case "药品管理": s = "/medicine"; break;
+                case "疫苗管理": s = "/vaccinum"; break;
             }
             this.$router.push({
                 path: "/admin" + s
