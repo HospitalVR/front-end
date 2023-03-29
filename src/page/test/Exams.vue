@@ -11,7 +11,7 @@
 
 <script>
 import { NetLoader } from '@/net';
-//import { exams } from './data/exams.js';
+// import { exams } from './data/exams.js';
 export default {
     data() {
         return {
