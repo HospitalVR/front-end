@@ -27,12 +27,12 @@ export default {
         }
     },
     created() {
-        // let loader = new NetLoader("test")
-        // loader.get("/test/findAll").then((value) => {
-        //     exams = value.data
-        // })
+        let loader = new NetLoader("test")
+        loader.get("/test/findAll").then((value) => {
+            exams = value.data
+        })
 
-        this.exams = exams
+        // this.exams = exams
     }
 }
 </script>
