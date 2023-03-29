@@ -2,7 +2,7 @@
     <el-dialog title="修改内容" :visible.sync="dialogFormVisible">
       <el-form :model="data">
         <el-form-item v-for="value,key,index in data" :label="label[index]" :label-width="formLabelWidth" :key="index">
-          <el-input v-model="data[key]" autocomplete="off"></el-input>
+          <el-input v-model="data[key]" autocomplete="off" ref="inputs"></el-input>
         </el-form-item>
       </el-form>
       <span slot="footer" class="dialog-footer">
