@@ -17,7 +17,7 @@ export default {
     },
     methods: {
         get_data() {
-            this.loader.get("/case/findAll").then((value) => {
+            this.loader.get("/case/findAllByType").then((value) => {
                 for (let key in value.data) {
                     let disease = { disease_group: key, disease_name_list: value.data[key] }
                     this.disease_data.push(disease)

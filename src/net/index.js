@@ -13,12 +13,11 @@ export class NetLoader {
         this.env = env;
         this.baseURL = config.env[this.env].base_url;
         this.instance = axios.create({
-            timeout: 1000,
+            timeout: 2000,
             baseURL: this.baseURL,
             headers: {
                 "Content-Encoding": "utf-8"
-            },
-            withCredentials: false
+            }
         })
 
         this.instance.interceptors.request.use(config => {
