@@ -64,6 +64,9 @@ export default {
                 if (this.$refs[key].$refs.pic.image != null) {
                     formData.append(key + 2, this.$refs[key].$refs.pic.image)
                 }
+                if (this.$refs[key].$refs.vid.video != null) {
+                    formData.append(key + 3, this.$refs[key].$refs.vid.video)
+                }
             }
 
             let url = "http://127.0.0.1:8888/case/save"
@@ -72,7 +75,10 @@ export default {
             })
             
             this.$router.replace('/admin/case_list')
-            this.$message('添加成功');
+            this.$message({
+                message: '添加成功',
+                type: "success"
+            });
         },
         back: function () {
             this.$router.replace('/admin/case_list')

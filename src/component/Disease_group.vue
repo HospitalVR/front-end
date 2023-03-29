@@ -24,14 +24,28 @@ export default {
             usr = "admin"
           }
           this.$router.push({
-            path: '/'+usr+'/disease_view', query: {disease_name: name}
+            path: '/'+usr+'/disease_view', query: {disease_name: name, disease_group: this.disease_group }
           })
         },
       delete_disease: function (name) {
-          let loader = new NetLoader("test")
-          loader.get("/case/deleteByName?name='"+name+"'").then((value) => {
-            alert("删除疾病 " + name)
+        let loader = new NetLoader("test")
+        this.$confirm('这将会永久删除数据，确定继续删除吗？', '警告', {
+          confirmButtonText: '确认',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(() => {
+          loader.get("/case/deleteByName?name='" + name + "'").then((value) => {
+          this.$message({
+              message: '删除成功',
+              type: "success"
+            });
           })
+        }).catch(() => {
+          this.$message({
+            type: 'info',
+            message: '撤销删除'
+          });
+        });
       },
         add_disease: function () {
             this.$router.push({

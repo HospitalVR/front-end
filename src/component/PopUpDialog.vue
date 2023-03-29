@@ -2,13 +2,12 @@
     <el-dialog title="修改内容" :visible.sync="dialogFormVisible">
       <el-form :model="data">
         <el-form-item v-for="value,key,index in data" :label="label[index]" :label-width="formLabelWidth" :key="index">
-          <el-input :v-model="data[key]" autocomplete="off"></el-input>
+          <el-input v-model="data[key]" autocomplete="off" ref="inputs"></el-input>
         </el-form-item>
-        <button v-on:click="test">test</button>
       </el-form>
       <span slot="footer" class="dialog-footer">
         <el-button @click="dialogFormVisible = false">Cancel</el-button>
-        <el-button type="primary" @click="dialogFormVisible = false">Confirm</el-button>
+        <el-button type="primary" @click="this.confirm">Confirm</el-button>
       </span>
     </el-dialog>
 </template>
@@ -25,11 +24,10 @@ export default {
         }
     },
     methods: {
-        test: function () {
-            console.log(this.label)
-            console.log(this.data)
-            for (let key in this.data) {
-                console.log(key)
+        confirm: function () {
+            this.dialogFormVisible = false
+            for (let i in this.$refs.inputs) {
+                console.log(this.$refs.inputs[i].value)
             }
         }
     },

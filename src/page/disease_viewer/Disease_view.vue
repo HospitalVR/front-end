@@ -51,7 +51,7 @@ export default {
                 }
             },
             component_type: 2,
-            disease_group: "没有数据无法显示类别啊"
+            disease_group: this.$route.query.disease_group
         };
     },
     methods: {
