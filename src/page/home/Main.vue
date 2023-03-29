@@ -33,7 +33,7 @@
                     </svg>
                 </transition>
             </div>
-            <div class="hospital_main-item hospital_main-test" @mouseenter="handleEnter($event)" @mouseleave="handleLeave($event)">
+            <div class="hospital_main-item hospital_main-test" @mouseenter="handleEnter($event)" @mouseleave="handleLeave($event)" @click="$router.push('/home/test')">
                 <transition name="text">
                     <span v-if="showText">测试功能</span>
                 </transition>

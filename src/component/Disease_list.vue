@@ -11,17 +11,13 @@ export default {
     name: "Disease_list",
     data() {
         return {
-            disease_data: [
-
-            ]
+            loader: new NetLoader("test"),
+            disease_data: []
         };
     },
     methods: {
-        get_data: function () {
-            let loader = new NetLoader("test")
-            this.disease_data=[]
-            loader.get("/case/findAllByType").then((value) => {
-                console.log(value)
+        get_data() {
+            this.loader.get("/case/findAllByType").then((value) => {
                 for (let key in value.data) {
                     let disease = { disease_group: key, disease_name_list: value.data[key] }
                     this.disease_data.push(disease)
@@ -41,7 +37,6 @@ export default {
     width: 70%;
     float:left;
     height: wrap-content;
-    //background: rgb(148, 254, 0);
     padding: 0;
     margin: 0;
 }
