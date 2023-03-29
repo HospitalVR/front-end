@@ -43,7 +43,7 @@ export default {
 
             for(let i = 0; i < questionIds.length; i++) {
                 loader.get("/question/findById?id=" + questionIds[i]).then((value) => {
-                    this.questions.push(value.data)
+                this.questions.push(value.data)
                 })
             }
             
