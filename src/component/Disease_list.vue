@@ -1,6 +1,6 @@
 <template>
     <div id="disease_list">
-        <Disease_group v-for="item in disease_data" :key="item.disease_group" :disease_group="item.disease_group" :disease_name_list="item.disease_name_list"></Disease_group>
+        <Disease_group v-for="item in disease_data" :refresh="get_data" :key="item.disease_group" :disease_group="item.disease_group" :disease_name_list="item.disease_name_list"></Disease_group>
     </div>
 </template>
 
@@ -17,6 +17,7 @@ export default {
     },
     methods: {
         get_data() {
+            this.disease_data=[]
             this.loader.get("/case/findAllByType").then((value) => {
                 for (let key in value.data) {
                     let disease = { disease_group: key, disease_name_list: value.data[key] }

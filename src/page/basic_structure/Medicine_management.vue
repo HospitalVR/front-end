@@ -1,7 +1,7 @@
 <template>
     <div id="medicine_management">
         <h1 style="textAlign: center">药品管理</h1>
-        <Table :label="labels" :data="tableData" :width="widthList"></Table>
+        <Table :label="labels" :data="tableData" :width="widthList" :keys="keys"></Table>
     </div>
 </template>
 
@@ -11,7 +11,8 @@ export default {
     name: "Medicine_management",
     data() {
         return {
-            labels: ["编号", "药物名称","价格","介绍"],
+            labels: ["编号", "药物名称", "价格", "介绍"],
+            keys: ["id","name","price","description"],
             widthList:[120,120,90,400],
             tableData: [{
                 id:"10240000-132A",

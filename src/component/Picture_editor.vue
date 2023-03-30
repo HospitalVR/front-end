@@ -42,7 +42,7 @@ export default {
     data() {
         return {
             image_url: this.disease_picture,
-            image:null
+            image: null
         }
     },
     methods: {

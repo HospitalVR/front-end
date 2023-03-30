@@ -13,12 +13,15 @@
             </template>
         </el-table-column>
     </el-table>
-    <PopUpDialog ref="child" :select-data="selectData" :labels="labels"></PopUpDialog>
+    <el-button type="primary" icon="el-icon-plus" style="width:80vw" size="small" @click="handleAdd()"></el-button>
+    <PopUpDialog ref="child" :select-data="selectData" :labels="labels" :keys="keyslist"></PopUpDialog>
+    <PopUpDialogForAdd ref="child2" :labels="labels" :keys="keyslist"></PopUpDialogForAdd>
     </div>
 </template>
 
 <script>
 import PopUpDialog from './PopUpDialog.vue';
+import PopUpDialogForAdd from './PopUpDialogForAdd.vue';
 export default {
     name: "Table",
     data() {
@@ -26,6 +29,7 @@ export default {
             labels: this.$props.label,
             tableData: this.$props.data,
             widthlist: this.$props.width,
+            keyslist:this.$props.keys,
             selectData:{},
             search: "",
         };
@@ -34,6 +38,9 @@ export default {
         handleEdit(index, row) {
             this.selectData= Object.assign({},row)
             this.$refs.child.dialogFormVisible = true
+        },
+        handleAdd() {
+            this.$refs.child2.dialogFormVisible = true
         },
         handleDelete(index, row) {
             console.log(index, row);
@@ -66,9 +73,10 @@ export default {
     props: {
         label: Array,
         data: Array,
-        width: Array
+        width: Array,
+        keys: Array
     },
-    components: { PopUpDialog }
+    components: { PopUpDialog, PopUpDialogForAdd }
 }
 </script>
 
