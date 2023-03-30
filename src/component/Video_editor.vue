@@ -41,7 +41,8 @@ export default {
     name: "Video_editor",
     data() {
         return {
-            video_url: this.disease_video
+            video_url: this.disease_video,
+            video:null
         }
     },
     methods: {
@@ -54,8 +55,8 @@ export default {
         let file = this.$refs.file;
         file.addEventListener("change", (e) => {
             console.log(e.target.files)
-            let video = e.target.files[0]
-            this.video_url= window.webkitURL.createObjectURL(video);
+            this.video = e.target.files[0]
+            this.video_url= window.webkitURL.createObjectURL(this.video);
         })
     }
 }

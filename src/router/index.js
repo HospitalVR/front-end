@@ -94,6 +94,10 @@ const router = new VueRouter({
                 {
                     path: "medicine",
                     component: () => import("@/page/basic_structure/Medicine_management.vue")
+                },
+                {
+                    path: "vaccinum",
+                    component: () => import("@/page/basic_structure/Vaccinum_management.vue")
                 }
             ]
         }

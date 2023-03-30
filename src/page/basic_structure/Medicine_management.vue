@@ -11,16 +11,18 @@ export default {
     name: "Medicine_management",
     data() {
         return {
-            labels: ["编号", "药物名称", "介绍"],
-            widthList:[250,250,200],
+            labels: ["编号", "药物名称","价格","介绍"],
+            widthList:[120,120,90,400],
             tableData: [{
-                date: "10240000-132A",
+                id:"10240000-132A",
                 name: "老鼠药",
-                addreas: "毒死老鼠的专用药物，人类误食会引发腹泻"
+                price: "80.00",
+                description: "毒死老鼠的专用药物，人类误食会引发腹泻"
             }, {
-                date: "10240000-132B",
+                id: "10240000-132B",
                 name: "蟑螂药",
-                addreas: "毒死蟑螂的专用药物，人类误食会引发腹泻"
+                price: "100.00",
+                description: "毒死蟑螂的专用药物，人类误食会引发腹泻"
             }],
         }
     },
