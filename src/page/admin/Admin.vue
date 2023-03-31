@@ -10,7 +10,7 @@
                 </el-menu>
             </div>
             <div class="hospital_admin-page">
-                    <router-view></router-view>
+                <router-view></router-view>
             </div>
         </el-main>
     </el-container>
