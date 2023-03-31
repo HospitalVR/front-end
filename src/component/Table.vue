@@ -13,19 +13,25 @@
             </template>
         </el-table-column>
     </el-table>
-    <PopUpDialog ref="child" :select-data="selectData" :labels="labels"></PopUpDialog>
+    <el-button type="primary" icon="el-icon-plus" style="width:80vw" size="small" @click="handleAdd()"></el-button>
+    <PopUpDialog ref="child" :select-data="selectData" :labels="labels" :keys="keyslist" :url="this.$props.url" :get_data="this.get_data"></PopUpDialog>
+    <PopUpDialogForAdd ref="child2" :labels="labels.slice(1)" :keys="keyslist.slice(1)" :url="this.$props.url" :get_data="this.get_data"></PopUpDialogForAdd>
     </div>
 </template>
 
 <script>
 import PopUpDialog from './PopUpDialog.vue';
+import PopUpDialogForAdd from './PopUpDialogForAdd.vue';
+import { NetLoader } from '@/net';
+
 export default {
     name: "Table",
     data() {
         return {
             labels: this.$props.label,
-            tableData: this.$props.data,
+            tableData: [],
             widthlist: this.$props.width,
+            keyslist:this.$props.keys,
             selectData:{},
             search: "",
         };
@@ -35,8 +41,41 @@ export default {
             this.selectData= Object.assign({},row)
             this.$refs.child.dialogFormVisible = true
         },
+        handleAdd() {
+            this.$refs.child2.dialogFormVisible = true
+        },
         handleDelete(index, row) {
-            console.log(index, row);
+            let loader = new NetLoader("test")
+             
+            this.$confirm('这将会永久删除数据，确定继续删除吗？', '警告', {
+                confirmButtonText: '确认',
+                cancelButtonText: '取消',
+                type: 'warning'
+            }).then(() => {
+                let url = "http://127.0.0.1:8888" + this.$props.url + "/deleteByName?name=" + row.name
+                loader.get(url).then((value) => {
+                    this.get_data()
+                    this.$message({
+                        message: '删除成功',
+                        type: "success"
+                    });
+                })
+            }).catch(() => {
+                this.$message({
+                    type: 'info',
+                    message: '撤销删除'
+                });
+            });
+        },
+        get_data() {
+            this.tableData = []
+            let url = "http://127.0.0.1:8888"+ this.$props.url +"/findAll"
+            let loader = new NetLoader("test")
+            loader.get(url).then((value) => {
+                for (let index in value.data) {
+                    this.tableData.push(value.data[index])
+                }
+            })
         },
         switch_label: function (label) {
             let res = "";
@@ -65,10 +104,14 @@ export default {
     },
     props: {
         label: Array,
-        data: Array,
-        width: Array
+        width: Array,
+        keys: Array,
+        url: String
     },
-    components: { PopUpDialog }
+    components: { PopUpDialog, PopUpDialogForAdd },
+    created() {
+        this.get_data()
+    }
 }
 </script>
 
