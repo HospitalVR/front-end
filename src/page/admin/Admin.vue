@@ -10,7 +10,7 @@
                 </el-menu>
             </div>
             <div class="hospital_admin-page">
-                    <router-view></router-view>
+                <router-view></router-view>
             </div>
         </el-main>
     </el-container>
@@ -20,13 +20,9 @@
     export default {
         name: "Admin",
         data() {
-            return {
-
-            }
+            return {}
         },
-        methods: {
-
-        },
+        methods: {},
         mounted() {
             this.$notify({
                 title: '恭喜你登陆成功',

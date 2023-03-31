@@ -5,7 +5,12 @@
             <span>{{ disease_group }}</span>
             <template v-if="this.$store.state.type == 'admin'"><el-button style="float: right; padding: 3px 0" type="text" v-on:click="add_disease">添加疾病</el-button></template>
           </div>
-          <el-tag id="tag" v-for="(item, index) in disease_name_list" :key="index" v-on:click="show_data(item)" closable :disable-transitions="false" @close="delete_disease(item)">{{ item }}</el-tag>
+          <template v-if="this.$store.state.type == 'admin'">
+            <el-tag id="tag" v-for="(item, index) in disease_name_list" :key="index" v-on:click="show_data(item)" closable :disable-transitions="false" @close="delete_disease(item)">{{ item }}</el-tag>
+          </template>
+          <template v-else>
+            <el-tag id="tag" v-for="(item, index) in disease_name_list" :key="index" v-on:click="show_data(item)" :disable-transitions="false">{{ item }}</el-tag>
+          </template>
         </el-card>
     </div>
 </template>
@@ -34,11 +39,12 @@ export default {
           cancelButtonText: '取消',
           type: 'warning'
         }).then(() => {
-          loader.get("/case/deleteByName?name='" + name + "'").then((value) => {
+          loader.get("/case/deleteByName?name=" + name + "").then((value) => {
           this.$message({
               message: '删除成功',
               type: "success"
-            });
+          });
+            this.$props.refresh();
           })
         }).catch(() => {
           this.$message({
@@ -55,7 +61,8 @@ export default {
     },
     props: {
         disease_group: String,
-        disease_name_list: Array
+      disease_name_list: Array,
+        refresh:Function
     }
 }
 </script>

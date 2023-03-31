@@ -8,14 +8,14 @@
 <script>
 import Table from '@/component/Table.vue'
 export default {
-    name: "Medicine_management",
+    name: "Inpatient_management",
     data() {
         return {
-            labels: ["编号", "药物名称", "价格", "介绍"],
-            keys: ["id","name","price","description"],
-            widthList: [60, 120, 90, 570],
-            url: "/drug",
-            title: "药品管理"
+            labels: ["编号", "宠物名称", "宠物类型", "宠物主人", "手机号", "住院原因", "入院时间", "出院时间","住院时长","住院费用"],
+            keys: ["id","name","breed","owner", "phone", "reason", "admission", "discharge", "day", "cost"],
+            widthList: [60, 90, 120, 90,120,90,120,120,90,90],
+            url: "/inpatient",
+            title: "住院管理"
         }
     },
     methods: {

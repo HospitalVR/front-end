@@ -56,9 +56,7 @@ import { NetLoader } from '@/net';
                 username: null,
             }
         },
-        methods: {
-
-        },
+        methods: {},
         created() {
             if(window.localStorage.getItem("token")) {
                 //TODO 此处需要发送请求来验证该token的具体身份方便在导航栏出展示用户名和用户的信息

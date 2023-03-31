@@ -1,13 +1,8 @@
 <template>
-    <el-dialog title="修改内容" :visible.sync="dialogFormVisible">
-      <el-form :model="data" style="height:270px; overflow-y: scroll;">
-        <el-form-item v-for="value,key,index in data" :label="label[index]" :label-width="formLabelWidth" :key="index">
-          <template v-if="(index==0)|(index==1)">
-            <el-input v-model="data[key]" autocomplete="off" ref="inputs" :disabled="true"></el-input>
-          </template>
-          <template v-else>
-            <el-input v-model="data[key]" autocomplete="off" ref="inputs"></el-input>
-          </template>
+    <el-dialog title="添加内容" :visible.sync="dialogFormVisible">
+      <el-form style="height:270px; overflow-y: scroll;">
+        <el-form-item v-for="value,key,index in label" :label="value" :label-width="formLabelWidth" :key="index">
+          <el-input v-model="data[key]" autocomplete="off" ref="inputs"></el-input>
         </el-form-item>
       </el-form>
       <span slot="footer" class="dialog-footer">
@@ -20,7 +15,7 @@
 <script>
 import { NetLoader } from '@/net';
 export default {
-    name: "PopUpDialog",
+    name: "PopUpDialogForAdd",
     data() {
         return {
             dialogFormVisible: false,
@@ -33,6 +28,7 @@ export default {
     methods: {
         confirm: function () {
             let formData = new FormData();
+            formData.append("id", 0)
             for (let index in this.keyslist) {
                 formData.append(this.keyslist[index], this.$refs.inputs[index].value)
             }
@@ -42,19 +38,18 @@ export default {
                 this.dialogFormVisible = false
                 this.$props.get_data()
                 this.$message({
-                    message: '修改成功',
+                    message: '添加成功',
                     type: "success"
                 });
             }).catch(() => {
                 this.$message({
-                    message: '修改失败',
+                    message: '添加失败',
                     type: "error"
                 });
             })
         }
     },
     props:{
-        selectData: Object,
         labels: Array,
         keys: Array,
         url: String,
@@ -62,10 +57,8 @@ export default {
     },
     watch: {
         dialogFormVisible(val, newval) {
-            if (val) {
-                for (let key in this.$props.selectData) {
-                    this.$set(this.data, key, this.$props.selectData[key])
-                }
+            for (let key in this.data) {
+                this.data[key] = ""
             }
         }
     }

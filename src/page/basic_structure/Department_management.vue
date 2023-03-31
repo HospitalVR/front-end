@@ -8,14 +8,14 @@
 <script>
 import Table from '@/component/Table.vue'
 export default {
-    name: "Vaccinum_management",
+    name: "Department_management",
     data() {
         return {
-            labels: ["编号", "疫苗名称", "作用动物", "疫苗类型", "注射方式", "接种时间", "有效时间", "副作用"],
-            keys: ["id", "name", "animal", "type", "method", "time", "protection", "side_effects"],
-            widthList: [60, 220, 80, 120, 120, 450, 80, 550],
-            url: "/vaccine",
-            title: "疫苗管理"
+            labels: ["编号", "药物名称", "价格", "介绍"],
+            keys: ["id","name","price","description"],
+            widthList: [60, 120, 90, 570],
+            url: "/drug",
+            title: "科室管理"
         }
     },
     methods: {
@@ -23,7 +23,7 @@ export default {
             this.$router.go(-1)
         }
     },
-    components: { Table }
+    components: { Table },
 }
 </script>
 
