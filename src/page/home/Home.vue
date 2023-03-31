@@ -7,7 +7,10 @@
                 </div>
             </div>
             <div class="nav-right">
-                <div class="nav-right-item" @click="$router.push('/login')"><span>登录</span></div>
+                <div class="nav-right-item">
+                    <span v-if="$store.state.status === 0" @click="$router.push('/login')">登录</span>
+                    <span v-if="$store.state.status === 1">{{ username }}</span>
+                </div>
                 <div class="nav-right-item" @click="$router.push('/home/test')"><span>测试功能</span></div>
                 <div class="nav-right-item" @click="$router.push('/home/role')"><span>角色扮演</span></div>
                 <div class="nav-right-item" @click="$router.push('/home/case_list')"><span>病例管理</span></div>
@@ -49,18 +52,29 @@ import { NetLoader } from '@/net';
         },
         data() {
             return {
-                loader: new NetLoader("test")
+                loader: new NetLoader("test"),
+                username: null,
             }
         },
         methods: {
 
         },
-        beforeRouteEnter(to,from,next) {
-            console.log("enter home")
+        created() {
             if(window.localStorage.getItem("token")) {
                 //TODO 此处需要发送请求来验证该token的具体身份方便在导航栏出展示用户名和用户的信息
+                this.loader.get("/user/verify").then(value => {
+                    console.log(value.data);
+                    this.username = value.data.userName;
+                    this.$message({
+                        message: '恭喜你，登陆成功',
+                        type: 'success'
+                    });
+                    this.$store.commit("changeStatus",1);
+                },err => {
+                    console.log(err);
+                    this.$store.commit("changeStatus",0);
+                })
             }
-            next();
         }
     }
 </script>
