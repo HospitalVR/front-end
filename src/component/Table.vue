@@ -22,6 +22,8 @@
 <script>
 import PopUpDialog from './PopUpDialog.vue';
 import PopUpDialogForAdd from './PopUpDialogForAdd.vue';
+import { NetLoader } from '@/net';
+
 export default {
     name: "Table",
     data() {
@@ -43,7 +45,10 @@ export default {
             this.$refs.child2.dialogFormVisible = true
         },
         handleDelete(index, row) {
-            console.log(index, row);
+            let url = "http://127.0.0.1:8888"+this.$props.url+"/deleteByName?name=\""+row.name+"\""
+            let loader = new NetLoader("test")
+            loader.get(url).then((value) => {
+            })
         },
         switch_label: function (label) {
             let res = "";
@@ -74,7 +79,8 @@ export default {
         label: Array,
         data: Array,
         width: Array,
-        keys: Array
+        keys: Array,
+        url:String
     },
     components: { PopUpDialog, PopUpDialogForAdd }
 }
