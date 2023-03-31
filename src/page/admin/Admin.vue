@@ -20,13 +20,9 @@
     export default {
         name: "Admin",
         data() {
-            return {
-
-            }
+            return {}
         },
-        methods: {
-
-        },
+        methods: {},
         mounted() {
             this.$notify({
                 title: '恭喜你登陆成功',
