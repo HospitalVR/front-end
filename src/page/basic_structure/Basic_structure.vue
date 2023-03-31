@@ -23,6 +23,12 @@ export default {
             switch (name) {
                 case "药品管理": s = "/medicine"; break;
                 case "疫苗管理": s = "/vaccinum"; break;
+                case "科室管理": s = "/department"; break;
+                case "档案管理": s = "/record"; break;
+                case "收费管理": s = "/charge"; break;
+                case "化验项目管理": s = "/assay"; break;
+                case "人员管理": s = "/staff"; break;
+                case "住院管理": s = "/inpatient"; break;
             }
             this.$router.push({
                 path: "/admin" + s

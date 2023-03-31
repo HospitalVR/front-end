@@ -54,7 +54,6 @@ export default {
     mounted() {
         let file = this.$refs.file;
         file.addEventListener("change", (e) => {
-            console.log(e.target.files)
             this.video = e.target.files[0]
             this.video_url= window.webkitURL.createObjectURL(this.video);
         })

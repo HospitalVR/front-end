@@ -1,7 +1,7 @@
 <template>
-    <div id="vaccinum_management">
-        <h1 style="textAlign: center">疫苗管理</h1>
-        <Table :label="labels" :data="tableData" :width="widthList"></Table>
+    <div>
+        <el-page-header @back="goBack" :content="title"></el-page-header>
+        <Table :label="labels" :width="widthList" :keys="keys" :url="url"></Table>
     </div>
 </template>
 
@@ -11,38 +11,21 @@ export default {
     name: "Vaccinum_management",
     data() {
         return {
-            labels: ["编号", "疫苗名称", "作用动物", "类型","方式","时间","有效时间","副作用"],
-            widthList: [120, 120, 90, 120, 180, 90, 120, 180],
-            tableData: [{
-                id: "10240000-132A",
-                name: "老鼠药",
-                price: "80.00",
-                description: "哈哈",
-                id2: "10240000-132A",
-                name3: "老鼠药",
-                pri4ce: "80.00",
-                desc5ription: "哈哈"
-            }, {
-                id: "10240000-132A",
-                name: "老鼠药BBB",
-                price: "80.00",
-                description: "哈哈",
-                id2: "10240000-132A",
-                name3: "老鼠药",
-                pri4ce: "80.00",
-                desc5ription: "哈哈"
-            }],
+            labels: ["编号", "疫苗名称", "作用动物", "疫苗类型", "注射方式", "接种时间", "有效时间", "副作用"],
+            keys: ["id", "name", "animal", "type", "method", "time", "protection", "side_effects"],
+            widthList: [60, 220, 80, 120, 120, 450, 80, 550],
+            url: "/vaccine",
+            title: "疫苗管理"
         }
     },
     methods: {
-
+        goBack() {
+            this.$router.go(-1)
+        }
     },
     components: { Table }
 }
 </script>
 
 <style lang="less" scoped>
-#vaccimum_management {
-    width: 100%;
-}
 </style>

@@ -44,9 +44,6 @@ export default {
                 }
             }
 
-            for (var key of formData.keys()) {
-                console.log(formData.get(key));
-            }
             
             let url = "http://127.0.0.1:8888/case/save"
             await loader.post(url, formData).then((value) => {

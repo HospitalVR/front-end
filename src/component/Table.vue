@@ -14,8 +14,8 @@
         </el-table-column>
     </el-table>
     <el-button type="primary" icon="el-icon-plus" style="width:80vw" size="small" @click="handleAdd()"></el-button>
-    <PopUpDialog ref="child" :select-data="selectData" :labels="labels" :keys="keyslist"></PopUpDialog>
-    <PopUpDialogForAdd ref="child2" :labels="labels" :keys="keyslist"></PopUpDialogForAdd>
+    <PopUpDialog ref="child" :select-data="selectData" :labels="labels" :keys="keyslist" :url="this.$props.url" :get_data="this.get_data"></PopUpDialog>
+    <PopUpDialogForAdd ref="child2" :labels="labels.slice(1)" :keys="keyslist.slice(1)" :url="this.$props.url" :get_data="this.get_data"></PopUpDialogForAdd>
     </div>
 </template>
 
@@ -29,7 +29,7 @@ export default {
     data() {
         return {
             labels: this.$props.label,
-            tableData: this.$props.data,
+            tableData: [],
             widthlist: this.$props.width,
             keyslist:this.$props.keys,
             selectData:{},
@@ -45,9 +45,36 @@ export default {
             this.$refs.child2.dialogFormVisible = true
         },
         handleDelete(index, row) {
-            let url = "http://127.0.0.1:8888"+this.$props.url+"/deleteByName?name=\""+row.name+"\""
+            let loader = new NetLoader("test")
+             
+            this.$confirm('这将会永久删除数据，确定继续删除吗？', '警告', {
+                confirmButtonText: '确认',
+                cancelButtonText: '取消',
+                type: 'warning'
+            }).then(() => {
+                let url = "http://127.0.0.1:8888" + this.$props.url + "/deleteByName?name=" + row.name
+                loader.get(url).then((value) => {
+                    this.get_data()
+                    this.$message({
+                        message: '删除成功',
+                        type: "success"
+                    });
+                })
+            }).catch(() => {
+                this.$message({
+                    type: 'info',
+                    message: '撤销删除'
+                });
+            });
+        },
+        get_data() {
+            this.tableData = []
+            let url = "http://127.0.0.1:8888"+ this.$props.url +"/findAll"
             let loader = new NetLoader("test")
             loader.get(url).then((value) => {
+                for (let index in value.data) {
+                    this.tableData.push(value.data[index])
+                }
             })
         },
         switch_label: function (label) {
@@ -77,12 +104,14 @@ export default {
     },
     props: {
         label: Array,
-        data: Array,
         width: Array,
         keys: Array,
-        url:String
+        url: String
     },
-    components: { PopUpDialog, PopUpDialogForAdd }
+    components: { PopUpDialog, PopUpDialogForAdd },
+    created() {
+        this.get_data()
+    }
 }
 </script>
 

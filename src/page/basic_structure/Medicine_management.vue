@@ -1,44 +1,31 @@
 <template>
-    <div id="medicine_management">
-        <h1 style="textAlign: center">药品管理</h1>
-        <Table :label="labels" :data="tableData" :width="widthList" :keys="keys" url="/drug"></Table>
+    <div>
+        <el-page-header @back="goBack" :content="title"></el-page-header>
+        <Table :label="labels" :width="widthList" :keys="keys" :url="url"></Table>
     </div>
 </template>
 
 <script>
 import Table from '@/component/Table.vue'
-import { NetLoader } from '@/net';
 export default {
     name: "Medicine_management",
     data() {
         return {
             labels: ["编号", "药物名称", "价格", "介绍"],
             keys: ["id","name","price","description"],
-            widthList:[60,120,90,570],
-            tableData: [],
+            widthList: [60, 120, 90, 570],
+            url: "/drug",
+            title: "药品管理"
         }
     },
     methods: {
-        get_data: function () {
-            this.tableData=[]
-            let url = "http://127.0.0.1:8888/drug/findAll"
-            let loader = new NetLoader("test")
-            loader.get(url).then((value) => {
-                for (let index in value.data) {
-                    this.tableData.push(value.data[index])
-                }
-            })
+        goBack() {
+            this.$router.go(-1)
         }
     },
     components: { Table },
-    created() {
-        this.get_data();
-    }
 }
 </script>
 
 <style lang="less" scoped>
-#medicine_management {
-    width: 100%;
-}
 </style>

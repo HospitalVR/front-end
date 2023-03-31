@@ -13,6 +13,7 @@
 </template>
 
 <script>
+import { NetLoader } from '@/net';
 export default {
     name: "PopUpDialogForAdd",
     data() {
@@ -26,15 +27,33 @@ export default {
     },
     methods: {
         confirm: function () {
-            this.dialogFormVisible = false
-            for (let i in this.$refs.inputs) {
-                console.log(this.$refs.inputs[i].value)
+            let formData = new FormData();
+            formData.append("id", 0)
+            for (let index in this.keyslist) {
+                formData.append(this.keyslist[index], this.$refs.inputs[index].value)
             }
+            let url = "http://127.0.0.1:8888" + this.$props.url + "/save"
+            let loader = new NetLoader("test")
+            loader.post(url, formData).then((value) => {
+                this.dialogFormVisible = false
+                this.$props.get_data()
+                this.$message({
+                    message: '添加成功',
+                    type: "success"
+                });
+            }).catch(() => {
+                this.$message({
+                    message: '添加失败',
+                    type: "error"
+                });
+            })
         }
     },
     props:{
         labels: Array,
-        keys: Array
+        keys: Array,
+        url: String,
+        get_data:Function
     },
     watch: {
         dialogFormVisible(val, newval) {
