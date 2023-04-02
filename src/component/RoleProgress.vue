@@ -41,6 +41,12 @@
                 this.active = (this.active + 1)%(this.progress.length + 1);
                 
             }
+        },
+        watch: {
+            progress() {
+                console.log(this)
+                this.active = 0;
+            }
         }
     }
 </script>
