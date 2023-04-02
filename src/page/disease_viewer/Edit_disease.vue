@@ -30,20 +30,30 @@ export default {
         };
     },
     methods: {
-        confirm:async function () {
+        confirm: async function () {
+            let loader = new NetLoader("test")
             let formData = new FormData();
             formData.append("type", this.$route.query.disease_group)
             for (let key in this.$refs) {
                 formData.append(key + 1, this.$refs[key].case_text)
+                if (this.$refs[key].$refs.pic.image != null) {
+                    formData.append(key + 2, this.$refs[key].$refs.pic.image)
+                } 
+                if (this.$refs[key].$refs.vid.video != null) {
+                    formData.append(key + 3, this.$refs[key].$refs.vid.video)
+                }
             }
 
+            
             let url = "http://127.0.0.1:8888/case/save"
-            let loader = new NetLoader("test")
             await loader.post(url, formData).then((value) => {
             })
 
             this.$router.replace('/admin/case_list')
-            this.$message('修改成功');
+            this.$message({
+                message: '修改成功',
+                type: "success"
+            });
         },
         back: function () {
             this.$router.go(-1)

@@ -8,14 +8,14 @@
 <script>
 import Table from '@/component/Table.vue'
 export default {
-    name: "Medicine_management",
+    name: "Record_management",
     data() {
         return {
-            labels: ["编号", "药物名称", "价格", "介绍"],
-            keys: ["id","name","price","description"],
-            widthList: [60, 120, 90, 570],
-            url: "/drug",
-            title: "药品管理"
+            labels: ["编号", "宠物名称", "宠物种类", "宠物年龄", "宠物性别", "宠物颜色", "宠物主人", "手机号"],
+            keys: ["id","name","breed","age", "gender", "color", "owner", "phone"],
+            widthList: [60, 90, 90, 90,90, 90, 90, 120],
+            url: "/record",
+            title: "档案管理"
         }
     },
     methods: {

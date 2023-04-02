@@ -7,7 +7,8 @@ Vue.use(Vuex)
 export const store = new Vuex.Store({
     state: {
         path: [],
-        type: "user"
+        type: "user",
+        status: 0 // 0表示用户未登录，1表示用户登录
     }, //存储具体的数据
     mutations: {
         changePath(state, payload) {
@@ -24,6 +25,9 @@ export const store = new Vuex.Store({
         },
         changeType(state,type) {
             state.type = type;
+        },
+        changeStatus(state,status) {
+            state.status = status;
         }
     },// 只能执行同步操作
     actions: {} //异步操作

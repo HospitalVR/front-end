@@ -92,6 +92,7 @@ const router = new VueRouter({
                     component: () => import("@/page/basic_structure/Medicine_management.vue")
                 },
                 {
+
                     path: "test_management",
                     component: () => import("@/page/test/TestManagement.vue")
                 },
@@ -110,6 +111,33 @@ const router = new VueRouter({
                 {
                     path: "paper_edit",
                     component: () => import("@/page/test/PaperEdit.vue")
+
+                    path: "vaccinum",
+                    component: () => import("@/page/basic_structure/Vaccinum_management.vue")
+                },
+                {
+                    path: "assay",
+                    component: () => import("@/page/basic_structure/Assay_management.vue")
+                },
+                {
+                    path: "charge",
+                    component: () => import("@/page/basic_structure/Charge_management.vue")
+                },
+                {
+                    path: "inpatient",
+                    component: () => import("@/page/basic_structure/Inpatient_management.vue")
+                },
+                {
+                    path: "department",
+                    component: () => import("@/page/basic_structure/Department_management.vue")
+                },
+                {
+                    path: "record",
+                    component: () => import("@/page/basic_structure/Record_management.vue")
+                },
+                {
+                    path: "staff",
+                    component: () => import("@/page/basic_structure/Staff_management.vue")
                 }
             ]
         }

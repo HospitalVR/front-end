@@ -5,7 +5,12 @@
             <span>{{ disease_group }}</span>
             <template v-if="this.$store.state.type == 'admin'"><el-button style="float: right; padding: 3px 0" type="text" v-on:click="add_disease">添加疾病</el-button></template>
           </div>
-          <el-tag id="tag" v-for="(item, index) in disease_name_list" :key="index" v-on:click="show_data(item)" closable :disable-transitions="false" @close="delete_disease(item)">{{ item }}</el-tag>
+          <template v-if="this.$store.state.type == 'admin'">
+            <el-tag id="tag" v-for="(item, index) in disease_name_list" :key="index" v-on:click="show_data(item)" closable :disable-transitions="false" @close="delete_disease(item)">{{ item }}</el-tag>
+          </template>
+          <template v-else>
+            <el-tag id="tag" v-for="(item, index) in disease_name_list" :key="index" v-on:click="show_data(item)" :disable-transitions="false">{{ item }}</el-tag>
+          </template>
         </el-card>
     </div>
 </template>
@@ -24,14 +29,29 @@ export default {
             usr = "admin"
           }
           this.$router.push({
-            path: '/'+usr+'/disease_view', query: {disease_name: name}
+            path: '/'+usr+'/disease_view', query: {disease_name: name, disease_group: this.disease_group }
           })
         },
       delete_disease: function (name) {
-          let loader = new NetLoader("test")
-          loader.get("/case/deleteByName?name='"+name+"'").then((value) => {
-            alert("删除疾病 " + name)
+        let loader = new NetLoader("test")
+        this.$confirm('这将会永久删除数据，确定继续删除吗？', '警告', {
+          confirmButtonText: '确认',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(() => {
+          loader.get("/case/deleteByName?name=" + name + "").then((value) => {
+          this.$message({
+              message: '删除成功',
+              type: "success"
+          });
+            this.$props.refresh();
           })
+        }).catch(() => {
+          this.$message({
+            type: 'info',
+            message: '撤销删除'
+          });
+        });
       },
         add_disease: function () {
             this.$router.push({
@@ -41,7 +61,8 @@ export default {
     },
     props: {
         disease_group: String,
-        disease_name_list: Array
+      disease_name_list: Array,
+        refresh:Function
     }
 }
 </script>
