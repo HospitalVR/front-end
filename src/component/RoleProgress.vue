@@ -44,7 +44,6 @@
         },
         watch: {
             progress() {
-                console.log(this)
                 this.active = 0;
             }
         }
