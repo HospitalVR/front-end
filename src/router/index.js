@@ -56,10 +56,6 @@ const router = new VueRouter({
                 {
                     path: "testResult",
                     component: () => import("@/page/test/TestResult.vue")
-                },
-                {
-                    path: "testManage",
-                    component: () => import("@/page/test/TestManage.vue")
                 }
             ] 
         },
@@ -94,6 +90,26 @@ const router = new VueRouter({
                 {
                     path: "medicine",
                     component: () => import("@/page/basic_structure/Medicine_management.vue")
+                },
+                {
+                    path: "test_management",
+                    component: () => import("@/page/test/TestManagement.vue")
+                },
+                {
+                    path: "question_management",
+                    component: () => import("@/page/test/QuestionManagement.vue")
+                },
+                {
+                    path: "paper_management",
+                    component: () => import("@/page/test/PaperManagement.vue")
+                },
+                {
+                    path: "exam_management",
+                    component: () => import("@/page/test/ExamManagement.vue")
+                },
+                {
+                    path: "paper_edit",
+                    component: () => import("@/page/test/PaperEdit.vue")
                 }
             ]
         }
