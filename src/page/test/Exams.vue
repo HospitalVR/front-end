@@ -1,38 +1,32 @@
 <template>
     <div>
         <el-menu class="exam-nav">
-            <el-menu-item 
-            v-for="item in exams" 
-            :key="item.id" 
-            v-on:click="show_paper(item.paper_id)">考试{{ ++count }}</el-menu-item>
+            <el-menu-item :key="item.id" v-for="item in exams" v-on:click="show_paper(item.testpaper)">考试{{ item.id }}</el-menu-item>
         </el-menu>
     </div>
 </template>
 
 <script>
 import { NetLoader } from '@/net';
-// import { exams } from './data/exams.js';
 export default {
     data() {
         return {
             count: 0,
-            exams: []
+            exams: [],
         }
     },
     methods: {
-        show_paper: function(id) {
+        show_paper: function(testpaper) {
             this.$router.push({
-                path: '/home/testPaper', query: { paper_id: id }
+                path: '/home/testPaper', query: { questions: testpaper.questions }
             })
         }
     },
     created() {
         let loader = new NetLoader("test")
         loader.get("/test/findAll").then((value) => {
-            exams = value.data
+            this.exams = value.data
         })
-
-        //this.exams = exams
     }
 }
 </script>

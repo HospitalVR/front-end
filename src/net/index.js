@@ -64,4 +64,22 @@ export class NetLoader {
             })
         })
     }
+
+    /**
+     * @description 发生delete 请求
+     * @param {string} url 
+     * @param {{}} params
+     * @param { AxiosHeaders } headers
+     * @param {"arraybuffer" | "blob" | "json"} responseType
+     * @returns {Promise<any>} 
+     */
+     delete(url, params, headers = {}, responseType = "json") {
+        return new Promise((res,rej) => {
+            this.instance.delete(url,{params,headers,responseType}).then((val) => {
+                res(val);
+            },(err) => {
+                rej(err)
+            })
+        })
+    }
 }

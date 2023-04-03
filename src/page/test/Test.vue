@@ -7,12 +7,12 @@
                     <span>考试</span>
                 </div>
             </div>
-            <div class="test_box">
+            <!-- <div class="test_box">
                 <img :src="imgSetting" alt="" @click="$router.push('/home/testManage')">
                 <div class="test_info">
                     <span>测试管理</span>
                 </div>
-            </div>
+            </div> -->
         </div>
     </div>
 </template>
