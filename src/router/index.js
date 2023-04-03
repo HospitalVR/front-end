@@ -92,7 +92,6 @@ const router = new VueRouter({
                     component: () => import("@/page/basic_structure/Medicine_management.vue")
                 },
                 {
-
                     path: "test_management",
                     component: () => import("@/page/test/TestManagement.vue")
                 },
@@ -111,6 +110,8 @@ const router = new VueRouter({
                 {
                     path: "paper_edit",
                     component: () => import("@/page/test/PaperEdit.vue")
+                },
+                {
 
                     path: "vaccinum",
                     component: () => import("@/page/basic_structure/Vaccinum_management.vue")
