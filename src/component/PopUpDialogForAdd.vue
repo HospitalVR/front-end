@@ -22,7 +22,8 @@ export default {
             data: {},
             label: this.$props.labels,
             keyslist: this.$props.keys,
-            formLabelWidth: '120px'
+            formLabelWidth: '120px',
+            configs: this.$props.config
         }
     },
     methods: {
@@ -53,7 +54,8 @@ export default {
         labels: Array,
         keys: Array,
         url: String,
-        get_data:Function
+        get_data: Function,
+        config: Array
     },
     watch: {
         dialogFormVisible(val, newval) {

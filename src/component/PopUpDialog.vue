@@ -2,7 +2,7 @@
     <el-dialog title="修改内容" :visible.sync="dialogFormVisible">
       <el-form :model="data" style="height:270px; overflow-y: scroll;">
         <el-form-item v-for="value,key,index in data" :label="label[index]" :label-width="formLabelWidth" :key="index">
-          <template v-if="(index==0)|(index==1)">
+          <template v-if="configs[index]=='uneditable_text'">
             <el-input v-model="data[key]" autocomplete="off" ref="inputs" :disabled="true"></el-input>
           </template>
           <template v-else>
@@ -27,7 +27,8 @@ export default {
             data: {},
             label: this.$props.labels,
             keyslist: this.$props.keys,
-            formLabelWidth: '120px'
+            formLabelWidth: '120px',
+            configs:this.$props.config
         }
     },
     methods: {
@@ -58,7 +59,8 @@ export default {
         labels: Array,
         keys: Array,
         url: String,
-        get_data:Function
+        get_data: Function,
+        config:Array
     },
     watch: {
         dialogFormVisible(val, newval) {

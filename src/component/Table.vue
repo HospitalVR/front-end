@@ -14,8 +14,8 @@
         </el-table-column>
     </el-table>
     <el-button type="primary" icon="el-icon-plus" style="width:80vw" size="small" @click="handleAdd()"></el-button>
-    <PopUpDialog ref="child" :select-data="selectData" :labels="labels" :keys="keyslist" :url="this.$props.url" :get_data="this.get_data"></PopUpDialog>
-    <PopUpDialogForAdd ref="child2" :labels="labels.slice(1)" :keys="keyslist.slice(1)" :url="this.$props.url" :get_data="this.get_data"></PopUpDialogForAdd>
+    <PopUpDialog ref="child" :select-data="selectData" :labels="labels" :keys="keyslist" :url="this.$props.url" :get_data="this.get_data" :config="this.$props.config"></PopUpDialog>
+    <PopUpDialogForAdd ref="child2" :labels="labels.slice(1)" :keys="keyslist.slice(1)" :url="this.$props.url" :get_data="this.get_data" :config="configs.slice(1)"></PopUpDialogForAdd>
     </div>
 </template>
 
@@ -34,6 +34,7 @@ export default {
             keyslist:this.$props.keys,
             selectData:{},
             search: "",
+            configs:this.$props.config
         };
     },
     methods: {
@@ -46,7 +47,6 @@ export default {
         },
         handleDelete(index, row) {
             let loader = new NetLoader("test")
-             
             this.$confirm('这将会永久删除数据，确定继续删除吗？', '警告', {
                 confirmButtonText: '确认',
                 cancelButtonText: '取消',
@@ -106,7 +106,8 @@ export default {
         label: Array,
         width: Array,
         keys: Array,
-        url: String
+        url: String,
+        config:Array
     },
     components: { PopUpDialog, PopUpDialogForAdd },
     created() {

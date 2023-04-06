@@ -1,7 +1,7 @@
 <template>
     <div>
         <el-page-header @back="goBack" :content="title"></el-page-header>
-        <Table :label="labels" :width="widthList" :keys="keys" :url="url"></Table>
+        <Table :label="labels" :width="widthList" :keys="keys" :url="url" :config="config"></Table>
     </div>
 </template>
 
@@ -15,7 +15,8 @@ export default {
             keys: ["id","name","price","description"],
             widthList: [60, 120, 90, 570],
             url: "/drug",
-            title: "科室管理"
+            title: "科室管理",
+            config:["uneditable_text", "uneditable_text", "text", "text"]
         }
     },
     methods: {
