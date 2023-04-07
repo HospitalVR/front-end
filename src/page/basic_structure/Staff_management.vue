@@ -16,7 +16,7 @@ export default {
             widthList: [60, 90, 60, 60, 120, 60, 120, 170, 100, 80, 60],
             url: "/staff",
             title: "人员管理",
-            config: ["uneditable_text", "uneditable_text", "text", "text", "text", "text", "text", "text", "text", "text", "text"]
+            config: ["uneditable_text", "uneditable_text", "num", "sex", "text", "num", "text", "uneditable_text", "date", "text", "text"]
         }
     },
     methods: {

@@ -8,15 +8,15 @@
 <script>
 import Table from '@/component/Table.vue'
 export default {
-    name: "Department_management",
+    name: "Charge_management",
     data() {
         return {
-            labels: ["编号", "药物名称", "价格", "介绍"],
-            keys: ["id","name","price","description"],
-            widthList: [60, 120, 90, 570],
-            url: "/drug",
+            labels: ["编号", "科室名称", "介绍", "权限"],
+            keys: ["id", "name",  "description","head"],
+            widthList: [60, 90, 600, 250],
+            url: "/department",
             title: "科室管理",
-            config:["uneditable_text", "uneditable_text", "text", "text"]
+            config: ["uneditable_text", "uneditable_text", "text", "text"]
         }
     },
     methods: {
@@ -28,5 +28,4 @@ export default {
 }
 </script>
 
-<style lang="less" scoped>
-</style>
+<style lang="less" scoped></style>

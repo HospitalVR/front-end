@@ -16,7 +16,7 @@ export default {
             widthList: [60, 150, 90, 500],
             url: "/charge",
             title: "收费管理",
-            config: ["uneditable_text", "uneditable_text", "text", "text"]
+            config: ["uneditable_text", "uneditable_text", "float", "text"]
         }
     },
     methods: {

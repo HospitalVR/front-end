@@ -16,7 +16,7 @@ export default {
             widthList: [60, 120, 90, 570],
             url: "/drug",
             title: "药品管理",
-            config: ["uneditable_text", "uneditable_text", "text", "text"]
+            config: ["uneditable_text", "uneditable_text", "float", "text"]
         }
     },
     methods: {

@@ -61,10 +61,6 @@ export default {
                     });
                 })
             }).catch(() => {
-                this.$message({
-                    type: 'info',
-                    message: '撤销删除'
-                });
             });
         },
         get_data() {
@@ -73,6 +69,13 @@ export default {
             let loader = new NetLoader("test")
             loader.get(url).then((value) => {
                 for (let index in value.data) {
+                    let count=0
+                    for (let key in value.data[index]) {
+                        if (this.configs[count] == 'date') {
+                            value.data[index][key]= this.formatDate(new Date(value.data[index][key]))
+                        }
+                        count=count+1
+                    }
                     this.tableData.push(value.data[index])
                 }
             })
@@ -100,6 +103,14 @@ export default {
                 }
             }
             return res;
+        },
+        formatDate: function (date) {
+            var y = date.getFullYear();
+            var m = date.getMonth() + 1;
+            m = m < 10 ? '0' + m : m;
+            var d = date.getDate();
+            d = d < 10 ? ('0' + d) : d;
+            return y + '-' + m + '-' + d;
         }
     },
     props: {
