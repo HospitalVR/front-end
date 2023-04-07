@@ -1,18 +1,19 @@
 <template>
     <div class="test-container">
         <div class="header">
-            <h1>试卷{{ paper_id }}</h1>
+            <h1>试卷</h1>
         </div>
         <ul class="list">
-            <li v-for="(q, i) in questions" :key="i">
+            <li v-for="(q, i) in questions" :key="q.id">
                 <el-card class="box-card">
                     <div slot="header">
-                        <span style="font-size: large;">{{ i+1 }}. {{q.content.split(',')[0]}}</span>
+                        <span style="font-size: large;">{{ i+1 }}. {{q.content}}</span>
                     </div>
                     <el-radio-group v-model="selected[i]" style="display:flex; flex-flow:column nowrap; align-items: flex-start;">
-                        <el-radio label="A">A. {{q.content.split(',')[1]}}</el-radio>
-                        <el-radio label="B">B. {{q.content.split(',')[2]}}</el-radio>
-                        <el-radio label="C">C. {{q.content.split(',')[3]}}</el-radio>
+                        <el-radio label="A">A. {{q.a_choice}}</el-radio>
+                        <el-radio label="B">B. {{q.b_choice}}</el-radio>
+                        <el-radio label="C">C. {{q.c_choice}}</el-radio>
+                        <el-radio label="D">D. {{q.d_choice}}</el-radio>
                     </el-radio-group>
                 </el-card>
             </li>
@@ -22,42 +23,20 @@
 </template>
 
 <script>
-//import { questions } from './data/questions.js';
 export default {
     data() {
         return {
-            paper_id: this.$route.query.paper_id,
-            paper: {},
-            questions: [],
+            questions: this.$route.query.questions,
             selected: []
         }
     },
     methods: {
-        get_questions: function () {
-            let loader = new NetLoader("test")
-            loader.get("/testPaper/findById?id=" + this.paper_id).then((value) => {
-                this.paper = value.data
-            })
-
-            let questionIds = this.paper.questions.split(',')
-
-            for(let i = 0; i < questionIds.length; i++) {
-                loader.get("/question/findById?id=" + questionIds[i]).then((value) => {
-                this.questions.push(value.data)
-                })
-            }
-            
-            //this.questions = questions
-        },
         present: function() {
             this.$router.push({
                 path: '/home/testResult', query: { questionsList: this.questions, usrSelected: this.selected }
             })
         }
     },
-    created () {
-        this.get_questions()
-    }
 }
 
 </script>
