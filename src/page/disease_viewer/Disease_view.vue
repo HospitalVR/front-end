@@ -2,8 +2,8 @@
     <div id="disease_view">
         <div id="header">
             <h1>{{disease_name}}</h1>
-            <template v-if="this.$store.state.type=='admin'"><button v-on:click="edit">编辑</button></template>
-            <button v-on:click="back">返回</button>
+            <template v-if="this.$store.state.type=='admin'"><el-button type="primary" v-on:click="edit">编辑</el-button></template>
+            <el-button type="primary" v-on:click="back">返回</el-button>
         </div>
         <Case_editor title="疾病名称" :text="disease_data.name.text" :disease_picture="disease_data.name.image" :disease_video="disease_data.name.video" :component_type="component_type"></Case_editor>
         <Case_editor title="接诊" :text="disease_data.treat.text" :disease_picture="disease_data.treat.image" :disease_video="disease_data.treat.video" :component_type="component_type"></Case_editor>
