@@ -43,6 +43,7 @@ export default {
     width: 100%;
     height: wrap-content;
     margin: 0;
+    margin-left:2%;
 }
 
 #header {
