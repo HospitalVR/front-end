@@ -6,6 +6,7 @@ const router = new VueRouter({
     routes:[
         { path: "/", redirect: "/home" },
         { path:"/vr",component:()=>import("@/page/webvr/HospitalVR.vue") },
+        { path: "/detail", component: () => import("@/page/room/RoomDetail.vue") },
         { path: "/login", component: () => import("@/page/login/Login.vue")},
         {   
             path: "/home", 
