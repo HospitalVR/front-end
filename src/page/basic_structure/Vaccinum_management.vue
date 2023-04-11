@@ -1,7 +1,7 @@
 <template>
     <div>
         <el-page-header @back="goBack" :content="title"></el-page-header>
-        <Table :label="labels" :width="widthList" :keys="keys" :url="url"></Table>
+        <Table :label="labels" :width="widthList" :keys="keys" :url="url" :config="config"></Table>
     </div>
 </template>
 
@@ -15,7 +15,8 @@ export default {
             keys: ["id", "name", "animal", "type", "method", "time", "protection", "side_effects"],
             widthList: [60, 220, 80, 120, 120, 450, 80, 550],
             url: "/vaccine",
-            title: "疫苗管理"
+            title: "疫苗管理",
+            config: ["uneditable_text", "uneditable_text", "text", "text", "text", "text", "text", "text"]
         }
     },
     methods: {

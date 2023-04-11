@@ -1,35 +1,26 @@
 <template>
     <div id="picture_editor">
-        <h3>疾病图片</h3>
+        <h3 style="color:#606266">疾病图片</h3>
         <div class="pic_video_button">
             <template v-if="component_type!=2">
-                <div class="box-card">
-                    <template v-if="image_url != null">
-                        <img id="img" :src="image_url">
-                    </template>
-                    <template v-else>
-                        <div style="margin-top:100px;">
-                            <template v-if="component_type == 1"><h1>请导入图片资源</h1></template>
-                            <template v-else><h1>不存在图片资源</h1></template>
-                        </div>
-                    </template>
-                </div>
-                <input class="button1" type="file" ref="file">
+                <template v-if="image_url != null">
+                    <div class="box-card"><img id="img" :src="image_url"></div>
+                    <input style="margin-left:10px" class="button1" type="file" ref="file">
+                </template>
+                <template v-else>
+                    <template v-if="component_type == 1"><p style="color:#909399; width:405px">请导入图片资源</p></template>
+                    <template v-else><p style="color:#909399; width:405px">不存在图片资源</p></template>
+                    <input style="margin-left:10px" type="file" ref="file">
+                </template>
             </template>
             <template v-else>
-                <div class="box-card">
-                    <template v-if="disease_picture != null">
+                <template v-if="disease_picture != null">
+                    <div class="box-card">
                         <img id="img" :src="disease_picture">
-                    </template>
-                    <template v-else>
-                        <div style="margin-top:100px;">
-                            <template v-if="component_type == 1"><h1>请导入图片资源</h1></template>
-                            <template v-else><h1>不存在图片资源</h1></template>
-                        </div>
-                    </template>
-                </div>
+                    </div>
+                </template>
                 <div style="display: none;">
-                    <input class="button1" type="file" ref="file">
+                    <input style="margin-left:10px" class="button1" type="file" ref="file">
                 </div>
             </template>
         </div>
