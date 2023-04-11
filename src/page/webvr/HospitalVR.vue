@@ -40,6 +40,7 @@
                     <h3>科室介绍</h3>
                     <p>{{ currentScene.desc[0] }}</p>
                 </div>
+                <div class="vr_hospital-btn" @click="$router.push(`/detail?room=${currentScene.name}`)">点击查看科室详情</div>
             </div>
         </transition>
         <div class="vr_hospital-close" @click="$router.push('/home')">
@@ -547,8 +548,6 @@ export default {
                 float: right;
                 margin-right: 5px;
             }
-
-
         }
         .vr_hospital-roomDetail {
 
@@ -584,8 +583,7 @@ export default {
     }
 
     .room-enter,.room-leave-to {
-        width: 0;
-        min-height: 0;
+       opacity: 0;
     }
 
     .room-enter-active,.room-leave-active {
