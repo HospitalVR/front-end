@@ -2,9 +2,12 @@
     <div id="disease_view">
         <div id="header">
             <h1>{{disease_name}}</h1>
-            <template v-if="this.$store.state.type=='admin'"><el-button type="primary" v-on:click="edit">编辑</el-button></template>
-            <el-button type="primary" v-on:click="back">返回</el-button>
         </div>
+        <div style="float:right;">
+            <template v-if="this.$store.state.type == 'admin'"><el-button type="primary" v-on:click="edit" size="medium">编辑</el-button></template>
+            <el-button type="primary" v-on:click="back" size="medium" style="margin-right: 80px;">返回</el-button>
+        </div>
+        <br>
         <Case_editor title="疾病名称" :text="disease_data.name.text" :disease_picture="disease_data.name.image" :disease_video="disease_data.name.video" :component_type="component_type"></Case_editor>
         <Case_editor title="接诊" :text="disease_data.treat.text" :disease_picture="disease_data.treat.image" :disease_video="disease_data.treat.video" :component_type="component_type"></Case_editor>
         <Case_editor title="病例检查" :text="disease_data.check.text" :disease_picture="disease_data.check.image" :disease_video="disease_data.check.video" :component_type="component_type"></Case_editor>
@@ -91,11 +94,12 @@ export default {
 
 <style scoped lang="less">
 #disease_view {
-    width: 100vw;
+    width: 100%;
     height: wrap-content;
     //background: rgb(114, 239, 139);
     padding-top: 60px;
     margin: 0;
+    margin-left:2%;
 }
 #header{
     display: flex;
