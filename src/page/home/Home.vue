@@ -14,7 +14,15 @@
                 <div class="nav-right-item" @click="$router.push('/home/test')"><span>测试功能</span></div>
                 <div class="nav-right-item" @click="$router.push('/home/role')"><span>角色扮演</span></div>
                 <div class="nav-right-item" @click="$router.push('/home/case_list')"><span>病例管理</span></div>
-                <div class="nav-right-item" @click="$router.push('/vr')"><span>医院导览</span></div>
+                <div class="nav-right-item" ref="guide">
+                    <span>医院导览</span>
+                    <transition name="itemList">
+                        <div class="nav-right-itemList" v-if="showItemList">
+                            <div @click="$router.push('/vr')">VR导览</div>
+                            <div @click="$router.push('/detail?room=手术室')">平面导览</div>
+                        </div>
+                    </transition>
+                </div>
             </div>
             
         </el-header>
@@ -54,6 +62,7 @@ import { NetLoader } from '@/net';
             return {
                 loader: new NetLoader("test"),
                 username: null,
+                showItemList: false
             }
         },
         methods: {},
@@ -61,7 +70,6 @@ import { NetLoader } from '@/net';
             if(window.localStorage.getItem("token")) {
                 //TODO 此处需要发送请求来验证该token的具体身份方便在导航栏出展示用户名和用户的信息
                 this.loader.get("/user/verify").then(value => {
-                    console.log(value.data);
                     this.username = value.data.userName;
                     this.$message({
                         message: '恭喜你，登陆成功',
@@ -73,6 +81,15 @@ import { NetLoader } from '@/net';
                     this.$store.commit("changeStatus",0);
                 })
             }
+        },
+        mounted() {
+            this.$refs.guide.addEventListener("mouseenter",() => {
+                this.showItemList = true;
+            })
+
+            this.$refs.guide.addEventListener("mouseleave", () => {
+                this.showItemList = false;
+            })
         }
     }
 </script>
@@ -123,9 +140,25 @@ import { NetLoader } from '@/net';
             color: #fff;
             opacity: 0.6;
             font-weight: 200;
-
+            position: relative;
             &:hover {
                 opacity: 1;
+            }
+
+            .nav-right-itemList {
+                position: absolute;
+                top: 60px;
+                left: 50%;
+                transform: translateX(-50%);
+                white-space: nowrap;
+                background: rgba(0,0,0,0.8);
+                border-radius: 5px;
+                div {
+                    padding: 10px 20px;
+                    &:hover {
+                        background: gray;
+                    }
+                }
             }
 
         }
