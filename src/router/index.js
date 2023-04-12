@@ -204,7 +204,7 @@ router.beforeEach((to,from,next) => {
     next();
 })
 
-
+// 前置路由守卫
 router.beforeEach((to,from,next) => {
     let path = to.path;
     if(/\/admin.*/g.test(path)) {

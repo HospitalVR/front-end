@@ -178,6 +178,7 @@ import { NetLoader } from '@/net';
                 border-radius: 5px;
                 div {
                     padding: 10px 20px;
+                    border-radius: 5px;
                     &:hover {
                         background: gray;
                     }
@@ -199,6 +200,7 @@ import { NetLoader } from '@/net';
                 border-radius: 5px;
                 div {
                     padding: 10px 20px;
+                    border-radius: 5px;
                     &:hover {
                         background: gray;
                     }

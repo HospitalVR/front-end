@@ -5,7 +5,7 @@
             </div>
             <div class="hospital_login-rightBox">
                 <div class="hospital_login-title">
-                    <span v-if="type==='user'">UserLogin</span>
+                    <span v-if=" type === 'user' ">UserLogin</span>
                     <span v-else>AdminLogin</span>
                 </div>
                 <div class="hospital_login-choice">
