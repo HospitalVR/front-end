@@ -3,6 +3,10 @@
         <div class="header">
             <h1>试卷</h1>
         </div>
+        <div id="timer">
+            距离考试结束还有：
+            <div style="color:red;">{{djs}}</div>
+        </div>
         <ul class="list">
             <li v-for="(q, i) in questions" :key="q.id">
                 <el-card class="box-card">
@@ -27,7 +31,11 @@ export default {
     data() {
         return {
             questions: this.$route.query.questions,
-            selected: []
+            period: this.$route.query.period,
+            selected: [],
+            timer: null,
+            djs: "",
+            seconds: 0
         }
     },
     methods: {
@@ -35,8 +43,33 @@ export default {
             this.$router.push({
                 path: '/home/testResult', query: { questionsList: this.questions, usrSelected: this.selected }
             })
-        }
+            clearInterval(this.timer);
+        },
+        countDown() {
+            let m = parseInt(this.seconds / 60);
+            m = m < 10 ? "0" + m : m
+            let s = parseInt(this.seconds % 60);
+            s = s < 10 ? "0" + s : s
+            this.djs = m + '分钟' + s + '秒'
+        },
     },
+    created() {
+        this.seconds = this.period * 60;
+        //考试时间倒计时监听器
+        this.timer=setInterval(() => {
+            if (this.seconds < 1) {
+                this.present();
+                this.$message({
+                    showClose: true,
+                    type: 'success',
+                    message: '时间到，考试结束'
+                });
+            } else {
+                this.seconds = this.seconds - 1;
+                this.countDown();
+            }
+        }, 1000);
+    }
 }
 
 </script>
@@ -60,5 +93,13 @@ export default {
     height: wrap-content;
     padding: 0;
     margin-top: 15px;
+}
+#timer {
+  /* position: fixed; */
+  width: 160px;
+  left: 20px;
+  padding-left: 20px;
+  font-size: 17px;
+  background:white;
 }
 </style>
