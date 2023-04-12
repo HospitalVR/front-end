@@ -131,6 +131,12 @@ import { NetLoader } from '@/net';
                 this.$refs.svgPassword.classList.remove("svg-selected")
                 e.target.parentNode.classList.remove("input-selected")
             })
+
+            document.onkeydown = (e) => {
+                if(e.keyCode == 13){
+                    this.login();
+                }
+            }
         }
     }
 </script>

@@ -59,6 +59,21 @@ export default {
     },
     methods: {
         confirm: async function () {
+            if (this.$refs["name"].case_text == "") {
+                this.$alert('疾病名称为必填字段，请输入疾病名称。', '添加失败', {
+                    confirmButtonText: '确认',
+                    callback: action => {
+                        this.$message({
+                            message: '添加失败',
+                            type: "error"
+                        });
+                    }
+                });
+                return
+            }
+
+
+
             let formData = new FormData();
             formData.append("type", this.$route.query.disease_group)
             for (let key in this.$refs) {
@@ -73,14 +88,18 @@ export default {
 
             let url = "http://127.0.0.1:8888/case/save"
             let loader = new NetLoader("test")
-            await loader.post(url,formData).then((value) => {
+            await loader.post(url, formData).then((value) => {
+                this.$router.replace('/admin/case_list')
+                this.$message({
+                    message: '添加成功',
+                    type: "success"
+                });
+            }).catch(e => {
+                this.$message({
+                    message: '添加失败',
+                    type: "error"
+                });
             })
-            
-            this.$router.replace('/admin/case_list')
-            this.$message({
-                message: '添加成功',
-                type: "success"
-            });
         },
         back: function () {
             this.$router.replace('/admin/case_list')

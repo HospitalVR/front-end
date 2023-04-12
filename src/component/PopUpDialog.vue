@@ -56,7 +56,7 @@ export default {
     methods: {
         confirm: function () {
             let formData = new FormData();
-            for (let index in this.keyslist) {
+              for (let index in this.keyslist) {
                 if (this.configs[index] == 'date') {
                     if (this.$refs.inputs[index].value != undefined) {
                         formData.append(this.keyslist[index], this.formatDate(new Date(this.$refs.inputs[index].value)))
