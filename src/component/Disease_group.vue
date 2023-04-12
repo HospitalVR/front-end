@@ -47,10 +47,6 @@ export default {
             this.$props.refresh();
           })
         }).catch(() => {
-          this.$message({
-            type: 'info',
-            message: '撤销删除'
-          });
         });
       },
         add_disease: function () {

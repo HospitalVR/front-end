@@ -55,7 +55,21 @@ export default {
             let formData = new FormData();
             formData.append("id", 0)
             for (let index in this.keyslist) {
-                if (this.configs[index] == 'date') {
+              if (index == 0) {
+                if (this.$refs.inputs[index].value == undefined) {
+                  this.$alert(this.label[0]+'为必填字段，请输入。', '添加失败', {
+                    confirmButtonText: '确认',
+                   callback: action => {
+                  this.$message({
+                    message: '添加失败',
+                    type: "error"
+                  });
+                     }
+                 });
+                return
+                }
+              }
+              if (this.configs[index] == 'date') {
                     if (this.$refs.inputs[index].value != undefined) {
                         formData.append(this.keyslist[index], this.formatDate(new Date(this.$refs.inputs[index].value)))
                     } else {

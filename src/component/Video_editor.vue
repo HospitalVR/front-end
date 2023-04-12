@@ -5,25 +5,23 @@
             <template v-if="component_type!=2">
                 <template v-if="video_url != null">
                     <div class="box-card"><video id="video" controls="controls" :src="video_url"></video></div>
-                    <input style="margin-left:10px" class="button1" type="file" ref="file">
                 </template>
                 <template v-else>
                     <template v-if="component_type == 1"><p style="color:#909399; width:405px;">请导入视频资源</p></template>
                     <template v-else><p style="color:#909399; width:405px;">不存在视频资源</p></template>
-                    <input style="margin-left:10px" type="file" ref="file">
                 </template>
+
+                <el-upload :style="(video_url == null) ? { 'margin-left': '30px' } : { 'margin-left': '30px', 'margin-top': '160px' }" :file-list="fileList" class="upload-demo" action="#" :http-request="uploadFile" :on-remove="handleRemove" :on-change="handleChange">
+                    <el-button size="mini" type="primary">上传视频</el-button>
+                    <el-button v-if="video_url != null" size="mini" type="primary" v-on:click.stop="handleRemove">删除视频</el-button>
+                    <div slot="tip" class="el-upload__tip">请上传mp4格式的视频</div>
+                </el-upload>
             </template>
+
             <template v-else>
                 <template v-if="disease_video != null">
                     <div class="box-card"><video id="video" controls="controls" :src="disease_video"></video></div>
                 </template>
-                <template v-else>
-                    <template v-if="component_type == 1"><h1>请导入视频资源</h1></template>
-                    <template v-else><h1>不存在视频资源</h1></template>
-                </template>
-                <div style="display: none;">
-                    <input style="margin-left:10px" class="button1" type="file" ref="file">
-                </div>
             </template>
         </div>
     </div>
@@ -35,21 +33,27 @@ export default {
     data() {
         return {
             video_url: this.disease_video,
-            video:null
+            video: null,
+            fileList: []
         }
     },
     methods: {
+        uploadFile(file) {
+            this.video = file.file
+            this.video_url = window.URL.createObjectURL(new Blob([this.video]))
+        },
+        handleRemove() {
+            this.video = null
+            this.video_url = null
+            this.fileList = []
+        },
+        handleChange(files, fileList) {
+            this.fileList = fileList.slice(-1)
+        }
     },
     props: {
         disease_video: String,
         component_type: Number
-    },
-    mounted() {
-        let file = this.$refs.file;
-        file.addEventListener("change", (e) => {
-            this.video = e.target.files[0]
-            this.video_url= window.webkitURL.createObjectURL(this.video);
-        })
     }
 }
 </script>
@@ -82,10 +86,5 @@ export default {
 #video {
     width: 100%;
     height: 100%;
-}
-
-.button1 {
-    margin-top: 250px;
-    height: 30px;
 }
 </style>

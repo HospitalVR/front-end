@@ -47,13 +47,17 @@ export default {
             
             let url = "http://127.0.0.1:8888/case/save"
             await loader.post(url, formData).then((value) => {
+                this.$router.replace('/admin/case_list')
+                this.$message({
+                    message: '修改成功',
+                    type: "success"
+                });
+            }).catch(e => {
+                this.$message({
+                    message: '修改失败',
+                    type: "error"
+                });
             })
-
-            this.$router.replace('/admin/case_list')
-            this.$message({
-                message: '修改成功',
-                type: "success"
-            });
         },
         back: function () {
             this.$router.go(-1)
