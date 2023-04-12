@@ -39,14 +39,14 @@ export default {
                 if (this.$refs[key].$refs.pic.image != null) {
                     formData.append(key + 2, this.$refs[key].$refs.pic.image)
                 } else {
-                    if (this.$refs[key].$refs.pic.image_url == null) {
+                    if ((this.$refs[key].$refs.pic.image_url == null)&(this.disease_data[key].image!=null)) {
                         formData.append(key + 2, "delete")
                     }
                 }
                 if (this.$refs[key].$refs.vid.video != null) {
                     formData.append(key + 3, this.$refs[key].$refs.vid.video)
                 } else {
-                    if (this.$refs[key].$refs.vid.video_url == null) {
+                    if((this.$refs[key].$refs.vid.video_url == null)& (this.disease_data[key].video != null)) {
                         formData.append(key + 3, "delete")
                     }
                 }
