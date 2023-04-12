@@ -10,7 +10,7 @@
             </template>
             <template v-else>
                 <div id="input">
-                    <el-input type="textarea" autosize placeholder="请输入文字" v-model="case_text"></el-input>
+                    <el-input type="textarea" autosize placeholder="请输入文字" v-model="case_text" :disabled="((component_type==3)&(title=='疾病名称'))?true:false"></el-input>
                 </div>
             </template>
 

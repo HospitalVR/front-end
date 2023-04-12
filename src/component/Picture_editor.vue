@@ -5,13 +5,18 @@
             <template v-if="component_type!=2">
                 <template v-if="image_url != null">
                     <div class="box-card"><img id="img" :src="image_url"></div>
-                    <input style="margin-left:10px" class="button1" type="file" ref="file">
                 </template>
                 <template v-else>
                     <template v-if="component_type == 1"><p style="color:#909399; width:405px">请导入图片资源</p></template>
                     <template v-else><p style="color:#909399; width:405px">不存在图片资源</p></template>
-                    <input style="margin-left:10px" type="file" ref="file">
                 </template>
+                
+                <el-upload :style="(image_url==null)? {'margin-left':'30px'}:{'margin-left': '30px','margin-top':'160px' }" :file-list="fileList" class="upload-demo" action="#" :on-preview="handlePreview" :http-request="uploadFile" :on-remove="handleRemove" :on-change="handleChange">
+                    <el-button size="mini" type="primary">上传图片</el-button>
+                    <el-button v-if="image_url != null" size="mini" type="primary" v-on:click.stop="handleRemove">删除图片</el-button>
+                    <div slot="tip" class="el-upload__tip">请上传jpg或png格式的图片</div>
+                </el-upload>
+
             </template>
             <template v-else>
                 <template v-if="disease_picture != null">
@@ -19,9 +24,6 @@
                         <img id="img" :src="disease_picture">
                     </div>
                 </template>
-                <div style="display: none;">
-                    <input style="margin-left:10px" class="button1" type="file" ref="file">
-                </div>
             </template>
         </div>
     </div>
@@ -33,22 +35,30 @@ export default {
     data() {
         return {
             image_url: this.disease_picture,
-            image: null
+            image: null,
+            fileList:[]
         }
     },
     methods: {
-        
+        handlePreview(file) {
+            console.log(file);
+        },
+        uploadFile(file) {
+            this.image = file.file
+            this.image_url = window.URL.createObjectURL(new Blob([this.image]))
+        },
+        handleRemove() {
+            this.image = null
+            this.image_url = null
+            this.fileList=[]
+        },
+        handleChange(files, fileList) {
+            this.fileList=fileList.slice(-1)
+        }
     },
     props: {
         disease_picture: String,
         component_type: Number
-    },
-    mounted() {
-        let file = this.$refs.file;
-        file.addEventListener("change", (e) => {
-            this.image = e.target.files[0]
-            this.image_url = window.URL.createObjectURL(new Blob([this.image]))
-        })
     }
 }
 </script>
@@ -80,9 +90,5 @@ export default {
 #img {
     width: 100%;
     height: 100%;
-}
-.button1 {
-    margin-top: 250px;
-    height: 30px;
 }
 </style>

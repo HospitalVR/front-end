@@ -38,22 +38,37 @@ export default {
                 formData.append(key + 1, this.$refs[key].case_text)
                 if (this.$refs[key].$refs.pic.image != null) {
                     formData.append(key + 2, this.$refs[key].$refs.pic.image)
-                } 
+                } else {
+                    if ((this.$refs[key].$refs.pic.image_url == null)&(this.disease_data[key].image!=null)) {
+                        formData.append(key + 2, "delete")
+                    }
+                }
                 if (this.$refs[key].$refs.vid.video != null) {
                     formData.append(key + 3, this.$refs[key].$refs.vid.video)
+                } else {
+                    if((this.$refs[key].$refs.vid.video_url == null)& (this.disease_data[key].video != null)) {
+                        formData.append(key + 3, "delete")
+                    }
                 }
             }
 
+            for (var key of formData.keys()) {
+                console.log("key:" + key + " value:" + formData.get(key));
+            }
             
             let url = "http://127.0.0.1:8888/case/save"
             await loader.post(url, formData).then((value) => {
+                this.$router.replace('/admin/case_list')
+                this.$message({
+                    message: '修改成功',
+                    type: "success"
+                });
+            }).catch(e => {
+                this.$message({
+                    message: '修改失败',
+                    type: "error"
+                });
             })
-
-            this.$router.replace('/admin/case_list')
-            this.$message({
-                message: '修改成功',
-                type: "success"
-            });
         },
         back: function () {
             this.$router.go(-1)

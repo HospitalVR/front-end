@@ -37,8 +37,12 @@ export default {
             })
         },
         show_data: function (name) {
+            let usr = "home"
+            if (this.$store.state.type == "admin") {
+                usr = "admin"
+            }
             this.$router.push({
-                path: '/home/disease_view', query: { disease_name: name }
+                path: '/'+usr+'/disease_view', query: { disease_name: name }
             })
         }
     },
