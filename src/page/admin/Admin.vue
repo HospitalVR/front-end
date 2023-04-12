@@ -8,6 +8,7 @@
                     <el-menu-item index="/admin/basic_structure">基本结构与功能管理</el-menu-item>
                     <el-menu-item index="/admin/case_list" >病例管理</el-menu-item>
                     <el-menu-item index="/admin/test_management" >测试管理</el-menu-item>
+                    <el-menu-item @click.native="logout">退出管理员账号</el-menu-item>
                 </el-menu>
             </div>
             <div class="hospital_admin-page">
@@ -18,12 +19,27 @@
 </template>
 
 <script>
+import { NetLoader } from '@/net';
     export default {
         name: "Admin",
         data() {
-            return {}
+            return {
+                loader: new NetLoader("test")
+            }
         },
-        methods: {},
+        methods: {
+            logout() {
+                this.loader.post("/user/logout").then(() => {
+                    this.$message({
+                        message: "退出账号成功",
+                        type: "success"
+                    })
+                    window.localStorage.removeItem("token");
+                    this.$store.commit("changeStatus",0);
+                    this.$router.push("/login");
+                })
+            }
+        },
         mounted() {
             this.$notify({
                 title: '恭喜你登陆成功',
