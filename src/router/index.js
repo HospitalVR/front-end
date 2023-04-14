@@ -1,6 +1,7 @@
 import VueRouter from "vue-router"
 import { store } from "@/store"
 import { NetLoader } from "@/net"
+
 // 路由的配置信息
 const router = new VueRouter({
     routes:[
@@ -210,20 +211,49 @@ router.beforeEach((to,from,next) => {
     if(/\/admin.*/g.test(path)) {
         //TODO 如果是想访问后台页面的话则需要发送请求进行验证，这部分需要和后端对接
         if(!window.localStorage.getItem("token")) {
+            store.commit("changeStatus",0);
+            
             next("/login");
         } else {
             //TODO 如果本次存储有token数据的话需要对该token进行验证才能继续进行下一步操作
-            net.get("/user/verify").then((data) => {
-                store.commit("changeType","admin");// 将用户的类型修改为admin
-                next();
+            net.get("/user/verify").then((value) => {
+                let type = value.data.type;
+                // 表明该用户已经登录
+                store.commit("changeStatus",1);
+                if(type === "admin") {
+                    store.commit("changeType","admin");// 将用户的类型修改为admin
+                    next();
+                } else {
+                    store.commit("changeType","user");// 将用户的类型修改为user
+                    next("/login");
+                }
+                
             }, (err)  => {
                 next("/login");
             })
             
         }
+    } else if(/home.*/g.test(path)){
+        if(!window.localStorage.getItem("token")) {
+            this.$store.commit("changeStatus",0);
+        } else {
+            net.get("/user/verify").then((value) => {
+                let type = value.data.type;
+                // 表明该用户已经登录
+                store.commit("changeStatus",1);
+                if(type === "admin") {
+                    store.commit("changeType","admin");// 将用户的类型修改为admin
+                } else {
+                    store.commit("changeType","user");// 将用户的类型修改为user
+                }  
+                next();
+                
+            }, (err)  => {
+                next("/login");
+            })
+        }
     } else {
         next();
-        store.commit("changeType","user");
     }
 })
 export default router;

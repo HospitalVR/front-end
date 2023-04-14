@@ -31,10 +31,10 @@ export default {
             labels: this.$props.label,
             tableData: [],
             widthlist: this.$props.width,
-            keyslist:this.$props.keys,
-            selectData:{},
+            keyslist: this.$props.keys,
+            selectData: {},
             search: "",
-            configs:this.$props.config
+            configs: this.$props.config
         };
     },
     methods: {

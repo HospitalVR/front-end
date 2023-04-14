@@ -4,11 +4,11 @@
             <h1>病例总览</h1>
             
         </div>
-        <div class="case_list-container" v-if="$store.state.status === 1">
+        <div class="case_list-container" v-if="$store.state.status === 1 && $store.state.type === 'user' ">
             <Disease_list />
             <Disease_selector />
         </div>
-        <div v-else-if="$store.state.status === 0">
+        <div v-else>
             <el-empty description="您暂未登录，无法查看病例信息"></el-empty>
         </div>
     </div>
@@ -30,6 +30,7 @@ export default {
     created() {
         this.loader.get("/user/verify").then(value => {
             this.$store.commit("changeStatus",1);
+            this.$store.commit("changeType", value.data.type);
         }, err => {
             this.$store.commit("changeStatus",0);
         })

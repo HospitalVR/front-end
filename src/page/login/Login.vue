@@ -48,7 +48,7 @@ import { NetLoader } from '@/net';
             //TODO 将用户名和密码作为请求体向后端发送请求进行登录，这部分还需要和后端对接
             login() {
                 // 1. 管理员登录
-                if(this.$store.state.type === "admin") {
+                if(this.type === "admin") {
                     this.loader.post("/user/login",{
                         userName: this.username,
                         password: this.password

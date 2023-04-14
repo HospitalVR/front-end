@@ -8,10 +8,11 @@
             </div>
             <div class="nav-right">
                 <div class="nav-right-item">
-                    <span v-if="$store.state.status === 0" @click="$router.push('/login')">登录</span>
-                    <div v-if="$store.state.status === 1" class="nav-right-itemLogin" @click="toggleUserInfo"> 
+                    
+                    <div v-if="$store.state.status === 1 && $store.state.type === 'user' " class="nav-right-itemLogin" @click="toggleUserInfo"> 
                         <span>{{ username }}</span>
                     </div>
+                    <span v-else @click="$router.push('/login')">登录</span>
                     <div class="nav-right-user" v-if="showUserInfo">
                         <div class="nav-right-info">用户详细信息</div>
                         <div class="nav-right-logout" @click="logout">退出登录</div>
@@ -94,11 +95,19 @@ import { NetLoader } from '@/net';
                 //TODO 此处需要发送请求来验证该token的具体身份方便在导航栏出展示用户名和用户的信息
                 this.loader.get("/user/verify").then(value => {
                     this.username = value.data.userName;
-                    this.$message({
-                        message: '恭喜你，登陆成功',
-                        type: 'success'
-                    });
-                    this.$store.commit("changeStatus",1);
+                    let type = value.data.type;
+                    if(type === "user") {
+                        this.$message({
+                            message: '恭喜你，登陆成功',
+                            type: 'success'
+                        });
+                        this.$store.commit("changeStatus",1);
+                    } else if(type === "admin"){
+                        
+                        this.$store.commit("changeStatus",1);
+                    }
+                    this.$store.commit("changeType",type)
+                    
                 },err => {
                     console.log(err);
                     this.$store.commit("changeStatus",0);
