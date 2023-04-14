@@ -4,7 +4,7 @@
             <h1>病例总览</h1>
             
         </div>
-        <div class="case_list-container" v-if="$store.state.status === 1 && $store.state.type === 'user' ">
+        <div class="case_list-container" v-if="$store.state.status === 1">
             <Disease_list />
             <Disease_selector />
             <div><el-button type="primary" size="small" v-on:click="navigate" v-if="this.$store.state.type == 'user'">进入模拟诊断</el-button></div>
