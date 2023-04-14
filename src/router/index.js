@@ -154,7 +154,7 @@ const router = new VueRouter({
 
 const net = new NetLoader("test");
 
-router.beforeEach((to,from,next) => {
+router.beforeEach((to, from, next) => {
     switch(to.path) {
         case "/home/main":
             store.commit("changePath",{
