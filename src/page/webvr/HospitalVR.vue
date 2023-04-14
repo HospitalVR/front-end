@@ -181,6 +181,7 @@ export default {
         // 刷新页面
         refresh() {
             const delta = this.clock.getDelta() //获取自上次调用的时间差
+            console.log(delta)
             this.controller.update && this.controller.update(delta)
             this.renderer.render(this.scene,this.camera)
 

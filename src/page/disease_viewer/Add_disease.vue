@@ -72,8 +72,6 @@ export default {
                 return
             }
 
-
-
             let formData = new FormData();
             formData.append("type", this.$route.query.disease_group)
             for (let key in this.$refs) {

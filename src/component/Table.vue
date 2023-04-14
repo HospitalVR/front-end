@@ -2,7 +2,7 @@
     <div style="height:100%;width:100%">
     <el-table :data="tableData.filter(data => !search || data.name.toLowerCase().includes(search.toLowerCase()))"
         style="width: 80vw" max-height="400">
-        <el-table-column v-for="label in labels" :label="label" :prop="switch_label(label)" :width="switch_width(label)" ></el-table-column>
+        <el-table-column v-for="label in labels" :label="label" :key="label" :prop="switch_label(label)" :width="switch_width(label)" ></el-table-column>
         <el-table-column align="right" fixed="right" width="180">
             <template v-if="tableData.length!==0" slot="header" slot-scope="scope">
                 <el-input v-model="search" size="mini" placeholder="输入检索信息" />
@@ -31,10 +31,10 @@ export default {
             labels: this.$props.label,
             tableData: [],
             widthlist: this.$props.width,
-            keyslist:this.$props.keys,
-            selectData:{},
+            keyslist: this.$props.keys,
+            selectData: {},
             search: "",
-            configs:this.$props.config
+            configs: this.$props.config
         };
     },
     methods: {

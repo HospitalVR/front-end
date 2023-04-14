@@ -8,13 +8,28 @@
             </div>
             <div class="nav-right">
                 <div class="nav-right-item">
-                    <span v-if="$store.state.status === 0" @click="$router.push('/login')">登录</span>
-                    <span v-if="$store.state.status === 1">{{ username }}</span>
+                    
+                    <div v-if="$store.state.status === 1 && $store.state.type === 'user' " class="nav-right-itemLogin" @click="toggleUserInfo"> 
+                        <span>{{ username }}</span>
+                    </div>
+                    <span v-else @click="$router.push('/login')">登录</span>
+                    <div class="nav-right-user" v-if="showUserInfo">
+                        <div class="nav-right-info">用户详细信息</div>
+                        <div class="nav-right-logout" @click="logout">退出登录</div>
+                    </div>
                 </div>
                 <div class="nav-right-item" @click="$router.push('/home/test')"><span>测试功能</span></div>
                 <div class="nav-right-item" @click="$router.push('/home/role')"><span>角色扮演</span></div>
                 <div class="nav-right-item" @click="$router.push('/home/case_list')"><span>病例管理</span></div>
-                <div class="nav-right-item" @click="$router.push('/vr')"><span>医院导览</span></div>
+                <div class="nav-right-item" ref="guide">
+                    <span>医院导览</span>
+                    <transition name="itemList">
+                        <div class="nav-right-itemList" v-if="showItemList">
+                            <div @click="$router.push('/vr')">VR导览</div>
+                            <div @click="$router.push('/detail?room=手术室')">平面导览</div>
+                        </div>
+                    </transition>
+                </div>
             </div>
             
         </el-header>
@@ -54,25 +69,59 @@ import { NetLoader } from '@/net';
             return {
                 loader: new NetLoader("test"),
                 username: null,
+                showItemList: false,
+                showUserInfo: false,
+                loader: new NetLoader("test")
             }
         },
-        methods: {},
+        methods: {
+            toggleUserInfo() {
+                this.showUserInfo = !this.showUserInfo;
+            },
+            logout() {
+                this.loader.post("/user/logout").then(() => {
+                    window.localStorage.removeItem("token");
+                    this.$store.commit("changeStatus",0);
+                    this.showUserInfo = false;
+                    this.$message({
+                        message: '退出账号成功',
+                        type: 'success'
+                    });
+                })
+            }
+        },
         created() {
             if(window.localStorage.getItem("token")) {
                 //TODO 此处需要发送请求来验证该token的具体身份方便在导航栏出展示用户名和用户的信息
                 this.loader.get("/user/verify").then(value => {
-                    console.log(value.data);
                     this.username = value.data.userName;
-                    this.$message({
-                        message: '恭喜你，登陆成功',
-                        type: 'success'
-                    });
-                    this.$store.commit("changeStatus",1);
+                    let type = value.data.type;
+                    if(type === "user") {
+                        this.$message({
+                            message: '恭喜你，登陆成功',
+                            type: 'success'
+                        });
+                        this.$store.commit("changeStatus",1);
+                    } else if(type === "admin"){
+                        
+                        this.$store.commit("changeStatus",1);
+                    }
+                    this.$store.commit("changeType",type)
+                    
                 },err => {
                     console.log(err);
                     this.$store.commit("changeStatus",0);
                 })
             }
+        },
+        mounted() {
+            this.$refs.guide.addEventListener("mouseenter",() => {
+                this.showItemList = true;
+            })
+
+            this.$refs.guide.addEventListener("mouseleave", () => {
+                this.showItemList = false;
+            })
         }
     }
 </script>
@@ -123,9 +172,48 @@ import { NetLoader } from '@/net';
             color: #fff;
             opacity: 0.6;
             font-weight: 200;
-
+            position: relative;
             &:hover {
                 opacity: 1;
+            }
+
+            .nav-right-user {
+                position: absolute;
+                top: 65px;
+                left: 50%;
+                transform: translateX(-50%);
+                white-space: nowrap;
+                background: rgba(0,0,0,0.8);
+                border-radius: 5px;
+                div {
+                    padding: 10px 20px;
+                    border-radius: 5px;
+                    &:hover {
+                        background: gray;
+                    }
+                }
+            }
+
+            // svg {
+            //     margin-left: 5px;
+            //     margin-top: 5px;
+            // }            
+
+            .nav-right-itemList {
+                position: absolute;
+                top: 60px;
+                left: 50%;
+                transform: translateX(-50%);
+                white-space: nowrap;
+                background: rgba(0,0,0,0.8);
+                border-radius: 5px;
+                div {
+                    padding: 10px 20px;
+                    border-radius: 5px;
+                    &:hover {
+                        background: gray;
+                    }
+                }
             }
 
         }
