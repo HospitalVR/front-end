@@ -29,6 +29,10 @@ const router = new VueRouter({
                     component: () => import("@/page/disease_viewer/Disease_view.vue")
                 },
                 {
+                    path: "disease_simulator",
+                    component: () => import("@/page/disease_viewer/Disease_simulator.vue")
+                },
+                {
                     path: "role",
                     component: () => import("@/page/role/Role.vue"),
                     children:[
