@@ -187,11 +187,28 @@ export default {
         },
         del(row) {
             this.loader.delete("/question/deleteById?id="+row.id).then((value) => {
-                alert("删除试题 " + row.id)
+                this.$message("删除成功");
                 this.loader.get("/question/findAll").then((value) => {
                 this.questionsList = value.data
                 })
+            }).catch(() => {
+                this.$alert( '删除失败，请先将该试题从所有试卷中移除' )
             })
+            // let url = "http://127.0.0.1:8888" + this.$props.url + "/save"
+            // let loader = new NetLoader("test")
+            // loader.post(url, formData).then((value) => {
+            //     this.dialogFormVisible = false
+            //     this.$props.get_data()
+            //     this.$message({
+            //         message: '添加成功',
+            //         type: "success"
+            //     });
+            // }).catch(() => {
+            //     this.$message({
+            //         message: '添加失败',
+            //         type: "error"
+            //     });
+            // })
         }
     },
     created() {

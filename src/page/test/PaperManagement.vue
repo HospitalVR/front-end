@@ -61,8 +61,10 @@ export default {
                 }
             });
         },
-        async del(row) {
-            await this.loader.get("/paper/deleteById?id="+row.id).then((value) => {
+        del(row) {
+            this.loader.get("/paper/deleteById?id="+row.id).then((value) => {
+            }).catch(() => {
+                this.$alert( "删除失败，请先将该试卷从所有考试中移除" )
             })
             this.$message("删除成功");
             this.loader.get("/paper/findAll").then((value) => {
