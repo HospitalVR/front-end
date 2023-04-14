@@ -235,7 +235,7 @@ router.beforeEach((to,from,next) => {
         }
     } else if(/home.*/g.test(path)){
         if(!window.localStorage.getItem("token")) {
-            this.$store.commit("changeStatus",0);
+            store.commit("changeStatus",0);
         } else {
             net.get("/user/verify").then((value) => {
                 let type = value.data.type;
