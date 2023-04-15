@@ -9,8 +9,8 @@
                 <el-input placeholder="在此输入检索试题" v-model="input" size="small" style="width:80%" clearable> </el-input>
                 <el-button type="primary" icon="el-icon-search" size="small" v-on:click="search"></el-button>
                 <el-radio-group id="select" v-model="radio" style="display:flex; flex-flow:row nowrap; align-items: flex-start;">
-                    <el-radio :label="1">内容检索</el-radio>
-                    <!-- <el-radio :label="2">ID检索</el-radio> -->
+                    <el-radio :label="1">模糊检索</el-radio>
+                    <el-radio :label="2">精确检索</el-radio>
                     <el-radio :label="3">类别检索</el-radio>
                 </el-radio-group>
                 <el-button style="margin-top:10px" type="primary" size="mini" @click="get_data">全部试题</el-button>
@@ -36,50 +36,56 @@
             </el-table-column>
         </el-table>
         <div class="dialog">
-            <el-dialog :title="dialogTitle" :visible.sync="dialogFormVisible">
+            <el-dialog :title="dialogTitle" :visible.sync="dialogFormVisible" :before-close="clear">
                 <el-form :rules="dialogRules" :model="question" ref="question">
                     <el-form-item style="display:none;" label="id" label-width="100px">
                         <el-input v-model="question.id"></el-input>
                     </el-form-item>
                     <el-form-item label="类别：" label-width="100px" prop="type">
-                        <el-input v-model="question.type" placeholder="请输入类别">
-                        </el-input>
+                        <!-- <el-input v-model="question.type" placeholder="请输入类别">
+                        </el-input> -->
+                        <el-select v-model="question.type" placeholder="请选择试题类别">
+                            <el-option v-for="typeName in types" :key="typeName" :label="typeName" :value="typeName">
+                            </el-option>
+                        </el-select>
                     </el-form-item>
                     <el-form-item label="题干：" label-width="100px" prop="content">
                         <el-input v-model="question.content" type="textarea" :rows="5" placeholder="请输入题干">
                         </el-input>
                     </el-form-item>
-
-                    <el-form-item label="A选项：" label-width="100px" prop="a">
-                        <el-input v-model="question.a_choice" placeholder="请输入A选项">
+                    <el-form-item label="A选项：" label-width="100px" prop="a_choice">
+                        <el-input v-model="question.a_choice" placeholder="请输入A选项内容">
                         </el-input>
                     </el-form-item>
-                    <el-form-item label="B选项：" label-width="100px" prop="b">
-                        <el-input v-model="question.b_choice" placeholder="请输入B选项">
+                    <el-form-item label="B选项：" label-width="100px" prop="b_choice">
+                        <el-input v-model="question.b_choice" placeholder="请输入B选项内容">
                         </el-input>
                     </el-form-item>
-                    <el-form-item label="C选项：" label-width="100px" prop="c">
-                        <el-input v-model="question.c_choice" placeholder="请输入C选项">
+                    <el-form-item label="C选项：" label-width="100px" prop="c_choice">
+                        <el-input v-model="question.c_choice" placeholder="请输入C选项内容">
                         </el-input>
                     </el-form-item>
-                    <el-form-item label="D选项：" label-width="100px" prop="d">
-                        <el-input v-model="question.d_choice" placeholder="请输入D选项">
+                    <el-form-item label="D选项：" label-width="100px" prop="d_choice">
+                        <el-input v-model="question.d_choice" placeholder="请输入D选项内容">
                         </el-input>
                     </el-form-item>
                     <el-form-item label="答案：" label-width="100px" prop="answer">
-                        <el-radio v-model="question.answer" label="A">A</el-radio>
-                        <el-radio v-model="question.answer" label="B">B</el-radio>
-                        <el-radio v-model="question.answer" label="C">C</el-radio>
-                        <el-radio v-model="question.answer" label="D">D</el-radio>
+                        <el-radio-group v-model="question.answer">
+                            <el-radio label="A">A</el-radio>
+                            <el-radio label="B">B</el-radio>
+                            <el-radio label="C">C</el-radio>
+                            <el-radio label="D">D</el-radio>
+                        </el-radio-group>
                     </el-form-item>
                     <el-form-item label="分值：" label-width="100px" prop="score">
-                        <el-input v-model="question.score" placeholder="请输入分值">
-                        </el-input>
+                        <!-- <el-input v-model="question.score" placeholder="请输入分值">
+                        </el-input> -->
+                        <el-input-number v-model="question.score" :min="0" :max="100"></el-input-number>
                     </el-form-item>
                 </el-form>
                 <div slot="footer" class="dialog-footer">
-                    <el-button @click="dialogFormVisible = false">取 消</el-button>
-                    <el-button type="primary" @click="submit()">确 定
+                    <el-button @click="clear">取 消</el-button>
+                    <el-button type="primary" @click="submit('question')">确 定
                     </el-button>
                 </div>
             </el-dialog>
@@ -108,6 +114,7 @@ export default {
                 score: ""
             },
             questionsList: [],
+            types: ["传染病", "寄生虫病", "内科", "外产科疾病", "常用手术", "免疫"],
             dialogTitle: "",
             dialogFormVisible: false,
             dialogRules: {
@@ -115,13 +122,23 @@ export default {
                     { required: true, message: '题干不能为空', trigger: 'blur' },
                     { max: 100, message: "题干长度不能超过100个字符", trigger: "blur" }
                 ],
+                a_choice: [
+                    { required: true, message: '选项内容不能为空', trigger: 'blur'}
+                ],
+                b_choice: [
+                    { required: true, message: '选项不能为空', trigger: 'blur' }
+                ],
+                c_choice: [
+                    { required: true, message: '选项不能为空', trigger: 'blur' }
+                ],
+                d_choice: [
+                    { required: true, message: '选项不能为空', trigger: 'blur' }
+                ],
                 type: [
-                    { required: true, message: '类型不能为空', trigger: 'blur' },
-                    { max: 10, message: "类型长度不能超过10个字符", trigger: "blur" }
+                    { required: true, message: '类型不能为空', trigger: 'change' },
                 ],
                 answer: [
-                    { required: true, message: '答案不能为空', trigger: 'blur' },
-                    { max: 50, message: "答案长度不能超过50个字符", trigger: "blur" }
+                    { required: true, message: '答案不能为空', trigger: 'change' }
                 ]
             }
         }
@@ -139,13 +156,18 @@ export default {
                 })
             }
             else if (this.radio === 2) {
-                this.loader.get("/question/findById?id=" + this.input).then((value) => {
-                    this.questionsList = value.data
-                })
+                this.loader.get("/question/findByContent?content=" + this.input).then((value) => {
+                    this.questionsList = []
+                    this.questionsList.push(value.data)
+                }).catch(() => {
+                    this.questionsList = []
+                }) 
             }
             else if (this.radio === 3) {
                 this.loader.get("/question/findAllByType?type=" + this.input).then((value) => {
                     this.questionsList = value.data
+                }).catch(() => {
+                    this.$alert( '请输入正确、完整的类名' )
                 })
             }
         },
@@ -175,14 +197,21 @@ export default {
             this.dialogTitle = "编辑试题"
             this.dialogFormVisible = true
         },
-        async submit() {
-            let url = "http://127.0.0.1:8888/question/save"
-            await this.loader.post(url,this.question).then((value) => {
-            })
-            this.$message(this.dialogTitle === "添加试题" ? '添加成功':'编辑成功');
-            this.dialogFormVisible = false
-            this.loader.get("/question/findAll").then((value) => {
-            this.questionsList = value.data
+        submit(formName) {
+            this.$refs[formName].validate((valid) => {
+                if (!valid) {
+                    return false;
+                }
+                else {
+                    let url = "http://127.0.0.1:8888/question/save"
+                    this.loader.post(url,this.question).then((value) => {
+                        this.$message(this.dialogTitle === "添加试题" ? '添加成功':'编辑成功');
+                        this.loader.get("/question/findAll").then((value) => {
+                            this.questionsList = value.data
+                        })
+                        this.clear()
+                    })
+                }
             })
         },
         del(row) {
@@ -194,21 +223,10 @@ export default {
             }).catch(() => {
                 this.$alert( '删除失败，请先将该试题从所有试卷中移除' )
             })
-            // let url = "http://127.0.0.1:8888" + this.$props.url + "/save"
-            // let loader = new NetLoader("test")
-            // loader.post(url, formData).then((value) => {
-            //     this.dialogFormVisible = false
-            //     this.$props.get_data()
-            //     this.$message({
-            //         message: '添加成功',
-            //         type: "success"
-            //     });
-            // }).catch(() => {
-            //     this.$message({
-            //         message: '添加失败',
-            //         type: "error"
-            //     });
-            // })
+        },
+        clear() {
+            this.dialogFormVisible = false
+            this.$refs.question.resetFields()
         }
     },
     created() {
