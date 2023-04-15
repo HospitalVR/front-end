@@ -4,7 +4,7 @@
             <h1>病例总览</h1>
             
         </div>
-        <div class="case_list-container" v-if="$store.state.status === 1 && $store.state.type === 'user' ">
+        <div class="case_list-container" v-if="$store.state.status === 1">
             <Disease_list />
             <Disease_selector />
         </div>

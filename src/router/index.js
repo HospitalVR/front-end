@@ -1,6 +1,9 @@
 import VueRouter from "vue-router"
+import Vue from "vue"
 import { store } from "@/store"
 import { NetLoader } from "@/net"
+
+Vue.use(VueRouter)
 
 // 路由的配置信息
 const router = new VueRouter({
@@ -235,7 +238,8 @@ router.beforeEach((to,from,next) => {
         }
     } else if(/home.*/g.test(path)){
         if(!window.localStorage.getItem("token")) {
-            this.$store.commit("changeStatus",0);
+            store.commit("changeStatus",0);
+            next(); // 如果本地没有存储token的话也需要放行!!!!
         } else {
             net.get("/user/verify").then((value) => {
                 let type = value.data.type;
