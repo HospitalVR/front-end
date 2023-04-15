@@ -59,9 +59,9 @@ import RoleProgress from "@/component/RoleProgress.vue"
             if(role === "yizhu") {
                 this.enum = ["静脉注射","皮下注射","肌肉注射","术前麻醉","器械准备"];
             } else if(role === "shouyi") {
-                this.enum = [];
+                this.enum = ['手术衣穿戴','宠物手术'];
             } else if(role === "qiantai") {
-                this.enum = [];
+                this.enum = ["挂号收费"];
             }
             this.knowledge = roles[this.$router.currentRoute.query.role];    
             this.progress = this.knowledge[this.enum[this.index]];
@@ -116,6 +116,7 @@ import RoleProgress from "@/component/RoleProgress.vue"
         video {
             width: 80%;
             height: auto;
+            border-radius: 10px;
         }
     }
     
