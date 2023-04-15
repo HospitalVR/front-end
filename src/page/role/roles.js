@@ -4,7 +4,7 @@ export const roles = {
             "注射工作": {
                 "静脉注射": [
                     {
-                        image: "", // 该步骤的示例图
+                        image: require("@/assets/role/roleProgress/准备药液.jpg"), // 该步骤的示例图
                         tools: [], // 进行这一步操作所需要的工具
                         title: "准备药液", // 该步骤的总体描述信息
                         desc: [
@@ -15,7 +15,7 @@ export const roles = {
                         tips: "", //注意事项
                     },
                     {
-                        image: "",
+                        image: require("@/assets/role/roleProgress/选取注射部位.jpg"),
                         tools: [],
                         title: "选取注射部位",
                         desc:[
@@ -27,7 +27,7 @@ export const roles = {
                         tips: ""
                     },
                     {
-                        image: "",
+                        image: require("@/assets/role/roleProgress/穿刺.jpg"),
                         tools: [],
                         title: "穿刺",
                         desc:[
@@ -38,7 +38,7 @@ export const roles = {
                         tips: ""
                     },
                     {
-                        image: "",
+                        image: require("@/assets/role/roleProgress/注射.jpg"),
                         tools: [],
                         title: "注射",
                         desc:[
@@ -49,7 +49,7 @@ export const roles = {
                         tips: ""
                     },
                     {
-                        image: "",
+                        image: require("@/assets/role/roleProgress/术后完善工作.jpg"),
                         tools: [],
                         title: "术后完善工作",
                         desc:[
@@ -62,6 +62,7 @@ export const roles = {
                 "皮下注射": [
                     {
                         title: "评估",
+                        image: require("@/assets/role/roleProgress/评估.jpg"),
                         desc: [
                             "评估患者病情及治疗情况。",
                             "评估患者的意识状态、肢体活动能力，对药物治疗的认知及合作程度；",
@@ -71,6 +72,7 @@ export const roles = {
                     },
                     {
                         title: "备药",
+                        image: require("@/assets/role/roleProgress/备药.png"),
                         desc: [
                             "核对医嘱及注射卡，检查药液质量并吸取药液。",
                             "核对解释：携用物至床旁，核对患者床号、姓名，核对无误后，解释操作目的和过程。",
@@ -79,6 +81,7 @@ export const roles = {
                     },
                     {
                         title: "进针",
+                        image: require("@/assets/role/roleProgress/进针.jpg"),
                         desc: [
                             "消毒：常规消毒注射部位皮肤，待干。",
                             "再次核对：再次进行核对，无误后排尽空气。",
@@ -87,6 +90,7 @@ export const roles = {
                     },
                     {
                         title: "抽血拔针",
+                        image: require("@/assets/role/roleProgress/抽血拔针.jpg"),
                         desc:[
                             "抽回血：右手保持原姿势，松开左手抽动活塞。",
                             "推针：如无回血，缓慢、均匀注入药液。",
@@ -99,12 +103,14 @@ export const roles = {
                 "肌肉注射": [
                     {
                         title: "核对",
+                        image: require("@/assets/role/roleProgress/核对医嘱.jpg"),
                         desc: [
                             "双人核对医嘱，无误后方可执行",
                         ]
                     },
                     {
                         title: "查对、解释",
+                        image: require("@/assets/role/roleProgress/评估.jpg"),
                         desc: [
                             "核对患者信息，评估患者病情，询问用药，屏风遮挡，观察注射部位皮肤情况。",
                             "向患者解释目的和注意问题·环境：清洁、宽敞（必要时屏风或拉帘遮挡）"
@@ -112,6 +118,7 @@ export const roles = {
                     },
                     {
                         title: "准备",
+                        image: require("@/assets/role/roleProgress/整理.jpg"),
                         desc: [
                             "护士：着装整洁、洗手、戴口罩",
                             "用物：治疗盘、治疗巾、注射器2个（5ml）、药液（按医嘱准备）、安尔碘、棉签、砂轮、纱布、启瓶器、弯盘、手消毒凝胶"
@@ -119,6 +126,7 @@ export const roles = {
                     },
                     {
                         title: "备药",
+                        image: require("@/assets/role/roleProgress/备药.png"),
                         desc: [
                             "铺治疗巾于注射盘内，注明铺盘时间及铺盘者。",
                             "按医嘱查对患者床号、姓名、药名、浓度、计量、时间、方法、有效期、批号·检查药物的名称、浓度、剂量、有效期、颜色、包装·消毒",
@@ -127,6 +135,7 @@ export const roles = {
                     },
                     {
                         title: "查对进针",
+                        image: require("@/assets/role/roleProgress/肌肉注射进针.jpg"),
                         desc: [
                             "查对患者床号、姓名、腕带。",
                             "指导患者摆放侧卧位：上腿伸直，下腿稍弯曲，以使肌肉放松。",
@@ -139,6 +148,7 @@ export const roles = {
                     },
                     {
                         title: "推药拔针",
+                        image: require("@/assets/role/roleProgress/抽血拔针.jpg"),
                         desc: [
                             "松开绷紧皮肤的手，松动活塞。如无回血，缓慢推注药液。",
                             "注射完毕，用干棉签轻压针刺处，迅速拔出针头，按压片刻。",
@@ -147,6 +157,7 @@ export const roles = {
                     },
                     {
                         title: "术后整理",
+                        image: require("@/assets/role/roleProgress/整理.jpg"),
                         desc: [
                             "协助患者整理衣物，协助患者取舒适卧位，整理床单位，交代注意事项。",
                             "正确处理注射用物，洗手，在医嘱本上签执行时间及签名。"
@@ -156,6 +167,7 @@ export const roles = {
                 "局部封闭注射": [
                     {
                         title: "选取注射靶点",
+                        image: require("@/assets/role/roleProgress/选取注射靶点.jpg"),
                         desc: [
                             "俯卧位，常规消毒，定位，定位，正位时调整C臂机，使目标椎间隙平行。",
                             "穿刺的目标是Kambin三角（下界是下位椎体上缘、内界是行走根、上界是出口根）。",
@@ -164,6 +176,7 @@ export const roles = {
                     },
                     {
                         title: "进行穿刺",
+                        image: require("@/assets/role/roleProgress/穿刺.jpg"),
                         desc: [
                             "刺入穿刺针，在上关节突侧面、偏下方，在椎间孔的下1/3，一般认为扎到上关节突是安全的。",
                             "然后调整为侧位，将穿刺针缓慢推入椎间孔。",
@@ -172,6 +185,7 @@ export const roles = {
                     },
                     {
                         title: "注射药物",
+                        image: require("@/assets/role/roleProgress/注射.jpg"),
                         desc:[
                             "调整为正位片，再次注射造影剂，针尖不应超过椎弓根中线，以免刺入硬脊膜。抽吸测试，若无血液和脑脊液，可行造影剂观察。",
                             "造影剂应该显示出向中线的流动，在椎弓根周围， 3ml的注射夜 就能够覆盖两根神经根 "
@@ -179,6 +193,7 @@ export const roles = {
                     },
                     {
                         title: "术后完善",
+                        image: require("@/assets/role/roleProgress/术后完善工作.jpg"),
                         desc: [
                             "协助患者整理衣物，协助患者取舒适卧位，整理床单位，交代注意事项。",
                             "正确处理注射用物，洗手，在医嘱本上签执行时间及签名。"
@@ -190,6 +205,7 @@ export const roles = {
                 "麻醉准备": [
                     {
                         title: "术前核对",
+                        image: require("@/assets/role/roleProgress/核对医嘱.jpg"),
                         desc: [
                             "进入手术室后先会有医生、护士核对您的个人信息并连接监护设备，开放静脉输液，监测血压、心率、血氧饱和度等。",
                             "对于大型手术还需要监测有创动脉压，即在手腕处桡动脉穿刺并置管。"
@@ -197,6 +213,7 @@ export const roles = {
                     },
                     {
                         title: "面罩吸氧",
+                        image: require("@/assets/role/roleProgress/面罩吸氧.jpg"),
                         desc: [
                             "医生会在您口鼻处扣一面罩，增加您的氧储备。",
                             "这一点很重要，此时您应多做深呼吸（深吸气，慢呼气），面罩吸氧做得越好接下来的麻醉诱导就越安全。"
@@ -204,6 +221,7 @@ export const roles = {
                     },
                     {
                         title: "麻醉诱导",
+                        image: require("@/assets/role/roleProgress/麻醉诱导.jpg"),
                         desc: [
                             "此时麻醉医生会给您三种药物：",
                             "1）镇静药，让您安静的睡觉。",
@@ -216,6 +234,7 @@ export const roles = {
                     },
                     {
                         title: "气管插管",
+                        image: require("@/assets/role/roleProgress/气管插管.jpg"),
                         desc: [
                             "这是麻醉过程中风险极高的一个操作，风险高并不只是对操作技术的要求高, 所以要求麻醉医生快速、精确的操作。",
                             "用一个不锈钢的L型喉镜，挑起患者上颌及会厌，暴露声门，把一个食指粗细的气管导管插入气管内，并通过这个气管导管连接呼吸机，对患者进行机械通气，已满足患者整个手术过程中的氧气供应。",
@@ -231,6 +250,7 @@ export const roles = {
                     },
                     {
                         title: "麻醉维持",
+                        image: require("@/assets/role/roleProgress/麻醉维持.jpg"),
                         desc: [
                             "整个过程麻醉医生都会时刻关注您的血压、心率等循环参数，并根据手术刺激的大小变化来调节麻醉深度及用药，保证您的血压心率平稳。",
                             "另外，麻醉医生还会时刻关注您的血氧饱和度，呼气末二氧化碳浓度以此来调节呼吸机参数，关注您的尿量来调节输血输液的速度和量，关注您的体温，血气电解质等，保证手术过程中生命体征、脏器功能及内环境稳定。"
@@ -238,6 +258,7 @@ export const roles = {
                     },
                     {
                         title: "麻醉苏醒",
+                        image: require("@/assets/role/roleProgress/麻醉苏醒.jpg"),
                         desc: [
                             "在这个阶段患者的肌肉力量会逐渐恢复，呼吸循环功能会逐渐趋于正常，意识会逐渐清醒。",
                             "麻醉医生此时会于您交流，在确定您可以配合睁眼、张嘴等指令且生命体征平稳时会给您拔除气管导管。",
@@ -247,6 +268,7 @@ export const roles = {
                     },
                     {
                         title: "术后镇痛",
+                        image: require("@/assets/role/roleProgress/术后镇痛.jpg"),
                         desc: [
                             "在拔除气管导管及生命体征恢复平稳后，麻醉医生或麻醉护士会跟转运人员一起将您送回病房。届时根据您术前的意见会给您安装一个镇痛泵，这个镇痛泵全称叫患者自控镇痛泵，主要有2点注意：",
                             "1）患者自控，即您可以根据自己情况来控制它的给药量。一般它会有一个很小的基础量，每小时1—2毫升，向输液一样持续的输入您体内，保证您基本的镇痛需求。另外，它还有一个快进按钮，在您感觉疼痛加重和下床活动前由您自行操作。",
@@ -257,43 +279,25 @@ export const roles = {
                 ],
                 "器械准备": [
                     {
-                        title: "准备手术室",
+                        title: "准备手术室,手术器械",
+                        image: require("@/assets/role/roleProgress/准备手术室,手术器械.jpg"),
                         desc: [
-                            "清洁手术室，并消毒手术室内的器械和设备。"
-                        ]
-                    },
-                    {
-                        title: "准备手术器械",
-                        desc: [
-                            "根据手术类型，准备需要的手术器械，包括手术刀、手术钳、剪刀、吸引器、注射器等。"
-                        ]
-                    },
-                    {
-                        title: "准备手术材料",
-                        desc: [
+                            "清洁手术室，并消毒手术室内的器械和设备。",
+                            "根据手术类型，准备需要的手术器械，包括手术刀、手术钳、剪刀、吸引器、注射器等。",
                             "根据手术类型和患者情况，准备需要的手术材料，包括敷料、缝线、注射药品、输液等。"
                         ]
                     },
                     {
-                        title: "准备设备",
+                        title: "准备且检查手术设备",
+                        image: require("@/assets/role/roleProgress/准备手术设备.jpg"),
                         desc:[
-                            "根据手术类型，准备需要的设备，如手术灯、手术床、电刀等。"
-                        ]
-                    },
-                    {
-                        title: "检查器械设备",
-                        desc: [
+                            "根据手术类型，准备需要的设备，如手术灯、手术床、电刀等。",
                             "医助需要检查手术器械和设备的质量和完整性，确保手术顺利进行。"
                         ]
                     },
                     {
-                        title: "组织手术器械",
-                        desc: [
-                            "根据手术流程，组织手术器械，确保手术过程中手术医生能够方便地使用。"
-                        ]
-                    },
-                    {
                         title: "熟悉手术流程",
+                        image: require("@/assets/role/roleProgress/熟悉手术流程.png"),
                         desc: [
                             "医助需要熟悉手术流程，了解每个器械的用途和使用方法，确保手术医生顺利进行手术。"
                         ]

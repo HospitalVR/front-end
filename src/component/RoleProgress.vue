@@ -14,7 +14,10 @@
             </el-button>
         </div>
         <div class="role_progress-detail" v-if="active < progress.length">
-            <h1>步骤具体描述</h1>
+            <h1>步骤具体描述：</h1>
+            <div class="role_progress-image" v-if="progress[active].image !== undefined">
+                <img :src="progress[active].image" alt="">
+            </div>
             <div class="role_progress-desc">
                 <p v-for="(item,index) in progress[active].desc" :key="index">{{ item }}</p>
             </div>
@@ -61,7 +64,15 @@
     .role_progress-detail {
         padding: 10px;
         margin-top: 30px;
-        overflow-y: scroll;
+        // overflow-y: scroll;
+
+        .role_progress-image {
+            img {
+                width: 320px;
+                height: auto;
+                border-radius: 10px;
+            }
+        }
     }
 }
 </style>
