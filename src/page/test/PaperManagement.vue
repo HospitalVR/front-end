@@ -43,13 +43,14 @@ export default {
         },
         async add_paper() {
             let formData = new FormData()
-            formData.append("period","0")
+            formData.append("period","1")
             formData.append("question_id","999")
             let url = "http://127.0.0.1:8888/paper/addPaper"
             await this.loader.post(url,formData).then((value) => {
             })
-            this.$message("添加成功");
+            this.$message("添加成功，请编辑试卷信息");
             this.loader.get("/paper/findAll").then((value) => {
+                this.edit(value.data[value.data.length-1])
                 this.paperList = value.data
             })
         },
@@ -61,8 +62,8 @@ export default {
                 }
             });
         },
-        del(row) {
-            this.loader.get("/paper/deleteById?id="+row.id).then((value) => {
+        async del(row) {
+            await this.loader.get("/paper/deleteById?id="+row.id).then((value) => {
             }).catch(() => {
                 this.$alert( "删除失败，请先将该试卷从所有考试中移除" )
             })

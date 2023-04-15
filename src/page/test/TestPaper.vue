@@ -40,7 +40,7 @@ export default {
     },
     methods: {
         present: function() {
-            this.$router.push({
+            this.$router.replace({
                 path: '/home/testResult', query: { questionsList: this.questions, usrSelected: this.selected }
             })
             clearInterval(this.timer);
