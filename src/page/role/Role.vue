@@ -1,6 +1,5 @@
 <template>
     <div class="hospital_role-wrapper">
-        <h1>请选择你想要体验的角色</h1>
         <div class="hospital_role-container">
             <div class="hospital_role-box hospital_role-qiantai">
                 <img :src="imgQiantai" alt="">
@@ -46,14 +45,6 @@ import imgShouyi from "@/assets/role/shouyi.png"
 
 <style lang="less" scoped>
 .hospital_role-wrapper {
-    h1 {
-        background: -webkit-linear-gradient(315deg,#42d392 25%,#647eff);
-        background-clip: text;
-        -webkit-text-fill-color: transparent;
-        text-align: center;
-        font-size: 34px;
-        font-weight: 600;
-    }
     .hospital_role-container {
         
         display: flex;

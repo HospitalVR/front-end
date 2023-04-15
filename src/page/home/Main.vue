@@ -2,7 +2,6 @@
     <div class="hospital_main-container">
         <div class="hospital_main-logo">
             <img src="@/assets/logo.png" alt="">
-            <div class="hospital_main-title">虚拟宠物医院学习系统</div>
         </div>
         <div class="hospital_main-box">
             <div class="hospital_main-item hospital_main-vr" @mouseenter="handleEnter($event)" @mouseleave="handleLeave($event)" @click="$router.push('/vr')">
