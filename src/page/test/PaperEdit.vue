@@ -69,7 +69,12 @@ export default {
             loader: new NetLoader('test'),
             paper: this.$route.query.selectedPaper,
             questionsList: [],
-            rules: {},
+            rules: {
+                time: [
+                    { required: true, message: '题干不能为空', trigger: 'blur' },
+                    { min: 3, message: "题干长度不能超过100个字符", trigger: "blur" }
+                ],
+            },
             input: "",
             radio: 3,
             dialogFormVisible: false,
@@ -129,6 +134,7 @@ export default {
             })
         },
         back() {
+
             this.$router.replace({
                 path: '/admin/paper_management'
             });
