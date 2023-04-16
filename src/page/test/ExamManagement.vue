@@ -20,7 +20,7 @@
             </el-table-column>
         </el-table>
         <div class="dialog">
-            <el-dialog :title="dialogTitle" :visible.sync="dialogFormVisible">
+            <el-dialog :title="dialogTitle" :visible.sync="dialogFormVisible" :before-close="clear">
                 <el-form :rules="dialogRules" :model="exam" ref="exam">
                     <el-form-item style="display:none;" label="id" label-width="100px" prop="id">
                         <el-input v-model="exam.id"></el-input>
@@ -50,7 +50,7 @@
                     </el-form-item>
                 </el-form>
                 <div slot="footer" class="dialog-footer">
-                    <el-button @click="dialogFormVisible = false">取 消</el-button>
+                    <el-button @click="clear">取 消</el-button>
                     <el-button type="primary" @click="submit('exam')">确 定
                     </el-button>
                 </div>
@@ -170,6 +170,7 @@ export default {
             })
         },
         clear() {
+            this.dialogFormVisible = false
             this.$refs.exam.resetFields()
         }
     },
