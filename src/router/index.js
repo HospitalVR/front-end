@@ -33,6 +33,10 @@ const router = new VueRouter({
                     component: () => import("@/page/disease_viewer/Disease_view.vue")
                 },
                 {
+                    path: "disease_simulator",
+                    component: () => import("@/page/disease_viewer/Disease_simulator.vue")
+                },
+                {
                     path: "role",
                     component: () => import("@/page/role/Role.vue"),
                     children:[
@@ -153,7 +157,7 @@ const router = new VueRouter({
 
 const net = new NetLoader("test");
 
-router.beforeEach((to,from,next) => {
+router.beforeEach((to, from, next) => {
     switch(to.path) {
         case "/home/main":
             store.commit("changePath",{
