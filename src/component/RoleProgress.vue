@@ -2,9 +2,7 @@
     <div class="role_progress-container">
         <div class="role_progress-progress">
             <el-steps :active="active" finish-status="success">
-                <el-step v-for="(item,index) in progress" :key="index" :title="item.title">
-                    
-                </el-step>
+                <el-step v-for="(item,index) in progress" :key="index" :title="item.title"></el-step>
             </el-steps>
             <el-button type="primary" @click="enterNext" v-if="progress.length > 0">
                 <template>
@@ -14,7 +12,11 @@
             </el-button>
         </div>
         <div class="role_progress-detail" v-if="active < progress.length">
-            <h1>步骤具体描述</h1>
+            <div>示例图:</div>
+            <div class="role_progress-image" v-if="progress[active].image !== undefined">
+                <img :src="progress[active].image" alt="">
+            </div>
+            <div>具体步骤:</div>
             <div class="role_progress-desc">
                 <p v-for="(item,index) in progress[active].desc" :key="index">{{ item }}</p>
             </div>
@@ -61,7 +63,15 @@
     .role_progress-detail {
         padding: 10px;
         margin-top: 30px;
-        overflow-y: scroll;
+        // overflow-y: scroll;
+
+        .role_progress-image {
+            img {
+                width: 320px;
+                height: auto;
+                border-radius: 10px;
+            }
+        }
     }
 }
 </style>

@@ -1,6 +1,12 @@
 <template>
     <el-container class="hospital_admin-container">
-        <el-header class="hospital_admin-header">后台管理系统页面</el-header>
+        <el-header class="hospital_admin-header">
+            <div class="hospital_admin-title">虚拟宠物医院--后台管理系统</div>
+            <div class="hospital_admin-info">
+                <span>管理员</span>
+                <span>查看更多</span>
+            </div>
+        </el-header>
         <el-main class="hospital_admin-main">
             <div class="hospital_admin-nav">
                 <el-menu router>
@@ -54,10 +60,29 @@ import { NetLoader } from '@/net';
 .hospital_admin-container {
     width: 100vw;
     .hospital_admin-header {
-        text-align: center;
-        line-height: 60px;
-        font-size: 23px;
-        font-weight: 500;
+        display: flex;
+        justify-content: space-between;
+        background: rgba(0,0,0,0.8);
+        .hospital_admin-title {
+            line-height: 60px;
+            font-size: 24px;
+            font-weight: 600;
+            background: -webkit-linear-gradient(315deg,#42d392 25%,#647eff);
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            cursor: pointer;
+        }
+
+        .hospital_admin-info {
+            line-height: 60px;
+            font-size: 16px;
+            // font-weight: 400;
+            cursor: pointer;
+            color: #fff;
+            span {
+                margin-right: 18px;
+            }
+        }
     }
     .hospital_admin-main {
         display: flex;

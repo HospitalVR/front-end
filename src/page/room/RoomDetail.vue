@@ -1,7 +1,7 @@
 <template>
   <div class="hospital_roomdetail-container">
     <div class="hospital_room-header">
-        <el-page-header @back="goBack" content="详情页面">
+        <el-page-header @back="goBack" content="系统主页">
         </el-page-header>
     </div>
     <div class="hospital_room-detail">
