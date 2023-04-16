@@ -24,6 +24,7 @@
                 </el-card>
             </li>
         </ul>
+        <el-button class="subBtn" @click="back">返回</el-button>
     </div>
 </template>
 
@@ -43,6 +44,10 @@ export default {
                     this.score += this.questionsList[i].score
                 }
             }
+        },
+        back() {
+            this.$router.go(-1)
+            this.$router.go(-1)
         }
     },
     created() {
@@ -79,4 +84,11 @@ export default {
 .redd{
     color: #f35;
 }
+
+.subBtn{
+  display: block;
+  width: 15%;
+  margin: 20px auto;
+}
 </style>
+

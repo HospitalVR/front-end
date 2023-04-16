@@ -6,10 +6,12 @@
             :header-cell-style="{ background: 'rgb(242, 243, 244)', color: '#515a6e' }">
             <el-table-column fixed prop="id" label="ID">
             </el-table-column>
-            <el-table-column :formatter="dateFormat" prop="start_time" label="开始时间">
+            <el-table-column fixed prop="testpaper.id" label="对应试卷">
+            </el-table-column>
+            <!-- <el-table-column :formatter="dateFormat" prop="start_time" label="开始时间">
             </el-table-column>
             <el-table-column :formatter="dateFormat" prop="end_time" label="结束时间">
-            </el-table-column>
+            </el-table-column> -->
             <el-table-column fixed="right" label="操作">
                 <template slot-scope="scope">
                     <!-- <el-button size="mini" @click="edit(scope.row)">编辑</el-button> -->
@@ -36,7 +38,7 @@
                     <el-form-item label="总分：" label-width="100px" prop="score">
                         <el-input :disabled="true" v-model="exam.testpaper.total_score"></el-input>
                     </el-form-item>
-                    <el-form-item label="开放时间" label-width="100px">
+                    <!-- <el-form-item label="开放时间" label-width="100px">
                         <el-date-picker
                             v-model="dateTimeValue"
                             type="datetimerange"
@@ -44,7 +46,7 @@
                             start-placeholder="开始时间"
                             end-placeholder="结束时间">
                         </el-date-picker>
-                    </el-form-item>
+                    </el-form-item> -->
                     <el-form-item>
                     </el-form-item>
                 </el-form>
