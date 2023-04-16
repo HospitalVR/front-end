@@ -43,8 +43,8 @@ export default {
         },
         async add_paper() {
             let formData = new FormData()
-            formData.append("period","1")
-            formData.append("question_id","999")
+            formData.append("period","0")
+            formData.append("question_id","0")
             let url = "http://127.0.0.1:8888/paper/addPaper"
             await this.loader.post(url,formData).then((value) => {
             })
