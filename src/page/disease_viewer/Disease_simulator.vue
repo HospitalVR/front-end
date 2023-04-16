@@ -2,8 +2,8 @@
     <div id="Disease_simulator">
         <div id="header">
             <h1>模拟诊断</h1>
+            <el-button size="small" @click="()=>this.$router.replace('/home/case_list')" style="margin-left:30px">返回</el-button>
         </div>
-
         <el-card class="box-card">
             <h2>基础信息</h2><br>
             <el-col class="list-title">
