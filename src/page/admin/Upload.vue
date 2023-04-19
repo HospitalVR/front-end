@@ -245,7 +245,7 @@ import { NetLoader } from '@/net';
             }    
             .hospital_upload-imageList {
                 margin-left: 50px;
-                max-height: 1000px;
+                // max-height: 1000px;
                 .image-item {
                     display: flex;
                     align-items: center;
@@ -269,7 +269,7 @@ import { NetLoader } from '@/net';
             }      
             .hospital_upload-videoList {
                 margin-left: 50px;
-                max-height: 1000px;
+                // max-height: 1000px;
                 .video-item {
                     display: flex;
                     align-items: center;

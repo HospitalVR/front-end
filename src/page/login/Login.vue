@@ -137,6 +137,11 @@ import { NetLoader } from '@/net';
                     this.login();
                 }
             }
+        },
+        beforeDestroy() {
+            console.log("销毁")
+            // 销毁组件中绑定的事件，数据等
+            this.$dispose();
         }
     }
 </script>
