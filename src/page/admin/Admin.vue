@@ -3,8 +3,8 @@
         <el-header class="hospital_admin-header">
             <div class="hospital_admin-title">虚拟宠物医院--后台管理系统</div>
             <div class="hospital_admin-info">
-                <span>管理员</span>
-                <span>查看更多</span>
+                <span>{{username}}</span>
+                <span @click = "logout">退出账号</span>
             </div>
         </el-header>
         <el-main class="hospital_admin-main">
@@ -14,7 +14,7 @@
                     <el-menu-item index="/admin/basic_structure">基本结构与功能管理</el-menu-item>
                     <el-menu-item index="/admin/case_list" >病例管理</el-menu-item>
                     <el-menu-item index="/admin/test_management" >测试管理</el-menu-item>
-                    <el-menu-item @click.native="logout">退出管理员账号</el-menu-item>
+                    <el-menu-item index="/admin/upload" >文件批量上传</el-menu-item>
                 </el-menu>
             </div>
             <div class="hospital_admin-page">
@@ -30,7 +30,8 @@ import { NetLoader } from '@/net';
         name: "Admin",
         data() {
             return {
-                loader: new NetLoader("test")
+                loader: new NetLoader("test"),
+                username: "default"
             }
         },
         methods: {
@@ -45,6 +46,12 @@ import { NetLoader } from '@/net';
                     this.$router.push("/login");
                 })
             }
+        },
+        created() {
+            this.loader.get("/user/verify").then(value => {
+                let username = value.data.userName;
+                this.username = username;
+            })
         },
         mounted() {
             this.$notify({
