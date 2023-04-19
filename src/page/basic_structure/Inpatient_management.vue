@@ -16,7 +16,7 @@ export default {
             widthList: [60, 90, 120, 90,150,90,120,120,90,90],
             url: "/inpatient",
             title: "住院管理",
-            config: ["uneditable_text", "uneditable_text", "text", "text", "text", "text", "date", "date", "num", "float"]
+            config: ["uneditable_text", "uneditable_text", "text", "text", "text", "disease", "date", "date", "num", "float"]
         }
     },
     methods: {
