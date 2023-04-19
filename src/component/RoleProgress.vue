@@ -55,7 +55,7 @@
 <style lang="less" scoped>
 .role_progress-container {
     padding: 10px;
-
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     .role_progress-progress {
         border-bottom: 1px solid #dcdfe6;
         padding: 20px;

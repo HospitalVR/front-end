@@ -16,7 +16,7 @@ export default {
             widthList: [60, 90, 90, 90,90, 90, 90, 150],
             url: "/record",
             title: "档案管理",
-            config: ["uneditable_text", "uneditable_text", "text", "num", "pet_sex", "text", "text", "text", "text", "text", "text", "text","text", "text", "bool", "text"]
+            config: ["uneditable_text", "uneditable_text", "text", "num", "pet_sex", "text", "text", "text", "disease", "text", "text", "text","text", "text", "bool", "text"]
         }
     },
     methods: {

@@ -87,6 +87,7 @@ import { NetLoader } from '@/net';
                         message: '退出账号成功',
                         type: 'success'
                     });
+                    this.$router.push("/login")
                 })
             }
         },
