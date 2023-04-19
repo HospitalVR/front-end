@@ -77,6 +77,10 @@ const router = new VueRouter({
                     component: () => import("@/page/admin/User.vue")
                 },
                 {
+                    path: "upload",
+                    component: () => import("@/page/admin/Upload.vue")
+                },
+                {
                     path: "case_list",
                     component: () => import("@/page/disease_viewer/Case_list.vue")
                 },
