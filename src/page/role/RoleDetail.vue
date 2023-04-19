@@ -105,9 +105,12 @@ import RoleProgress from "@/component/RoleProgress.vue"
     }
     .hospital_roleDetail-rightContainer {
         flex: 1;
-        margin-left: 5px;
+        margin-left: 15px;
+        padding: 10px;
         height: 600px;
         overflow-y: scroll;
+        box-sizing: border-box;
+        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
         .title {
             font-size: 23px;
             font-weight: 600;
