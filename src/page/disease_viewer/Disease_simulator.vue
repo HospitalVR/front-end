@@ -162,7 +162,17 @@
             <el-table :data="tableData.filter(data => !search || data.name.toLowerCase().includes(search.toLowerCase()))"
                 style="width: 100%" max-height="300px">
                 <template v-if="dialogTitle == '查看档案'">
-                    <el-table-column property="name" label="疾病名称" width="350"></el-table-column>
+                    <el-table-column property="disease" label="疾病名称" width="150"></el-table-column>
+                    <el-table-column property="name" label="宠物名称" width="120"></el-table-column>
+                    <el-table-column property="breed" label="宠物品种" width="120"></el-table-column>
+                    <el-table-column property="gender" label="宠物性别" width="120"></el-table-column>
+                    <el-table-column property="doctor" label="主治医生" width="120"></el-table-column>
+                    <el-table-column property="department" label="主要责任科室" width="120"></el-table-column>
+                    <el-table-column property="charge" label="付费项目" width="240"></el-table-column>
+                    <el-table-column property="drug" label="使用药物" width="240"></el-table-column>
+                    <el-table-column property="vaccine" label="使用疫苗" width="240"></el-table-column>
+                    <el-table-column property="assay" label="化验项目" width="240"></el-table-column>
+                    <el-table-column property="inpatient" label="是否住院" width="120"></el-table-column>
                 </template>
                 <template v-if="dialogTitle == '查看住院信息'">
                     <el-table-column property="reason" label="住院原因" width="120"></el-table-column>
@@ -170,7 +180,7 @@
                     <el-table-column property="breed" label="宠物品种" width="150"></el-table-column>
                     <el-table-column property="day" label="住院天数" width="260"></el-table-column>
                 </template>
-                <el-table-column align="right">
+                <el-table-column align="right" width="240" fixed="right">
                     <template slot="header" slot-scope="scope">
                         <el-input v-model="search" size="mini" placeholder="输入以查询" />
                     </template>
