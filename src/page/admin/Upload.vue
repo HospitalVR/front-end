@@ -102,6 +102,18 @@ import { NetLoader } from '@/net';
                         }
                         this.imageList = arr;
                     })
+
+                    this.loader.get("/file/getVideoFiles").then(value => {
+                        let arr = []
+                        for(let key in value.data) {
+                            let obj = {
+                                name: key,
+                                buffer: value.data[key]
+                            }
+                            arr.push(obj);
+                        }
+                        this.videoList = arr;
+                    })
                 })
             },
             handleChange(file) {
