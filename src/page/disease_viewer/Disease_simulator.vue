@@ -2,7 +2,8 @@
     <div id="Disease_simulator">
         <div id="header">
             <h1>模拟诊断</h1>
-            <el-button size="small" @click="()=>this.$router.replace('/home/case_list')" style="margin-left:30px">返回</el-button>
+            <el-button size="small" @click="() => this.$router.replace('/home/case_list')"
+                style="margin-left:30px">返回</el-button>
         </div>
         <el-card class="box-card">
             <h2>基础信息</h2><br>
@@ -174,13 +175,13 @@
                     <el-table-column property="assay" label="化验项目" width="240"></el-table-column>
                     <el-table-column property="inpatient" label="是否住院" width="120"></el-table-column>
                 </template>
-                <template v-if="dialogTitle == '查看住院信息'">
+                <template v-else>
                     <el-table-column property="reason" label="住院原因" width="120"></el-table-column>
                     <el-table-column property="name" label="宠物名字" width="120"></el-table-column>
                     <el-table-column property="breed" label="宠物品种" width="150"></el-table-column>
-                    <el-table-column property="day" label="住院天数" width="260"></el-table-column>
+                    <el-table-column property="day" label="住院天数" width="1440"></el-table-column>
                 </template>
-                <el-table-column align="right" width="240" fixed="right">
+                <el-table-column width="240" fixed="right">
                     <template slot="header" slot-scope="scope">
                         <el-input v-model="search" size="mini" placeholder="输入以查询" />
                     </template>
@@ -278,16 +279,16 @@ export default {
             }
             return total
         },
-        checkTable(title) {
+        checkTable: async function (title) {
             this.dialogTableVisible2 = true
             this.dialogTitle = title
             this.tableData = []
             let table_url = ""
-            this.search=""
+            this.search = ""
             let loader = new NetLoader("test")
             if (title == "查看档案") {
                 table_url = "/record"
-                let url = "http://127.0.0.1:8888" + table_url + "/findAllByDisease?disease="+this.disease_name
+                let url = "http://127.0.0.1:8888" + table_url + "/findAllByDisease?disease=" + this.disease_name
                 loader.get(url).then((value) => {
                     for (let index in value.data) {
                         this.tableData.push(value.data[index])
@@ -295,7 +296,7 @@ export default {
                 })
             } else if (title == "查看住院信息") {
                 table_url = "/inpatient"
-                let url = "http://127.0.0.1:8888" + table_url + "/findAllByReason?reason="+this.disease_name
+                let url = "http://127.0.0.1:8888" + table_url + "/findAllByReason?reason=" + this.disease_name
                 loader.get(url).then((value) => {
                     for (let index in value.data) {
                         this.tableData.push(value.data[index])

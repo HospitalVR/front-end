@@ -30,11 +30,10 @@ export default {
     },
     methods: {
         search: function () {
+            this.result=[]
             let loader = new NetLoader("test")
             if (this.radio == 1) {
-                console.log(1)
                 loader.get("/case/findByName?name=" + this.input).then((value) => {
-                    console.log(value)
                     if (value.data.name == undefined) {
                         return 
                     } else {
