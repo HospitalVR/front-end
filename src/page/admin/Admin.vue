@@ -31,7 +31,7 @@ import { NetLoader } from '@/net';
         data() {
             return {
                 loader: new NetLoader("test"),
-                username: ""
+                username: "default"
             }
         },
         methods: {
