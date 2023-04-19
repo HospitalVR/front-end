@@ -16,7 +16,7 @@
         </div>
         <div class="hospital_roleDetail-rightContainer">
             <div class="title">具体操作视频</div>
-            <video :src="videoUrl" controls></video>
+            <video :src="videoUrl" controls loop></video>
         </div>
     </div>
 </template>
