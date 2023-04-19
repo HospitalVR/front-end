@@ -130,13 +130,19 @@ import { NetLoader } from '@/net';
             },
             previewImage(item) {
                 this.$alert(`<img src="http://localhost:8888/res/${item.name}" style="width: 400px;height: 300px"/ >`, '图片预览展示', {
-                    dangerouslyUseHTMLString: true
+                    dangerouslyUseHTMLString: true,
+                    callback() {
+                        document.getElementsByTagName("video")[0].pause();
+                    }
                 });
                 
             },
             previewVideo(item) {
                 this.$alert(`<video src="http://localhost:8888/res/${item.name}" controls width="400" height="300"></video>`, '视频预览展示', {
-                    dangerouslyUseHTMLString: true
+                    dangerouslyUseHTMLString: true,
+                    callback() {
+                        document.getElementsByTagName("video")[0].pause();
+                    }
                 })
             }
         },
