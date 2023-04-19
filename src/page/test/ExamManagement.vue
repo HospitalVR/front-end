@@ -6,7 +6,15 @@
             :header-cell-style="{ background: 'rgb(242, 243, 244)', color: '#515a6e' }">
             <el-table-column fixed prop="id" label="ID">
             </el-table-column>
-            <el-table-column fixed prop="testpaper.id" label="对应试卷">
+            <el-table-column prop="testpaper.id" label="对应试卷">
+            </el-table-column>
+            <el-table-column fixed="right" label="参与用户">
+                <template slot-scope="scope">
+                    <!-- <el-button size="mini" @click="edit(scope.row)">编辑</el-button> -->
+                    <!-- <el-button size="mini" @click="userInfo(scope.row)">详情</el-button> -->
+                    {{ scope.row.users[0].userName }}
+                    <span v-for="(item, index) in scope.row.users" :key="item.id" v-if="index!==0">, {{ item.userName }} </span>
+                </template>
             </el-table-column>
             <!-- <el-table-column :formatter="dateFormat" prop="start_time" label="开始时间">
             </el-table-column>
@@ -28,6 +36,12 @@
                     <el-form-item label="考试试卷：" label-width="100px" prop="selectedPaper">
                         <el-select v-model="exam.selectedPaper" placeholder="请选择试卷" @change="changeTestPaper">
                             <el-option v-for="item in paperList" :value="item.id" :label="item.id" :key="item.id">
+                            </el-option>
+                        </el-select>
+                    </el-form-item>
+                    <el-form-item label="参加用户：" label-width="100px" prop="users">
+                        <el-select v-model="exam.users" multiple placeholder="请选择参加用户">
+                            <el-option v-for="item in userList" :value="item.id" :label="item.userName" :key="item.id">
                             </el-option>
                         </el-select>
                     </el-form-item>
@@ -68,6 +82,7 @@ export default {
             loader: new NetLoader("test"),
             examList: [],
             paperList: [],
+            userList: [],
             exam: {
                 id: "",
                 selectedPaper: "",
@@ -81,13 +96,19 @@ export default {
             dialogRules: {
                 selectedPaper: [
                     { required: true, message: '请选择试卷', trigger: 'change' },
-                ]
+                ],
+                // users: [
+                //     { required: true, message: '请选择可参加用户', trigger: 'change' },
+                // ]
             },
             dateTimeValue: []
         }
     },
     methods: {
         get_data() {
+            this.loader.get("/user/findAll").then((value) => {
+                this.userList = value.data
+            })
             this.loader.get("/test/findAll").then((value) => {
                 this.examList = value.data
             })
@@ -133,6 +154,9 @@ export default {
                 })
             })
         },
+        userInfo(row) {
+
+        },
         submit(formName) {
             // this.exam.start_time = this.dateTimeValue[0]
             // this.exam.end_time = this.dateTimeValue[1]
@@ -154,9 +178,10 @@ export default {
                     return false;
                 }
                 else {
+                    this.exam.users.push(2)
                     let formData = new FormData();
                     formData.append("paper_id", this.exam.testpaper.id)
-                    formData.append("user_id", 3)
+                    formData.append("user_id", this.exam.users)
                     let url = "http://127.0.0.1:8888/test/addTest"
                     this.loader.post(url,formData).then((value) => {
                         this.$message(this.dialogTitle === "添加考试" ? '添加成功':'编辑成功');

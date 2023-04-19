@@ -13,7 +13,7 @@
             </el-table-column>
             <el-table-column fixed="right" label="操作">
                 <template slot-scope="scope">
-                    <el-button type="primary" size="mini" @click="show_paper(scope.row.testpaper)">参加考试</el-button>
+                    <el-button type="primary" size="mini" @click="show_paper(scope.row)">参加考试</el-button>
                 </template>
             </el-table-column>
         </el-table>
@@ -31,24 +31,37 @@ import { NetLoader } from '@/net';
 export default {
     data() {
         return {
+            loader: new NetLoader("test"),
             count: 0,
             exams: [],
+            currentUserName: ""
         }
     },
     methods: {
-        show_paper: function(testpaper) {
-            this.$router.push({
-                path: '/home/testPaper', query: { questions: testpaper.questions, period: testpaper.period }
-            })
+        show_paper: function(row) {
+            let users = row.users
+            let flag = false
+            for(let i=0; i<users.length; i++) {
+                if (users[i].userName === this.currentUserName) {
+                    flag = true
+                }
+            }
+            if (flag === true) {
+                this.$router.push({
+                    path: '/home/testPaper', query: { questions: row.testpaper.questions, period: row.testpaper.period }
+                })
+            }
+            else {
+                this.$message('抱歉，您没有权限参加本考试')
+            }
         },
-        joinExamination: function(row) {
-
-        }
     },
     created() {
-        let loader = new NetLoader("test")
-        loader.get("/test/findAll").then((value) => {
+        this.loader.get("/test/findAll").then((value) => {
             this.exams = value.data
+        })
+        this.loader.get("/user/verify").then(value => {
+            this.currentUserName = value.data.userName
         })
     }
 }
