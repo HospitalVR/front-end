@@ -145,7 +145,7 @@
                 style="width: 100%" @selection-change="handleSelectionChange" max-height="300">
                 <el-table-column type="selection" width="55"></el-table-column>
                 <el-table-column property="name" label="名称" width="180"></el-table-column>
-                <el-table-column v-if="dialogTitle!='疫苗注射'" property="description" label="介绍" width="480"></el-table-column>
+                <el-table-column v-if="dialogTitle != '疫苗注射'" property="description" label="介绍" width="480"></el-table-column>
                 <el-table-column v-if="dialogTitle == '疫苗注射'" property="type" label="疫苗类型" width="240"></el-table-column>
                 <el-table-column property="price" label="价格" width="90"></el-table-column>
                 <el-table-column align="right">
@@ -164,10 +164,10 @@
             <el-table :data="tableData.filter(data => !search || data.name.toLowerCase().includes(search.toLowerCase()))"
                 style="width: 100%" max-height="300px">
                 <el-table-column width="240" fixed="right">
-                        <template slot="header" slot-scope="scope">
-                            <el-input v-model="search" size="mini" placeholder="输入以查询" />
-                        </template>
-                    </el-table-column>
+                    <template slot="header" slot-scope="scope">
+                        <el-input v-model="search" size="mini" placeholder="输入以查询" />
+                    </template>
+                </el-table-column>
                 <template v-if="dialogTitle == '查看档案'">
                     <el-table-column property="disease" label="疾病名称" width="150"></el-table-column>
                     <el-table-column property="name" label="宠物名称" width="120"></el-table-column>
@@ -196,11 +196,16 @@
         <el-dialog width="80%" style="" :title="dialogTitle" :visible.sync="dialogTableVisible3">
             <el-table :data="tableData.filter(data => !search || data.name.toLowerCase().includes(search.toLowerCase()))"
                 highlight-current-row @current-change="handleSingleChange" style="width: 100%" max-height="300px">
+                <el-table-column align="right" fixed="right">
+                    <template slot="header" slot-scope="scope">
+                        <el-input v-model="search" size="mini" placeholder="输入以查询" />
+                    </template>
+                </el-table-column>
                 <template v-if="dialogTitle == '选择病例'">
                     <el-table-column property="type" label="疾病种类" width="350"></el-table-column>
                     <el-table-column property="name" label="疾病名称" width="350"></el-table-column>
                 </template>
-                <template v-if="dialogTitle == '选择医师'">
+                <template v-else-if="dialogTitle == '选择医师'">
                     <el-table-column property="name" label="姓名" width="90"></el-table-column>
                     <el-table-column property="age" label="年龄" width="90"></el-table-column>
                     <el-table-column property="gender" label="性别" width="90"></el-table-column>
@@ -208,15 +213,10 @@
                     <el-table-column property="experience" label="工作经验" width="90"></el-table-column>
                     <el-table-column property="phone" label="电话号码" width="200"></el-table-column>
                 </template>
-                <template v-if="dialogTitle == '选择科室'">
+                <template v-else-if="dialogTitle == '选择科室'">
                     <el-table-column property="name" label="科室名称" width="120"></el-table-column>
                     <el-table-column property="description" label="科室介绍" width="650"></el-table-column>
                 </template>
-                <el-table-column align="right">
-                    <template slot="header" slot-scope="scope">
-                        <el-input v-model="search" size="mini" placeholder="输入以查询" />
-                    </template>
-                </el-table-column>
             </el-table>
             <span slot="footer" class="dialog-footer">
                 <el-button @click="cancel3">取消</el-button>
