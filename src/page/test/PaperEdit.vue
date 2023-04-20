@@ -3,8 +3,8 @@
         <h1 style="textAlign: center">试卷编制</h1>
         <el-card class="box-card" shadow="never" style="width:60%;margin-left:20%;">
             <el-form :rules="rules" :model="paper" ref="paper">
-                <el-form-item label="考试时间(分钟)：" label-width="150px" prop="time">
-                    <el-input-number v-model="paper.period" :min="0"></el-input-number>
+                <el-form-item label="考试时间(分钟)：" label-width="150px" prop="period">
+                    <el-input-number v-model="paper.period" :min="1" :max="300"></el-input-number>
                     <el-button style="margin-left:20px" @click="periodEdit()" >确认</el-button>
                 </el-form-item>
                 <el-button size="mini" @click="add_question()" style="margin-bottom:10px;float:right;">添加试题</el-button>
@@ -70,12 +70,11 @@ export default {
             loader: new NetLoader('test'),
             paper: this.$route.query.selectedPaper,
             questionsList: [],
-            rules: {
-                // time: [
-                //     { required: true, message: '题干不能为空', trigger: 'change' },
-                //     { min: 3, message: "题干长度不能超过100个字符", trigger: "blur" }
-                // ],
-            },
+            // rules: {
+            //      period: [
+            //          { min: 1, message: "考试时间应介于1-300分钟之间", trigger: "blur" },
+            //      ],
+            // },
             input: "",
             radio: 3,
             dialogFormVisible: false,

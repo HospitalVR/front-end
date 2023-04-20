@@ -54,6 +54,9 @@ export default {
         },
     },
     created() {
+        if (this.questions[0] === "[object Object]") {
+            this.$router.replace('/home/exams')
+        }
         this.seconds = this.period * 60;
         //考试时间倒计时监听器
         this.timer=setInterval(() => {
@@ -69,6 +72,9 @@ export default {
                 this.countDown();
             }
         }, 1000);
+    },
+    destroyed() {
+        clearInterval(this.timer);
     }
 }
 
