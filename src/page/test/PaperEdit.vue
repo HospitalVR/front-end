@@ -5,6 +5,7 @@
             <el-form :rules="rules" :model="paper" ref="paper">
                 <el-form-item label="考试时间(分钟)：" label-width="150px" prop="time">
                     <el-input-number v-model="paper.period" :min="0"></el-input-number>
+                    <el-button style="margin-left:20px" @click="periodEdit()" >确认</el-button>
                 </el-form-item>
                 <el-button size="mini" @click="add_question()" style="margin-bottom:10px;float:right;">添加试题</el-button>
                 <el-table :data="paper.questions" :header-cell-style="{ background: 'rgb(242, 243, 244)', color: '#515a6e' }">
@@ -70,10 +71,10 @@ export default {
             paper: this.$route.query.selectedPaper,
             questionsList: [],
             rules: {
-                time: [
-                    { required: true, message: '题干不能为空', trigger: 'blur' },
-                    { min: 3, message: "题干长度不能超过100个字符", trigger: "blur" }
-                ],
+                // time: [
+                //     { required: true, message: '题干不能为空', trigger: 'change' },
+                //     { min: 3, message: "题干长度不能超过100个字符", trigger: "blur" }
+                // ],
             },
             input: "",
             radio: 3,
@@ -131,6 +132,15 @@ export default {
             this.dialogFormVisible = false
             this.loader.get("/paper/findById?id="+this.paper.id).then((value) => {
                 this.paper = value.data
+            })
+        },
+        periodEdit() {
+            let formData = new FormData()
+            formData.append("id",this.paper.id)
+            formData.append("period",this.paper.period)
+            let url = "http://127.0.0.1:8888/paper/save"
+            this.loader.post(url,formData).then((value) => {
+                this.$message("修改成功");
             })
         },
         back() {
