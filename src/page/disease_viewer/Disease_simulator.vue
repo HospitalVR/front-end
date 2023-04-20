@@ -145,7 +145,8 @@
                 style="width: 100%" @selection-change="handleSelectionChange" max-height="300">
                 <el-table-column type="selection" width="55"></el-table-column>
                 <el-table-column property="name" label="名称" width="180"></el-table-column>
-                <el-table-column property="description" label="介绍" width="480"></el-table-column>
+                <el-table-column v-if="dialogTitle!='疫苗注射'" property="description" label="介绍" width="480"></el-table-column>
+                <el-table-column v-if="dialogTitle == '疫苗注射'" property="type" label="疫苗类型" width="240"></el-table-column>
                 <el-table-column property="price" label="价格" width="90"></el-table-column>
                 <el-table-column align="right">
                     <template slot="header" slot-scope="scope">
@@ -162,6 +163,11 @@
         <el-dialog width="80%" style="" :title="dialogTitle" :visible.sync="dialogTableVisible2">
             <el-table :data="tableData.filter(data => !search || data.name.toLowerCase().includes(search.toLowerCase()))"
                 style="width: 100%" max-height="300px">
+                <el-table-column width="240" fixed="right">
+                        <template slot="header" slot-scope="scope">
+                            <el-input v-model="search" size="mini" placeholder="输入以查询" />
+                        </template>
+                    </el-table-column>
                 <template v-if="dialogTitle == '查看档案'">
                     <el-table-column property="disease" label="疾病名称" width="150"></el-table-column>
                     <el-table-column property="name" label="宠物名称" width="120"></el-table-column>
@@ -179,13 +185,8 @@
                     <el-table-column property="reason" label="住院原因" width="120"></el-table-column>
                     <el-table-column property="name" label="宠物名字" width="120"></el-table-column>
                     <el-table-column property="breed" label="宠物品种" width="150"></el-table-column>
-                    <el-table-column property="day" label="住院天数" width="1440"></el-table-column>
+                    <el-table-column property="day" label="住院天数" width="120"></el-table-column>
                 </template>
-                <el-table-column width="240" fixed="right">
-                    <template slot="header" slot-scope="scope">
-                        <el-input v-model="search" size="mini" placeholder="输入以查询" />
-                    </template>
-                </el-table-column>
             </el-table>
             <span slot="footer" class="dialog-footer">
                 <el-button @click="cancel2">返回</el-button>
