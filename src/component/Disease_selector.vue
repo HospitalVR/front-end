@@ -10,7 +10,6 @@
         <el-radio-group v-model="radio" style="display:flex; flex-flow:column nowrap; align-items: flex-start;">
           <el-radio :label="1">疾病名称检索</el-radio>
           <el-radio :label="2">关键字检索</el-radio>
-          <el-radio :label="3">模糊检索</el-radio>
         </el-radio-group>
         <p id="select">检索结果：</p>
         <el-tag id="tag" v-for="item in result" :key="item" v-on:click="show_data(item)">{{ item }}</el-tag>
@@ -25,16 +24,27 @@ export default {
     data() {
         return {
             input: '',
-            radio: 3,
+            radio: 1,
             result:[]
         };
     },
     methods: {
         search: function () {
+            this.result=[]
             let loader = new NetLoader("test")
-            loader.get("/case/findAllByName?name=" + this.input).then((value) => {
-                this.result = value.data
-            })
+            if (this.radio == 1) {
+                loader.get("/case/findByName?name=" + this.input).then((value) => {
+                    if (value.data.name == undefined) {
+                        return 
+                    } else {
+                        this.result = [value.data.name.text]
+                    }
+                })
+            } else {
+                loader.get("/case/findAllByName?name=" + this.input).then((value) => {
+                    this.result = value.data
+                })
+            }
         },
         show_data: function (name) {
             let usr = "home"
