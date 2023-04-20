@@ -4,6 +4,7 @@
             <h1>{{disease_name}}</h1>
         </div>
         <div style="float:right;">
+            <template v-if="this.$store.state.type == 'admin'"><el-button type="primary" v-on:click="delete_disease" size="medium">删除</el-button></template>
             <template v-if="this.$store.state.type == 'admin'"><el-button type="primary" v-on:click="edit" size="medium">编辑</el-button></template>
             <el-button type="primary" v-on:click="back" size="medium" style="margin-right: 80px;">返回</el-button>
         </div>
@@ -66,6 +67,23 @@ export default {
                     disease_data: this.disease_data
                 }
             })
+        },
+        delete_disease() {
+            let loader = new NetLoader("test")
+            this.$confirm('这将会永久删除数据，确定继续删除吗？', '警告', {
+                confirmButtonText: '确认',
+                cancelButtonText: '取消',
+                type: 'warning'
+            }).then(() => {
+                loader.get("/case/deleteByName?name=" + this.disease_name + "").then((value) => {
+                    this.$message({
+                        message: '删除成功',
+                        type: "success"
+                    });
+                    this.$router.go(-1)
+                })
+            }).catch(() => {
+            });
         },
         back() {
             this.$router.go(-1)
