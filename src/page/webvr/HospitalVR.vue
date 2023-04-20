@@ -564,6 +564,15 @@ export default {
                 margin-top: 20px;
             }
         }
+        .vr_hospital-btn {
+            display: inline-block;
+            margin-top: 10px;
+            margin-left: 50%;
+            transform: translateX(-50%);
+            padding: 10px;
+            background: -webkit-linear-gradient(315deg,#42d392 25%,#647eff);
+            border-radius: 10px;
+        }
     }
 
     .vr-enter,.vr-leave-to {

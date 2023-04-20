@@ -9,7 +9,11 @@
         </el-header>
         <el-main class="hospital_admin-main">
             <div class="hospital_admin-nav">
-                <el-menu router>
+                <el-menu router 
+                        background-color="#545c64"
+                        text-color="#fff"
+                        active-text-color="#ffd04b"
+                >
                     <el-menu-item index="/admin/user">用户管理</el-menu-item>
                     <el-menu-item index="/admin/basic_structure">基本结构与功能管理</el-menu-item>
                     <el-menu-item index="/admin/case_list" >病例管理</el-menu-item>
@@ -93,13 +97,19 @@ import { NetLoader } from '@/net';
     }
     .hospital_admin-main {
         display: flex;
+        padding: 0!important;
+        overflow: hidden;
         .hospital_admin-page {
             flex-grow: 1;
             padding: 10px;
         }
         .hospital_admin-nav {
             width: 170px;
+            height: calc(100vh - 60px)!important;
         }
     }
+}
+.el-menu {
+    height: 100%;
 }
 </style>
