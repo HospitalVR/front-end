@@ -8,7 +8,10 @@
             </el-table-column>
             <el-table-column prop="total_score" label="总分">
             </el-table-column>
-            <el-table-column prop="period" label="考试时间">
+            <el-table-column label="考试时间">
+                <template slot-scope="scope">
+                    {{ scope.row.period }} (分钟)
+                </template>
             </el-table-column>
             <el-table-column fixed="right" label="操作">
                 <template slot-scope="scope">
@@ -43,7 +46,7 @@ export default {
         },
         async add_paper() {
             let formData = new FormData()
-            formData.append("period","0")
+            formData.append("period","1")
             formData.append("question_id","0")
             let url = "http://127.0.0.1:8888/paper/addPaper"
             await this.loader.post(url,formData).then((value) => {
