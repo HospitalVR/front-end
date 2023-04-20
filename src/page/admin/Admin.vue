@@ -8,7 +8,6 @@
             </div>
         </el-header>
         <el-main class="hospital_admin-main">
-            <div class="hospital_admin-nav">
                 <el-menu router 
                         background-color="#545c64"
                         text-color="#fff"
@@ -20,7 +19,6 @@
                     <el-menu-item index="/admin/test_management" >测试管理</el-menu-item>
                     <el-menu-item index="/admin/upload" >文件批量上传</el-menu-item>
                 </el-menu>
-            </div>
             <div class="hospital_admin-page">
                 <router-view></router-view>
             </div>
@@ -74,6 +72,11 @@ import { NetLoader } from '@/net';
         display: flex;
         justify-content: space-between;
         background: rgba(0,0,0,0.8);
+        position: fixed;
+        top: 0px;
+        left: 0px;
+        width: 100vw;
+        z-index: 100;
         .hospital_admin-title {
             line-height: 60px;
             font-size: 24px;
@@ -97,19 +100,19 @@ import { NetLoader } from '@/net';
     }
     .hospital_admin-main {
         display: flex;
-        padding: 0!important;
+        padding-left: 175px;
+        padding-top: 60px;
         overflow: hidden;
         .hospital_admin-page {
             flex-grow: 1;
             padding: 10px;
         }
-        .hospital_admin-nav {
-            width: 170px;
-            height: calc(100vh - 60px)!important;
-        }
     }
 }
 .el-menu {
     height: 100%;
+    position: fixed;
+    top: 60px;
+    left: 0px;
 }
 </style>
