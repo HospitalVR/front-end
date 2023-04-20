@@ -141,7 +141,9 @@ import { NetLoader } from '@/net';
                 this.$alert(`<video src="http://localhost:8888/res/${item.name}" controls width="400" height="300"></video>`, '视频预览展示', {
                     dangerouslyUseHTMLString: true,
                     callback() {
-                        document.getElementsByTagName("video")[0].pause();
+                        if(document.getElementsByTagName("video")) {
+                            document.getElementsByTagName("video")[0].pause();
+                        }
                     }
                 })
             }
